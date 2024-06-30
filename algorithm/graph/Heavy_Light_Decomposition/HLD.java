@@ -8,7 +8,7 @@ import java.io.*;
  * test link : https://www.luogu.com.cn/problem/P3384
  */
 
-public class Main {
+public class HLD {
 
     static int n, m, r, p;
     static int[] head, nxt, to;
