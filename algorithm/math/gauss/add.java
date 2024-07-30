@@ -63,10 +63,9 @@ public class add {
             return;
         }
         for (int i = 0; i < n; i++) {
-            out.println(String.format("%.2f", mat[i][n]));
+            out.printf("%.2f\n", mat[i][n]);
         }
     }
 
    
-
 }
