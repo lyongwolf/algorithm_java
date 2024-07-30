@@ -33,7 +33,11 @@ public class eDCC_generate_graph {
         dcc = new int[n + 1];
         bri = new boolean[(m + 1) << 1];
         ts = top = no = 0;
-        tarjan(1, 0);
+        for (int i = 1; i <= n; i++) {
+            if (dfn[i] == 0) {
+                tarjan(i, 0);
+            }
+        }
         garph = new List[no + 1];
         val = new int[no + 1];
         Arrays.setAll(garph, v -> new ArrayList<>());
