@@ -34,19 +34,18 @@ public class rang_sum {
     static class Block {
         private int[] l, r, id;
         private long[] arr, sum, lazy;
-        private int N;
 
         public Block(int[] nums) {
             int n = nums.length - 1;
-            N = (int) Math.sqrt(n);
-            N += N * N == n ? 0 : 1;
-            l = new int[N + 1];
-            r = new int[N + 1];
+            int N = (int) Math.sqrt(n);
+            int tot = (n + N - 1) / N;
+            l = new int[tot + 1];
+            r = new int[tot + 1];
             id = new int[n + 1];
             arr = new long[n + 1];
-            sum = new long[N + 1];
-            lazy = new long[N + 1];
-            for (int i = 1, x = 1, y; i <= N; i++, x += N) {
+            sum = new long[tot + 1];
+            lazy = new long[tot + 1];
+            for (int i = 1, x = 1, y; i <= tot; i++, x += N) {
                 y = Math.min(n, x + N - 1);
                 l[i] = x;
                 r[i] = y;
