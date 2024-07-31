@@ -1,0 +1,80 @@
+package algorithm.math.gauss;
+
+import java.io.*;
+import java.util.*;
+/**
+ * 高斯消元解异或方程组
+ * 测试链接：https://acm.hdu.edu.cn/showproblem.php?pid=5833
+ */
+public class xor {
+    public static void main(String[] args) {int t = sc.nextInt(); while (t-- > 0) solve(); out.flush(); out.close();} static class FastReader {BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); StringTokenizer s; int nextInt() {return Integer.parseInt(next());} long nextLong() {return Long.parseLong(next());} double nextDouble() {return Double.parseDouble(next());} String next() {try {while (s == null || !s.hasMoreTokens()) s = new StringTokenizer(r.readLine());} catch (Exception e) {} return s.nextToken();}}
+    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    static FastReader sc = new FastReader();
+
+    static int testCase;
+    static int MOD = (int) 1e9 + 7;
+    static long[] A = new long[301];
+    static int[] p = new int[303];
+    static {
+        A[0] = 1;
+        for (int i = 1; i <= 300; i++) {
+            A[i] = A[i - 1] * 2 % MOD;
+        }
+        boolean[] isP = new boolean[2001];
+        for (int i = 2; i <= 2000; i++) {
+            isP[i] = true;
+        }
+        for (int i = 2, k = 0; i <= 2000; i++) {
+            if (isP[i]) {
+                p[k++] = i;
+                for (int j = i; j * i <= 2000; j++) {
+                    isP[j * i] = false;
+                }
+            }
+        }
+    }
+
+    static void solve() {
+        int n = sc.nextInt();
+        int[][] mat = new int[303][304];
+        for (int j = 0; j < n; j++) {
+            long v = sc.nextLong();
+            for (int i = 0; i < 303; i++) {
+                while (v % p[i] == 0) {
+                    v /= p[i];
+                    mat[i][j] ^= 1;
+                }
+            }
+        }
+        for (int i = 0; i < 303; i++) {
+            for (int j = 0, b = i; j < 303; j++) {
+                if (j < i && mat[j][j] == 1) {
+                    continue;
+                }
+                if (mat[j][i] == 1) {
+                    int[] tmp = mat[b];
+                    mat[b] = mat[j];
+                    mat[j] = tmp;
+                    break;
+                }
+            }
+            if (mat[i][i] == 0) {
+                continue;
+            }
+            for (int j = 0; j < 303; j++) {
+                if (i != j && mat[j][i] == 1) {
+                    for (int k = i; k < 304; k++) {
+                        mat[j][k] ^= mat[i][k];
+                    }
+                }
+            }
+        }
+        int cnt = n;
+        for (int i = 0; i < n; i++) {
+            cnt -= mat[i][i];
+        }
+        out.println("Case #" + (++testCase) + ":");
+        out.println((A[cnt] - 1 + MOD) % MOD);
+    }
+
+}
