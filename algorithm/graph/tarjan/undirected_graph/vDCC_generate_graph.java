@@ -30,7 +30,7 @@ public class vDCC_generate_graph {
         stk = new int[n + 1];
         id = new int[n + 1];
         cut = new boolean[n + 1];
-        dcc = new List[n + 1];
+        dcc = new List[n << 1];
         root = ts = top = no = 0;
         Arrays.setAll(dcc, v -> new ArrayList<>());
         for (int u = 1; u <= n; u++) {
@@ -57,7 +57,7 @@ public class vDCC_generate_graph {
         }
         garph = new List[no + 1];
         Arrays.setAll(garph, v -> new ArrayList<>());
-        for (int u = 1; u <= Math.min(n, no); u++) {
+        for (int u = 1; u <= no; u++) {
             for (int v : dcc[u]) {
                 if (cut[v]) {
                     garph[u].add(id[v]);
