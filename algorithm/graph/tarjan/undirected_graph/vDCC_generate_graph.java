@@ -61,10 +61,11 @@ public class vDCC_generate_graph {
             for (int v : dcc[u]) {
                 if (cut[v]) {
                     garph[u].add(id[v]);
-                    garph[v].add(id[u]);
+                    garph[id[v]].add(u);
                 }
             }
         }
+
     }
 
     static void tarjan(int u) {
@@ -99,7 +100,7 @@ public class vDCC_generate_graph {
 
 
   
-    static boolean retest = true;
+    static boolean retest = false;
     static FastReader sc = new FastReader();
     static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
     public static void main(String[] args) {
