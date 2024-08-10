@@ -10,9 +10,10 @@ import java.util.*;
 
 public class Dinic {
     
+    static long INF = Long.MAX_VALUE / 100;
     static int n, m, s, t;
     static int[] head, nxt, to, es, dep;
-    static long[] wt;
+    static long[] wt;       
 
     static void solve() {
         n = sc.nextInt();
@@ -32,7 +33,7 @@ public class Dinic {
         dep = new int[n + 1];
         long ans = 0;
         while (bfs()) {
-            ans += flow(s, Long.MAX_VALUE / 100);
+            ans += flow(s, INF);
         }
         out.println(ans);
     }
