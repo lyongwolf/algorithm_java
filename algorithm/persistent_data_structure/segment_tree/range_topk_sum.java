@@ -1,20 +1,20 @@
-package algorithm.segment_tree;
-
-import java.io.*;
+package algorithm.persistent_data_structure.segment_tree;
 import java.util.*;
+import java.io.*;
 /**
- * 静态区间第 k 小
- * 测试链接：https://www.luogu.com.cn/problem/P3834
+ * 求区间topK累加和
+ * 测试链接：https://codeforces.com/contest/1862/problem/E
  */
-public class range_smallK {
-    
+public class range_topk_sum {
+
     static void solve() {
         int n = sc.nextInt(), m = sc.nextInt();
+        long d = sc.nextLong();
         int[] arr = new int[n + 1];
         int[] val = new int[n + 1];
         for (int i = 1; i <= n; i++) {
             arr[i] = sc.nextInt();
-            val[i] = arr[i];
+            val[i] = Math.max(0, arr[i]);
         }
         Arrays.sort(val, 1, n + 1);
         HashMap<Integer, Integer> idx = new HashMap<>();
@@ -25,27 +25,33 @@ public class range_smallK {
             idx.put(val[i], ++k);
             val[k] = val[i];
         }
-        SegTree tree = new SegTree(n, n);
+        SegTree tree = new SegTree(val, idx.size(), n);
         for (int i = 1; i <= n; i++) {
-            tree.insert(i - 1, idx.get(arr[i]));
+            int v = idx.get(Math.max(0, arr[i]));
+            tree.insert(i - 1, v);
         }
-        while (m-- > 0) {
-            int l = sc.nextInt(), r = sc.nextInt(), k = sc.nextInt();
-            out.println(val[tree.smallK(l, r, k)]);
+        long ans = 0;
+        for (int i = 1; i <= n; i++) {
+            ans = Math.max(ans, tree.sumK(1, i - 1, m - 1) + arr[i] - d * i);
         }
+        out.println(ans);
     }
 
     static class SegTree {
         private int[] root, cnt, lc, rc;
         private int N, no, version;
+        private int[] val;
+        private long[] sum;
 
-        public SegTree(int len, int version) {
+        public SegTree(int[] val, int len, int version) {
             N = len;
             int tot = N * 2 + version * (33 - Integer.numberOfLeadingZeros(N));
             root = new int[version + 1];
             lc = new int[tot];
             rc = new int[tot];
             cnt = new int[tot];
+            this.val = val;
+            sum = new long[tot];
             root[0] = build(1, N);
         }
 
@@ -68,6 +74,7 @@ public class range_smallK {
             int o = ++no;
             cnt[o] = cnt[x] + 1;
             if (l == r) {
+                sum[o] = (long) val[i] * cnt[o];
                 return o;
             }
             int m = (l + r) >> 1;
@@ -78,31 +85,49 @@ public class range_smallK {
                 rc[o] = insert(rc[x], i, m + 1, r);
                 lc[o] = lc[x];
             }
+            sum[o] = sum[lc[o]] + sum[rc[o]];
             return o;
         }
 
-        public int smallK(int x, int y, int k) {
-            return smallK(root[x - 1], root[y], k, 1, N);
+        public int topK(int x, int y, int k) {
+            return topK(root[x - 1], root[y], k, 1, N);
         }
 
-        private int smallK(int x, int y, int k, int l, int r) {
+        private int topK(int x, int y, int k, int l, int r) {
             if (l == r) {
-                return l;
+                return val[l];
             }
             int m = (l + r) >> 1;
-            int t = cnt[lc[y]] - cnt[lc[x]];
-            if (t < k) {
-                return smallK(rc[x], rc[y], k - t, m + 1, r);
+            int t = cnt[rc[y]] - cnt[rc[x]];
+            if (t >= k) {
+                return topK(rc[x], rc[y], k, m + 1, r);
             } else {
-                return smallK(lc[x], lc[y], k, l, m);
+                return topK(lc[x], lc[y], k - t, l, m);
             }
+        }
+
+        public long sumK(int x, int y, int k) {
+            return sumK(root[x - 1], root[y], k, 1, N);
+        }
+
+        public long sumK(int x, int y, int k, int l, int r) {
+            if (l == r) {
+                return (long) val[l] * Math.min(k, cnt[y] -cnt[x]);
+            }
+            int m = (l + r) >> 1;
+            int t = cnt[rc[y]] - cnt[rc[x]];
+            long ans = 0;
+            if (t >= k) {
+                ans = sumK(rc[x], rc[y], k, m + 1, r);
+            } else {
+                ans = sumK(lc[x], lc[y], k - t, l, m) + sum[rc[y]] - sum[rc[x]];
+            }
+            return ans;
         }
     }
 
-   
-
     
-    static boolean retest = false;
+    static boolean retest = true;
     static FastReader sc = new FastReader();
     static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
     public static void main(String[] args) {

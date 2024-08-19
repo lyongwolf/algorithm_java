@@ -1,4 +1,4 @@
-package algorithm.segment_tree;
+package algorithm.persistent_data_structure.segment_tree;
 
 import java.util.*;
 import java.io.*;
