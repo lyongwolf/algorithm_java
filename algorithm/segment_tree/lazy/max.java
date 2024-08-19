@@ -49,11 +49,11 @@ public class max {
             }
         }
 
-        public void setVal(int l, int r, long v) {
-            setVal(l, r, v, 1, N, 1);
+        public void set(int l, int r, long v) {
+            set(l, r, v, 1, N, 1);
         }
 
-        private void setVal(int L, int R, long v, int l, int r, int i) {
+        private void set(int L, int R, long v, int l, int r, int i) {
             if (l == r) {
                 lazy[i] = v;
                 max[i] = v;
@@ -62,10 +62,10 @@ public class max {
             int m = (l + r) >> 1;
             down(i);
             if (L <= m) {
-                setVal(L, R, v, l, m, i << 1);
+                set(L, R, v, l, m, i << 1);
             }
             if (R > m) {
-                setVal(L, R, v, m + 1, r, i << 1 | 1);
+                set(L, R, v, m + 1, r, i << 1 | 1);
             }
             up(i);
         }

@@ -35,20 +35,20 @@ public class max {
             max[i] = Math.max(max[i << 1], max[i << 1 | 1]);
         }
 
-        public void update(int o, long v) {
-            update(o, v, 1, N, 1);
+        public void set(int o, long v) {
+            set(o, v, 1, N, 1);
         }
 
-        private void update(int o, long v, int l, int r, int i) {
+        private void set(int o, long v, int l, int r, int i) {
             if (l == r) {
                 max[i] = v;
                 return;
             }
             int m = (l + r) >> 1;
             if (o <= m) {
-                update(o, v, l, m, i << 1);
+                set(o, v, l, m, i << 1);
             } else {
-                update(o, v, m + 1, r, i << 1 | 1);
+                set(o, v, m + 1, r, i << 1 | 1);
             }
             up(i);
         }
