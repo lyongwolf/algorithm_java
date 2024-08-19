@@ -14,7 +14,7 @@ public class min {
             Arrays.fill(min, Long.MAX_VALUE);
         }
 
-        public void add(int i, long v) {
+        public void update(int i, long v) {
             while (i < N) {
                 min[i] = Math.min(min[i], v);
                 i += i & -i;

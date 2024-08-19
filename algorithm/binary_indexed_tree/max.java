@@ -14,7 +14,7 @@ public class max {
             Arrays.fill(max, Long.MIN_VALUE);
         }
 
-        public void add(int i, long v) {
+        public void update(int i, long v) {
             while (i < N) {
                 max[i] = Math.max(max[i], v);
                 i += i & -i;
