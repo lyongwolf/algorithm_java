@@ -1,32 +1,30 @@
-package algorithm.segment_tree.lazy;
+package algorithm.segment_tree.lazy.sum;
+/**
+ * 区间添加值
+ */
+public class sumAddRange {
 
-import java.util.Arrays;
-
-public class min {
-    
     static class SegTree {
-        private long[] min;
+        private long[] sum;
         private long[] lazy;
         private int N;
 
         public SegTree(int len) {
             N = len;
-            min = new long[N << 2];
+            sum = new long[N << 2];
             lazy = new long[N << 2];
-            Arrays.fill(min, Long.MAX_VALUE);
-            Arrays.fill(lazy, Long.MAX_VALUE);
         }
 
         public SegTree(int[] arr) {
             N = arr.length - 1;
-            min = new long[N << 2];
+            sum = new long[N << 2];
             lazy = new long[N << 2];
             build(arr, 1, N, 1);
         }
 
         private void build(int[] arr, int l, int r, int i) {
             if (l == r) {
-                min[i] = arr[l];
+                sum[i] = arr[l];
                 return;
             }
             int m = (l + r) >> 1;
@@ -36,36 +34,36 @@ public class min {
         }
 
         private void up(int i) {
-            min[i] = Math.min(min[i << 1], min[i << 1 | 1]);
+            sum[i] = sum[i << 1] + sum[i << 1 | 1];
         }
 
-        private void down(int i) {
-            if (lazy[i] != Long.MAX_VALUE) {
-                lazy[i << 1] = lazy[i];
-                lazy[i << 1 | 1] = lazy[i];
-                min[i << 1] = lazy[i];
-                min[i << 1 | 1] = lazy[i];
-                lazy[i] = Long.MAX_VALUE;
+        private void down(int i, int ln, int rn) {
+            if (lazy[i] != 0) {
+                lazy[i << 1] += lazy[i];
+                lazy[i << 1 | 1] += lazy[i];
+                sum[i << 1] += lazy[i] * ln;
+                sum[i << 1 | 1] += lazy[i] * rn;
+                lazy[i] = 0;
             }
         }
 
-        public void set(int l, int r, long v) {
-            set(l, r, v, 1, N, 1);
+        public void add(int l, int r, long v) {
+            add(l, r, v, 1, N, 1);
         }
 
-        private void set(int L, int R, long v, int l, int r, int i) {
-            if (L <= l && r <= R) {
-                lazy[i] = v;
-                min[i] = v;
+        private void add(int L, int R, long v, int l, int r, int i) {
+            if (l == r) {
+                lazy[i] += v;
+                sum[i] += v * (r - l + 1);
                 return;
             }
             int m = (l + r) >> 1;
-            down(i);
+            down(i, m - l + 1, r);
             if (L <= m) {
-                set(L, R, v, l, m, i << 1);
+                add(L, R, v, l, m, i << 1);
             }
             if (R > m) {
-                set(L, R, v, m + 1, r, i << 1 | 1);
+                add(L, R, v, m + 1, r, i << 1 | 1);
             }
             up(i);
         }
@@ -76,16 +74,16 @@ public class min {
 
         private long query(int L, int R, int l, int r, int i) {
             if (L <= l && r <= R) {
-                return min[i];
+                return sum[i];
             }
             int m  = (l + r) >> 1;
-            down(i);
-            long ans = Long.MAX_VALUE;
+            down(i, m - l + 1, r);
+            long ans = 0;
             if (L <= m) {
-                ans = Math.min(ans, query(L, R, l, m, i << 1));
+                ans += query(L, R, l, m, i << 1);
             }
             if (R > m) {
-                ans = Math.min(ans, query(L, R, m + 1, r, i << 1 | 1));
+                ans += query(L, R, m + 1, r, i << 1 | 1);
             }
             return ans;
         }
@@ -96,10 +94,10 @@ public class min {
 
         private long query(int o, int l, int r, int i) {
             if (l == r) {
-                return min[i];
+                return sum[i];
             }
             int m  = (l + r) >> 1;
-            down(i);
+            down(i, m - l + 1, r);
             if (o <= m) {
                 return query(o, l, m, i << 1);
             } else {
@@ -107,4 +105,5 @@ public class min {
             }
         }
     }
+
 }

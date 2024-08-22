@@ -1,10 +1,11 @@
-package algorithm.segment_tree.lazy;
+package algorithm.segment_tree.lazy.max;
 
-import java.util.Arrays;
-
-public class max {
+/**
+ * 区间添加值
+ */
+public class maxAddRange {
     
-    static class SegTree {
+     static class SegTree {
         private long[] max;
         private long[] lazy;
         private int N;
@@ -13,8 +14,6 @@ public class max {
             N = len;
             max = new long[N << 2];
             lazy = new long[N << 2];
-            Arrays.fill(max, Long.MIN_VALUE);
-            Arrays.fill(lazy, Long.MIN_VALUE);
         }
 
         public SegTree(int[] arr) {
@@ -40,32 +39,32 @@ public class max {
         }
 
         private void down(int i) {
-            if (lazy[i] != Long.MIN_VALUE) {
-                lazy[i << 1] = lazy[i];
-                lazy[i << 1 | 1] = lazy[i];
-                max[i << 1] = lazy[i];
-                max[i << 1 | 1] = lazy[i];
-                lazy[i] = Long.MIN_VALUE;
+            if (lazy[i] != 0) {
+                lazy[i << 1] += lazy[i];
+                lazy[i << 1 | 1] += lazy[i];
+                max[i << 1] += lazy[i];
+                max[i << 1 | 1] += lazy[i];
+                lazy[i] = 0;
             }
         }
 
-        public void set(int l, int r, long v) {
-            set(l, r, v, 1, N, 1);
+        public void add(int l, int r, long v) {
+            add(l, r, v, 1, N, 1);
         }
 
-        private void set(int L, int R, long v, int l, int r, int i) {
+        private void add(int L, int R, long v, int l, int r, int i) {
             if (L <= l && r <= R) {
-                lazy[i] = v;
-                max[i] = v;
+                lazy[i] += v;
+                max[i] += v;
                 return;
             }
             int m = (l + r) >> 1;
             down(i);
             if (L <= m) {
-                set(L, R, v, l, m, i << 1);
+                add(L, R, v, l, m, i << 1);
             }
             if (R > m) {
-                set(L, R, v, m + 1, r, i << 1 | 1);
+                add(L, R, v, m + 1, r, i << 1 | 1);
             }
             up(i);
         }
