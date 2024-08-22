@@ -5,7 +5,7 @@ import java.util.*;
 public class Manacher {
     
     // 若s[i..j]为回文串，则  (j - i + 1) < pArr[i + j + 1]
-    public int[] pArr(String s) {
+    static int[] pArr(String s) {
         char[] str = manacherString(s).toCharArray();
         System.out.println(Arrays.toString(str));
         int n = str.length;
@@ -23,7 +23,7 @@ public class Manacher {
         return pArr;
     }
 
-    public String manacherString(String s) {
+    static String manacherString(String s) {
         StringBuilder sb = new StringBuilder("#");
         for (char c : s.toCharArray()) {
             sb.append(c).append('#');
