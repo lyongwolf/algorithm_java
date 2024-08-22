@@ -54,7 +54,7 @@ public class max {
         }
 
         private void set(int L, int R, long v, int l, int r, int i) {
-            if (l == r) {
+            if (L <= l && r <= R) {
                 lazy[i] = v;
                 max[i] = v;
                 return;
