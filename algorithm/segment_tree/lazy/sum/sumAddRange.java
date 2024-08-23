@@ -58,7 +58,7 @@ public class sumAddRange {
                 return;
             }
             int m = (l + r) >> 1;
-            down(i, m - l + 1, r);
+            down(i, m - l + 1, r - m);
             if (L <= m) {
                 add(L, R, v, l, m, i << 1);
             }
@@ -77,7 +77,7 @@ public class sumAddRange {
                 return sum[i];
             }
             int m  = (l + r) >> 1;
-            down(i, m - l + 1, r);
+            down(i, m - l + 1, r - m);
             long ans = 0;
             if (L <= m) {
                 ans += query(L, R, l, m, i << 1);
@@ -97,7 +97,7 @@ public class sumAddRange {
                 return sum[i];
             }
             int m  = (l + r) >> 1;
-            down(i, m - l + 1, r);
+            down(i, m - l + 1, r - m);
             if (o <= m) {
                 return query(o, l, m, i << 1);
             } else {
