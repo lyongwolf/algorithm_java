@@ -42,12 +42,27 @@ public class Trie01 {
             Node cur = root;
             int ans = 0;
             for (int i = 30; i >= 0; i--) {
-                int j = v >> i & 1, k = j ^ 1;
-                if (cur.nxt[k] != null) {
+                int j = v >> i & 1;
+                if (cur.nxt[j ^ 1] != null) {
                     ans |= 1 << i;
-                    cur = cur.nxt[k];
+                    cur = cur.nxt[j ^ 1];
                 } else {
                     cur = cur.nxt[j];
+                }
+            }
+            return ans;
+        }
+
+        private int minXor(int v) {
+            Node cur = root;
+            int ans = 0;
+            for (int i = 30; i >= 0; i--) {
+                int j = v >> i & 1;
+                if (cur.nxt[j] != null) {
+                    cur = cur.nxt[j];
+                } else {
+                    ans |= 1 << i;
+                    cur = cur.nxt[j ^ 1];
                 }
             }
             return ans;
