@@ -21,6 +21,10 @@ public class MyDeque {
             size = 0;
         }
 
+        public int size() {
+            return size;
+        }
+
         public boolean isEmpty() {
             return size == 0;
         }
@@ -63,6 +67,10 @@ public class MyDeque {
             head = arr.length >> 1;
             tail = head - 1;
             size = 0;
+        }
+
+        public int size() {
+            return size;
         }
 
         public boolean isEmpty() {
@@ -109,6 +117,10 @@ public class MyDeque {
             size = 0;
         }
 
+        public int size() {
+            return size;
+        }
+
         public boolean isEmpty() {
             return size == 0;
         }
@@ -151,6 +163,10 @@ public class MyDeque {
             head = arr.length >> 1;
             tail = head - 1;
             size = 0;
+        }
+
+        public int size() {
+            return size;
         }
 
         public boolean isEmpty() {
