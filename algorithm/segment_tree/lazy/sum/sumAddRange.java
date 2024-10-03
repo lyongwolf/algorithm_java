@@ -4,7 +4,7 @@ package algorithm.segment_tree.lazy.sum;
  */
 public class sumAddRange {
 
-    static class SegTree {
+    class SegTree {
         private long[] sum;
         private long[] lazy;
         private int N;

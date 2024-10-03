@@ -5,7 +5,7 @@ package algorithm.segment_tree.lazy.min;
  */
 public class minAddRange {
     
-     static class SegTree {
+    class SegTree {
         private long[] min;
         private long[] lazy;
         private int N;

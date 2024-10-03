@@ -6,7 +6,7 @@ import java.util.Arrays;
  */
 public class maxSetRange {
     
-    static class SegTree {
+    class SegTree {
         private long[] max;
         private long[] lazy;
         private int N;

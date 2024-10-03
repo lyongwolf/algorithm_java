@@ -2,7 +2,7 @@ package algorithm.segment_tree;
 
 public class sum {
     
-    static class SegTree {
+    class SegTree {
         private long[] sum;
         private int N;
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class max {
     
-     static class SegTree {
+    class SegTree {
         private long[] max;
         private int N;
 

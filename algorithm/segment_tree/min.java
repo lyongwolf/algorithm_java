@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class min {
     
-    static class SegTree {
+    class SegTree {
         private long[] min;
         private int N;
 
