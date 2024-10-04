@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class sumSetRange {
     
-    class SegTree {
+    static class SegTree {
         private long[] sum;
         private long[] lazy;
         private int N;

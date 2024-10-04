@@ -5,7 +5,7 @@ package algorithm.segment_tree.lazy.max;
  */
 public class maxAddRange {
     
-    class SegTree {
+    static class SegTree {
         private long[] max;
         private long[] lazy;
         private int N;
