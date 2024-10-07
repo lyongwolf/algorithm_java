@@ -1,5 +1,3 @@
-package algorithm.util.matrix;
-
 public class MatrixUtil {
     
     // 32位整数
