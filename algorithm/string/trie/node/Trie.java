@@ -1,4 +1,4 @@
-package algorithm.string.trie;
+package algorithm.string.trie.node;
 
 /**
  * 测试链接：https://www.nowcoder.com/practice/a55a584bc0ca4a83a272680174be113b

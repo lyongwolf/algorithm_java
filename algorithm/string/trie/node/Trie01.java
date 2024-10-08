@@ -1,4 +1,4 @@
-package algorithm.string.trie;
+package algorithm.string.trie.node;
 
 /**
  * 0-1 trie

@@ -1,4 +1,4 @@
-package algorithm.string.trie;
+package algorithm.string.trie.array;
 
 import java.io.*;
 import java.util.*;
