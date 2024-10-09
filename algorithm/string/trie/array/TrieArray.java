@@ -6,9 +6,9 @@ package algorithm.string.trie.array;
 public class TrieArray {
 
     static class Trie {
-        int[][] nxt;
-        int[] end, cnt; 
-        int no;
+        private int[][] nxt;
+        private int[] end, cnt; 
+        private int no;
 
         public Trie(int tot) {
             tot++;
