@@ -12,15 +12,14 @@ public class Trie01Array {
         private int no, high;
 
         public Trie01(int tot, int high) {
-            tot += 2;
+            tot++;
             nxt = new int[tot][2];
             cnt = new int[tot];
-            no = 1;
             this.high = high;
         }
 
         public void insert(int v) {
-            int u = 1;
+            int u = 0;
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
                 if (nxt[u][j] == 0) {
@@ -32,7 +31,7 @@ public class Trie01Array {
         }
 
         public void delete(int v) {
-            int u = 1;
+            int u = 0;
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
                 if (cnt[nxt[u][j]] == 1) {
@@ -45,7 +44,7 @@ public class Trie01Array {
         }
 
         public int maxXor(int v) {
-            int u = 1;
+            int u = 0;
             int ans = 0;
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
@@ -60,7 +59,7 @@ public class Trie01Array {
         }
 
         public int minXor(int v) {
-            int u = 1;
+            int u = 0;
             int ans = 0;
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
@@ -73,6 +72,5 @@ public class Trie01Array {
             }
             return ans;
         }
-
     }
 }

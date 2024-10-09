@@ -11,15 +11,14 @@ public class TrieArray {
         int no;
 
         public Trie(int tot) {
-            tot += 2;
+            tot++;
             nxt = new int[tot][26];
             end = new int[tot];
             cnt = new int[tot];
-            no = 1;
         }
 
-        void insert(String word) {
-            int u = 1;
+        public void insert(String word) {
+            int u = 0;
             for (char c : word.toCharArray()) {
                 c -= 'a';
                 if (nxt[u][c] == 0) {
@@ -32,8 +31,8 @@ public class TrieArray {
         }
 
         // 字符串在前缀树中
-        void delete(String word) {
-            int u = 1;
+        public void delete(String word) {
+            int u = 0;
             for (char c : word.toCharArray()) {
                 c -= 'a';
                 if (--cnt[nxt[u][c]] == 0) {
@@ -45,8 +44,8 @@ public class TrieArray {
             end[u]--;
         }
 
-        boolean search(String word) {
-            int u = 1;
+        public boolean search(String word) {
+            int u = 0;
             for (char c : word.toCharArray()) {
                 u = nxt[u][c - 'a'];
                 if (u == 0) {
@@ -56,8 +55,8 @@ public class TrieArray {
             return end[u] > 0;
         }
 
-        int prefixNumber(String pre) {
-            int u = 1;
+        public int prefixNumber(String pre) {
+            int u = 0;
             for (char c : pre.toCharArray()) {
                 u = nxt[u][c - 'a'];
                 if (u == 0) {
