@@ -1,5 +1,7 @@
 package algorithm.string.trie.array;
 
+import java.util.Arrays;
+
 /**
  * 0-1 trie
  * 测试链接：https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/
@@ -11,10 +13,9 @@ public class Trie01Array {
         private int[] cnt;
         private int no, high;
 
-        public Trie01(int tot, int high) {
-            tot++;
-            nxt = new int[tot][2];
-            cnt = new int[tot];
+        public Trie01(int high) {
+            nxt = new int[16][2];
+            cnt = new int[16];
             this.high = high;
         }
 
@@ -23,10 +24,21 @@ public class Trie01Array {
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
                 if (nxt[u][j] == 0) {
-                    nxt[u][j] = ++no;
+                    if (++no == nxt.length) {
+                        int[][] tmp = new int[no << 1][2];
+                        for (int k = 0; k < no; k++) {
+                            tmp[k] = nxt[k];
+                        }
+                        for (int k = no; k < no << 1; k++) {
+                            tmp[k] = new int[2];
+                        }
+                        nxt = tmp;
+                        cnt = Arrays.copyOf(cnt, no << 1);
+                    }
+                    nxt[u][j] = no;
                 }
                 u = nxt[u][j];
-                cnt[u]--;
+                cnt[u]++;
             }
         }
 
@@ -34,12 +46,11 @@ public class Trie01Array {
             int u = 0;
             for (int i = high; i >= 0; i--) {
                 int j = v >> i & 1;
-                if (cnt[nxt[u][j]] == 1) {
+                if (--cnt[nxt[u][j]] == 0) {
                     nxt[u][j] = 0;
                     return;
                 }
                 u = nxt[u][j];
-                cnt[u]--;
             }
         }
 

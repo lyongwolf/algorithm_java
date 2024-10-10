@@ -1,5 +1,7 @@
 package algorithm.string.trie.array;
 
+import java.util.Arrays;
+
 /**
  * 测试链接：https://www.nowcoder.com/practice/a55a584bc0ca4a83a272680174be113b
  */
@@ -10,11 +12,10 @@ public class TrieArray {
         private int[] end, cnt; 
         private int no;
 
-        public Trie(int tot) {
-            tot++;
-            nxt = new int[tot][26];
-            end = new int[tot];
-            cnt = new int[tot];
+        public Trie() {
+            nxt = new int[16][26];
+            end = new int[16];
+            cnt = new int[16];
         }
 
         public void insert(String word) {
@@ -22,7 +23,19 @@ public class TrieArray {
             for (char c : word.toCharArray()) {
                 c -= 'a';
                 if (nxt[u][c] == 0) {
-                    nxt[u][c] = ++no;
+                    if (++no == nxt.length) {
+                        int[][] tmp = new int[no << 1][2];
+                        for (int i = 0; i < no; i++) {
+                            tmp[i] = nxt[i];
+                        }
+                        for (int i = no; i < no << 1; i++) {
+                            tmp[i] = new int[26];
+                        }
+                        nxt = tmp;
+                        end = Arrays.copyOf(end, no << 1);
+                        cnt = Arrays.copyOf(cnt, no << 1);
+                    }
+                    nxt[u][c] = no;
                 }
                 u = nxt[u][c];
                 cnt[u]++;
@@ -35,7 +48,7 @@ public class TrieArray {
             int u = 0;
             for (char c : word.toCharArray()) {
                 c -= 'a';
-                if (--cnt[nxt[u][c]] == 0) {
+                if (cnt[nxt[u][c]] == 1) {
                     nxt[u][c] = 0;
                     return;
                 }
@@ -68,7 +81,7 @@ public class TrieArray {
     }
 
     public String[] trieU(String[][] operators) {
-        Trie trie = new Trie(100000 * 20);
+        Trie trie = new Trie();
         int n = 0;
         for (String[] op : operators) {
             if (op[0].equals("3") || op[0].equals("4")) {
