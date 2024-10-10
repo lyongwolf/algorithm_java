@@ -17,7 +17,7 @@ public class AC_setLast {                                                       
         for (int i = 0; i < n; i++) {
             num[i] = str[i] - '0';
         }
-        AhoCorasick ac = new AhoCorasick(1500);
+        AhoCorasick ac = new AhoCorasick();
         int m = sc.nextInt();
         for (int i = 0; i < m; i++) {
             ac.insert(sc.next());
@@ -51,17 +51,13 @@ public class AC_setLast {                                                       
 
     static class AhoCorasick {
         public int[][] nxt;
-        public int[] fail;
-        public int[] last;
         public boolean[] end;
+        public int[] fail, last;
         public int no;
 
-        public AhoCorasick(int tot) {
-            tot++;
-            nxt = new int[tot][10];
-            fail = new int[tot];
-            last = new int[tot];
-            end = new boolean[tot];
+        public AhoCorasick() {
+            nxt = new int[16][10];
+            end = new boolean[16];
         }
 
         public void insert(String s) {
@@ -69,7 +65,18 @@ public class AC_setLast {                                                       
             for (char c : s.toCharArray()) {
                 c -= '0';
                 if (nxt[u][c] == 0) {
-                    nxt[u][c] = ++no;
+                    if (++no == nxt.length) {
+                        int[][] tmp = new int[no << 1][];
+                        for (int i = 0; i < no; i++) {
+                            tmp[i] = nxt[i];
+                        }
+                        for (int i = no; i < no << 1; i++) {
+                            tmp[i] = new int[10];
+                        }
+                        nxt = tmp;
+                        end = Arrays.copyOf(end, no << 1);
+                    }
+                    nxt[u][c] = no;
                 }
                 u = nxt[u][c];
             }
@@ -77,6 +84,8 @@ public class AC_setLast {                                                       
         }
 
         public void setFail() {
+            fail = new int[no + 1];
+            last = new int[no + 1];
             Deque<Integer> queue = new ArrayDeque<>();
             for (int i = 0; i < 10; i++) {
                 if (nxt[0][i] != 0) {
