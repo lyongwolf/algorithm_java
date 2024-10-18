@@ -25,7 +25,7 @@ public class Trie01Array {
                 int j = v >> i & 1;
                 if (nxt[u][j] == 0) {
                     if (++no == nxt.length) {
-                        int[][] tmp = new int[no << 1][2];
+                        int[][] tmp = new int[no << 1][];
                         for (int k = 0; k < no; k++) {
                             tmp[k] = nxt[k];
                         }
