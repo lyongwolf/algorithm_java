@@ -45,7 +45,7 @@ public class range_topk_sum {
 
         public SegTree(int[] val, int len, int version) {
             N = len;
-            int tot = N * 2 + version * (33 - Integer.numberOfLeadingZeros(N));
+            int tot = N * 2 + version * (33 - Integer.numberOfLeadingZeros(N - 1));
             root = new int[version + 1];
             lc = new int[tot];
             rc = new int[tot];
