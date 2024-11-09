@@ -1,4 +1,4 @@
-package algorithm.math;
+package algorithm.math.util;
 
 public class matrix {
     

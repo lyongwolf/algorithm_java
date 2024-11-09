@@ -1,4 +1,4 @@
-package algorithm.math;
+package algorithm.math.util;
 
 /**
  * 扩展欧几里得算法
