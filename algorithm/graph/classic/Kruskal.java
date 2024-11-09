@@ -1,4 +1,4 @@
-package algorithm.graph;
+package algorithm.graph.classic;
 
 import java.io.*;
 import java.util.*;
