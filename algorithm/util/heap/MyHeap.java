@@ -1,7 +1,5 @@
 import java.util.*;
-/**
- * 需要指定堆的初始大小
- */
+
 public class MyHeap {
     
     // 小根堆，32位整型
@@ -9,8 +7,8 @@ public class MyHeap {
         private int[] arr;
         private int size;
 
-        public HeapIntegerMin(int len) {
-            arr = new int[len];
+        public HeapIntegerMin() {
+            arr = new int[16];
         }
 
         public boolean isEmpty() {
@@ -36,6 +34,9 @@ public class MyHeap {
         }
 
         public void add(int v) {
+            if (size == arr.length) {
+                arr = Arrays.copyOf(arr, arr.length << 1);
+            }
             arr[size++] = v;
             heapInsert(size - 1);
         }
@@ -73,8 +74,8 @@ public class MyHeap {
         private int[] arr;
         private int size;
 
-        public HeapIntegerMax(int len) {
-            arr = new int[len];
+        public HeapIntegerMax() {
+            arr = new int[16];
         }
 
         public boolean isEmpty() {
@@ -100,6 +101,9 @@ public class MyHeap {
         }
 
         public void add(int v) {
+            if (size == arr.length) {
+                arr = Arrays.copyOf(arr, arr.length << 1);
+            }
             arr[size++] = v;
             heapInsert(size - 1);
         }
@@ -137,8 +141,8 @@ public class MyHeap {
         private long[] arr;
         private int size;
 
-        public HeapLongMin(int len) {
-            arr = new long[len];
+        public HeapLongMin() {
+            arr = new long[16];
         }
 
         public boolean isEmpty() {
@@ -164,6 +168,9 @@ public class MyHeap {
         }
 
         public void add(long v) {
+            if (size == arr.length) {
+                arr = Arrays.copyOf(arr, arr.length << 1);
+            }
             arr[size++] = v;
             heapInsert(size - 1);
         }
@@ -201,8 +208,8 @@ public class MyHeap {
         private long[] arr;
         private int size;
 
-        public HeapLongMax(int len) {
-            arr = new long[len];
+        public HeapLongMax() {
+            arr = new long[16];
         }
 
         public boolean isEmpty() {
@@ -228,6 +235,9 @@ public class MyHeap {
         }
 
         public void add(long v) {
+            if (size == arr.length) {
+                arr = Arrays.copyOf(arr, arr.length << 1);
+            }
             arr[size++] = v;
             heapInsert(size - 1);
         }
@@ -266,9 +276,9 @@ public class MyHeap {
         private E[] arr;
         private int size;
 
-        public Heap(int len, Comparator<? super E> comparator) {
+        public Heap(Comparator<? super E> comparator) {
             this.comparator = comparator;
-            arr = (E[]) new Object[len];
+            arr = (E[]) new Object[16];
         }
 
         public boolean isEmpty() {
@@ -294,6 +304,9 @@ public class MyHeap {
         }
 
         public void add(E v) {
+            if (size == arr.length) {
+                arr = Arrays.copyOf(arr, arr.length << 1);
+            }
             arr[size++] = v;
             heapInsert(size - 1);
         }
