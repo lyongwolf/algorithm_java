@@ -13,9 +13,9 @@ public class TrieArray {
         private int no;
 
         public Trie() {
-            nxt = new int[16][26];
-            end = new int[16];
-            cnt = new int[16];
+            nxt = new int[1][26];
+            end = new int[1];
+            cnt = new int[1];
         }
 
         public void insert(String word) {

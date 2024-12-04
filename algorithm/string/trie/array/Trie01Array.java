@@ -14,8 +14,8 @@ public class Trie01Array {
         private int no, high;
 
         public Trie01(int high) {
-            nxt = new int[16][2];
-            cnt = new int[16];
+            nxt = new int[1][2];
+            cnt = new int[1];
             this.high = high;
         }
 

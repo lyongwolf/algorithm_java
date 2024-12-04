@@ -67,7 +67,7 @@ public class AC_classic {                                                       
         public int no;
 
         public AhoCorasick() {
-            nxt = new int[16][26];
+            nxt = new int[1][26];
         }
 
         public void insert(String s) {

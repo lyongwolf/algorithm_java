@@ -56,8 +56,8 @@ public class AC_setLast {                                                       
         public int no;
 
         public AhoCorasick() {
-            nxt = new int[16][10];
-            end = new boolean[16];
+            nxt = new int[1][10];
+            end = new boolean[1];
         }
 
         public void insert(String s) {

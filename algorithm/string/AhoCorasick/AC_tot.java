@@ -12,9 +12,9 @@ public class AC_tot {
         public int no;
 
         public AhoCorasick() {
-            nxt = new int[16][26];
-            len = new int[16];
-            end = new boolean[16];
+            nxt = new int[1][26];
+            len = new int[1];
+            end = new boolean[1];
         }
 
         public void insert(String s) {
