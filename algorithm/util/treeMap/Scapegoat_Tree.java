@@ -1,5 +1,3 @@
-package algorithm.util.treeMap;
-
 import java.util.*;
 /**
  * 替罪羊树
