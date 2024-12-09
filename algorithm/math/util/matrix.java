@@ -3,7 +3,7 @@ package algorithm.math.util;
 public class matrix {
     
     // 矩阵乘法
-    static long[][] times(long[][] mat1, long[][] mat2) {
+    static long[][] mul(long[][] mat1, long[][] mat2) {
         if (mat1[0].length != mat2.length) {
             return null;
         }
