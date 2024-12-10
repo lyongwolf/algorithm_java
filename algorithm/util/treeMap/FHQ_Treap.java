@@ -94,10 +94,18 @@ public class FHQ_Treap {
         }
 
         public int rank(int k) {
-            split(0, 0, head, k - 1);
-            int ans = sz[rc[0]] + 1;
-            head = merge(rc[0], lc[0]);
-            return ans;
+            return smallCount(k, head) + 1;
+        }
+        
+        private int smallCount(int k, int i) {
+            if (i == 0) {
+                return 0;
+            }
+            if (key[i] >= k) {
+                return smallCount(k, lc[i]);
+            } else {
+                return sz[lc[i]] + 1 + smallCount(k, rc[i]);
+            }
         }
 
         public int rankKey(int rk) {
