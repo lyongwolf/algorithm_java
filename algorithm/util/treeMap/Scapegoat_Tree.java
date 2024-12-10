@@ -150,21 +150,30 @@ public class Scapegoat_Tree {
         }
         
         private int smallCount(int k, int i) {
-            return i == 0 ? 0 : key[i] >= k ? smallCount(k, lc[i]) : tot[lc[i]] + val[i] + smallCount(k, rc[i]);
+            if (i == 0) {
+                return 0;
+            }
+            if (key[i] >= k) {
+                return smallCount(k, lc[i]);
+            } else {
+                return tot[lc[i]] + val[i] + smallCount(k, rc[i]);
+            }
         }
     
-        public int rankKey(int x) {
-            return rankKey(x, head);
+        public int rankKey(int rk) {
+            if (rk < 1 || rk > tot[head]) {
+                return -1;
+            }
+            return rankKey(rk, head);
         }
         
-        private int rankKey(int x, int i) {
-            return tot[lc[i]] >= x ? rankKey(x, lc[i]) : tot[lc[i]] + val[i] < x ? rankKey(x - tot[lc[i]] - val[i], rc[i]) : key[i];
-        }
-    
-        public void clear() {
-            Arrays.fill(lc, 1, no + 1, 0);
-            Arrays.fill(rc, 1, no + 1, 0);
-            head = no = 0;
+        private int rankKey(int rk, int i) {
+            if (tot[lc[i]] >= rk) {
+                return rankKey(rk, lc[i]);
+            } else if (tot[lc[i]] + val[i] < rk) {
+                return rankKey(rk - tot[lc[i]] - val[i], rc[i]);
+            }
+            return key[i];
         }
     
         public int[] copy() {
