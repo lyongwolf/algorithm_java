@@ -1,3 +1,5 @@
+package algorithm.util;
+
 public class MyBitSet {
 
     static class BitSet {

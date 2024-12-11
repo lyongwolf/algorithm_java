@@ -1,3 +1,5 @@
+package algorithm.util;
+
 public class MyDeque {
     
     // 32 位 Deque

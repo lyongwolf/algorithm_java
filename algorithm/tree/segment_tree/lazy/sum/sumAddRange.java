@@ -1,4 +1,4 @@
-package algorithm.segment_tree.lazy.sum;
+package algorithm.tree.segment_tree.lazy.sum;
 /**
  * 区间添加值
  */

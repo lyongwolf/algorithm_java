@@ -1,4 +1,4 @@
-package algorithm.segment_tree.lazy.max;
+package algorithm.tree.segment_tree.lazy.max;
 
 import java.util.Arrays;
 /**

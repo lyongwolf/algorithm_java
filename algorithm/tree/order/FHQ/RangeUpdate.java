@@ -1,23 +1,24 @@
-import java.util.*;
+package algorithm.tree.order.FHQ;
 
+import java.util.*;
+/**
+ * 维护新增节点的相对顺序（key仅存储值，不再具有大小关系）
+ * 区间插入，区间移动，区间翻转
+ */
 public class RangeUpdate {
     
-    
-
-    // 维护新增节点的相对顺序（key仅存储值，不再具有大小关系）
-    // 区间插入，区间移动，区间翻转
-    static class FHQTreapRange {
+    static class FHQTreap {
         private int[] key, lc, rc, sz;
         private double[] priority;
         private boolean[] reverse;
         private int head;
         private int no;
 
-        public FHQTreapRange() {
+        public FHQTreap() {
             this(0);
         }
 
-        public FHQTreapRange(int len) {
+        public FHQTreap(int len) {
             len++;
             key = new int[len];
             lc = new int[len];

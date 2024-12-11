@@ -1,3 +1,5 @@
+package algorithm.util;
+
 import java.util.*;
 
 public class MyHashMap {

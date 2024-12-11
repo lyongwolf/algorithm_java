@@ -1,4 +1,4 @@
-package algorithm.segment_tree;
+package algorithm.tree.segment_tree;
 
 public class sum {
     

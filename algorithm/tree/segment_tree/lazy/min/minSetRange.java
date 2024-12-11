@@ -1,4 +1,4 @@
-package algorithm.segment_tree.lazy.min;
+package algorithm.tree.segment_tree.lazy.min;
 
 import java.util.Arrays;
 /**

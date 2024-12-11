@@ -1,3 +1,5 @@
+package algorithm.util.heap;
+
 import java.util.*;
 
 public class MyDualHeap {

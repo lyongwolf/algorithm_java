@@ -1,4 +1,4 @@
-package algorithm.binary_indexed_tree.two_D;
+package algorithm.tree.binary_indexed_tree.two_D;
 
 public class max {
     

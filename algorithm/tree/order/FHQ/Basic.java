@@ -1,9 +1,9 @@
-package tree.order.FHQ;
+package algorithm.tree.order.FHQ;
 
 import java.util.*;
 
 public class Basic {
-    
+
     static class FHQTreap {
         private int[] key, lc, rc, sz;
         private double[] priority;

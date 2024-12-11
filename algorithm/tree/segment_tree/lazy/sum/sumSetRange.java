@@ -1,4 +1,4 @@
-package algorithm.segment_tree.lazy.sum;
+package algorithm.tree.segment_tree.lazy.sum;
 
 import java.util.Arrays;
 

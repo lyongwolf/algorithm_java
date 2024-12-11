@@ -1,4 +1,4 @@
-package algorithm.binary_indexed_tree;
+package algorithm.tree.binary_indexed_tree;
 
 public class sum {
     
