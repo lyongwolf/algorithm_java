@@ -29,6 +29,14 @@ public class MyDeque {
             return size == 0;
         }
 
+        public int peekFirst() {
+            return arr[head];
+        }
+
+        public int peekLast() {
+            return arr[tail];
+        }
+
         public void addLast(int v) {
             size++;
             arr[++tail] = v;
@@ -75,6 +83,14 @@ public class MyDeque {
 
         public boolean isEmpty() {
             return size == 0;
+        }
+
+        public long peekFirst() {
+            return arr[head];
+        }
+
+        public long peekLast() {
+            return arr[tail];
         }
 
         public void addLast(long v) {
@@ -125,6 +141,14 @@ public class MyDeque {
             return size == 0;
         }
 
+        public int[] peekFirst() {
+            return arr[head];
+        }
+
+        public int[] peekLast() {
+            return arr[tail];
+        }
+
         public void addLast(int[] v) {
             size++;
             arr[++tail] = v;
@@ -171,6 +195,14 @@ public class MyDeque {
 
         public boolean isEmpty() {
             return size == 0;
+        }
+
+        public E peekFirst() {
+            return arr[head];
+        }
+
+        public E peekLast() {
+            return arr[tail];
         }
 
         public void addLast(E v) {
