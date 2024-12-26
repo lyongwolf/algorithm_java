@@ -27,7 +27,7 @@ public class dynamic_segTree {
                 sum[i] += v;
                 return;
             }
-            int m = (l + r) >> 1;
+            int m = (l + r) >>> 1;
             down(i);
             if (L <= m) {
                 add(L, R, v, l, m, lc[i]);
@@ -46,7 +46,7 @@ public class dynamic_segTree {
             if (L <= l && r <= R) {
                 return sum[i];
             }
-            int m = (l + r) >> 1;
+            int m = (l + r) >>> 1;
             down(i);
             int ans = 0;
             if (L <= m) {
