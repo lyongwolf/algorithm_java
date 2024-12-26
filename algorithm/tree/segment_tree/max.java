@@ -4,19 +4,19 @@ import java.util.Arrays;
 
 public class max {
     
-    static class SegTree {
+    class SegTree {
         private long[] max;
         private int N;
 
         public SegTree(int len) {
             N = len;
-            max = new long[N << 2];
+            max = new long[1 << (33 - Integer.numberOfLeadingZeros(N - 1))];
             Arrays.fill(max, Long.MIN_VALUE);
         }
         
         public SegTree(int[] arr) {
             N = arr.length - 1;
-            max = new long[N << 2];
+            max = new long[1 << (33 - Integer.numberOfLeadingZeros(N - 1))];
             build(arr, 1, N, 1);
         }
 

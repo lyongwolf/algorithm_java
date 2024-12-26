@@ -5,21 +5,23 @@ package algorithm.tree.segment_tree.lazy.min;
  */
 public class minAddRange {
     
-    static class SegTree {
+    class SegTree {
         private long[] min;
         private long[] lazy;
         private int N;
 
         public SegTree(int len) {
             N = len;
-            min = new long[N << 2];
-            lazy = new long[N << 2];
+            int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+            min = new long[tot];
+            lazy = new long[tot];
         }
 
         public SegTree(int[] arr) {
             N = arr.length - 1;
-            min = new long[N << 2];
-            lazy = new long[N << 2];
+            int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+            min = new long[tot];
+            lazy = new long[tot];
             build(arr, 1, N, 1);
         }
 

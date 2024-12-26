@@ -6,15 +6,16 @@ import java.util.Arrays;
  */
 public class maxSetRange {
     
-    static class SegTree {
+    class SegTree {
         private long[] max;
         private long[] lazy;
         private int N;
 
         public SegTree(int len) {
             N = len;
-            max = new long[N << 2];
-            lazy = new long[N << 2];
+            int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+            max = new long[tot];
+            lazy = new long[tot];
             Arrays.fill(max, Long.MIN_VALUE);
             Arrays.fill(lazy, Long.MIN_VALUE);
         }

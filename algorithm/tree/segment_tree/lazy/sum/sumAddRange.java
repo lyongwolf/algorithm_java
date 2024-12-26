@@ -4,21 +4,23 @@ package algorithm.tree.segment_tree.lazy.sum;
  */
 public class sumAddRange {
 
-    static class SegTree {
+    class SegTree {
         private long[] sum;
         private long[] lazy;
         private int N;
 
         public SegTree(int len) {
             N = len;
-            sum = new long[N << 2];
-            lazy = new long[N << 2];
+            int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+            sum = new long[tot];
+            lazy = new long[tot];
         }
 
         public SegTree(int[] arr) {
             N = arr.length - 1;
-            sum = new long[N << 2];
-            lazy = new long[N << 2];
+            int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+            sum = new long[tot];
+            lazy = new long[tot];
             build(arr, 1, N, 1);
         }
 
