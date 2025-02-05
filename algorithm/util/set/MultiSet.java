@@ -4,17 +4,16 @@ import java.util.Arrays;
 
 public class MultiSet {
     
-    class MultisetInteger {
+    class MultisetInt {
         private int[] keys;
         private int[] vals;
         private int[] head, nxt;
         private int size, type, no;
         private final int m;
-
-        public MultisetInteger(int n) {
+    
+        public MultisetInt(int n) {
             keys = new int[n];
             vals = new int[n];
-            n--;
             n |= n >>> 1;
             n |= n >>> 2;
             n |= n >>> 4;
@@ -25,11 +24,11 @@ public class MultiSet {
             nxt = new int[n];
             Arrays.fill(head, -1);
         }
-
+    
         public int size() {
             return size;
         }
-
+    
         public int type() {
             return type;
         }
@@ -72,12 +71,21 @@ public class MultiSet {
             }
             add(u, key);
         }
-        
-        private int hash(Integer key) {
-            int h = key.hashCode();
-            return (h ^ (h >>> 16)) & m;
+    
+        public int get(int key) {
+            int u = hash(key);
+            for (int i = head[u]; i != -1; i = nxt[i]) {
+                if (keys[i] == key) {
+                    return vals[i];
+                }
+            }
+            return 0;
         }
-
+        
+        private int hash(int key) {
+            return (key ^ (key >>> 16)) & m;
+        }
+    
         private void add(int u, int key) {
             keys[no] = key;
             vals[no] = 1;
@@ -98,7 +106,6 @@ public class MultiSet {
         public MultisetLong(int n) {
             keys = new long[n];
             vals = new int[n];
-            n--;
             n |= n >>> 1;
             n |= n >>> 2;
             n |= n >>> 4;
@@ -156,9 +163,19 @@ public class MultiSet {
             }
             add(u, key);
         }
+
+        public int get(long key) {
+            int u = hash(key);
+            for (int i = head[u]; i != -1; i = nxt[i]) {
+                if (keys[i] == key) {
+                    return vals[i];
+                }
+            }
+            return 0;
+        }
         
-        private int hash(Long key) {
-            int h = key.hashCode();
+        private int hash(long key) {
+            int h = (int) (key ^ (key >>> 32));
             return (h ^ (h >>> 16)) & m;
         }
 

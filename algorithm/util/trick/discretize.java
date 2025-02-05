@@ -17,7 +17,7 @@ public class discretize {
                 while (j < n && val[i] == val[j]) {
                     j++;
                 }
-            put(val[i], m++);
+                put(val[i], m++);
             }
             for (int i = 0; i < n; i++) {
                 nums[i] = get(nums[i]);
@@ -28,7 +28,6 @@ public class discretize {
         private void init(int n) {
             keys = new int[n];
             vals = new int[n];
-            n--;
             n |= n >>> 1;
             n |= n >>> 2;
             n |= n >>> 4;

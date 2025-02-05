@@ -4,7 +4,7 @@ package algorithm.graph.Bipartite_Graph;
  * 测试链接：https://leetcode.cn/problems/is-graph-bipartite/
  * 如果存在奇环，则不是二分图（染色法）
  */
-public class check_bipartite_graph {
+public class check {
     
     int[][] graph;
     int[] color;

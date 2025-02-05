@@ -4,7 +4,7 @@ import java.util.*;
  */
 public class Scapegoat_Tree {
     
-    static class ScapegoatTree {
+    class ScapegoatTree {
         private final double ALPHA = 0.7;// 平衡因子
         private int head;// 头节点编号
         private int no;// 已新建节点数量（节点最大编号）
@@ -32,7 +32,7 @@ public class Scapegoat_Tree {
         }
     
         public boolean isEmpty() {
-            return tot[head] > 0;
+            return tot[head] == 0;
         }
     
         public boolean contains(int k) {

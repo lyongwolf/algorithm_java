@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class TrieArray {
 
-    static class Trie {
+    class Trie {
         private int[][] nxt;
         private int[] end, cnt; 
         private int no;

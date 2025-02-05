@@ -2,7 +2,7 @@ package algorithm.string;
 
 public class suffix_array {
     
-    static class DC3 {
+    class DC3 {
 
         public int[] sa;// sa[i] 表示排名为 i 的后缀
     

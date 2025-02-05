@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class RangeUpdate {
     
-    static class FHQTreap {
+    class FHQTreap {
         private int[] key, lc, rc, sz;
         private double[] priority;
         private boolean[] reverse;
@@ -33,7 +33,7 @@ public class RangeUpdate {
         }
 
         public boolean isEmpty() {
-            return sz[head] > 0;
+            return sz[head] == 0;
         }
 
         public void add(int k) {

@@ -4,33 +4,35 @@ import java.util.*;
 
 public class Basic {
 
-    static class FHQTreap {
+    class FHQTreap {
         private int[] key, lc, rc, sz;
+        private long[] sum;
         private double[] priority;
         private int head;
         private int no;
-
+    
         public FHQTreap() {
             this(0);
         }
-
+    
         public FHQTreap(int len) {
             len++;
             key = new int[len];
             lc = new int[len];
             rc = new int[len];
             sz = new int[len];
+            sum = new long[len];
             priority = new double[len];
         }
-
+    
         public int size() {
             return sz[head];
         }
-
+    
         public boolean isEmpty() {
-            return sz[head] > 0;
+            return sz[head] == 0;
         }
-
+    
         public boolean contains(int k) {
             return contains(k, head);
         }
@@ -46,13 +48,13 @@ public class Basic {
             }
             return true;
         }
-
+    
         public void add(int k) {
             split(0, 0, head, k);
             int l = rc[0], r = lc[0];
             head = merge(merge(l, create(k)), r);
         }
-
+    
         public void remove(int k) {
             int l, m, r;
             split(0, 0, head, k);
@@ -64,11 +66,11 @@ public class Basic {
             m = merge(lc[m], rc[m]);
             head = merge(merge(l, m), r);
         }
-
+    
         public int floor(int k) {
             return floor(head, k);
         }
-
+    
         private int floor(int i, int k) {
             if (i == 0) {
                 return Integer.MIN_VALUE;
@@ -79,11 +81,11 @@ public class Basic {
                 return floor(lc[i], k);
             }
         }
-
+    
         public int ceiling(int k) {
             return ceiling(k, head);
         }
-
+    
         private int ceiling(int k, int i) {
             if (i == 0) {
                 return Integer.MAX_VALUE;
@@ -94,7 +96,7 @@ public class Basic {
                 return ceiling(k, rc[i]);
             }
         }
-
+    
         public int rank(int k) {
             return smallCount(k, head) + 1;
         }
@@ -109,7 +111,7 @@ public class Basic {
                 return sz[lc[i]] + 1 + smallCount(k, rc[i]);
             }
         }
-
+    
         public int rankKey(int rk) {
             if (rk < 1 || rk > sz[head]) {
                 return -1;
@@ -125,7 +127,7 @@ public class Basic {
             }
             return key[i];
         }
-
+    
         public int first() {
             return rankKey(1);
         }
@@ -145,11 +147,92 @@ public class Basic {
             remove(k);
             return k;
         }
-
+    
+        public int rangeCount(int l, int r) {
+            if (l > r) {
+                return 0;
+            }
+            int ans;
+            if (l == Integer.MIN_VALUE) {
+                split(0, 0, head, r);
+                int lx = rc[0], rx = lc[0];
+                ans = sz[lx];
+                head = merge(lx, rx);
+            } else {
+                split(0, 0, head, r);
+                int mx = rc[0], rx = lc[0];
+                split(0, 0, mx, l - 1);
+                int lx = rc[0];
+                mx = lc[0];
+                ans = sz[mx];
+                head = merge(merge(lx, mx), rx);
+            }
+            return ans;
+        }
+    
+        public long rangeSum(int l, int r) {
+            if (l > r) {
+                return 0;
+            }
+            long ans;
+            if (l == Integer.MIN_VALUE) {
+                split(0, 0, head, r);
+                int lx = rc[0], rx = lc[0];
+                ans = sum[lx];
+                head = merge(lx, rx);
+            } else {
+                split(0, 0, head, r);
+                int mx = rc[0], rx = lc[0];
+                split(0, 0, mx, l - 1);
+                int lx = rc[0];
+                mx = lc[0];
+                ans = sum[mx];
+                head = merge(merge(lx, mx), rx);
+            }
+            return ans;
+        }
+        
+        public long topKMinSum(int k) {
+            splitByRank(0, 0, head, k);
+            long ans = sum[rc[0]];
+            head = merge(rc[0], lc[0]);
+            return ans;
+        }
+    
+        public long topKMaxSum(int k) {
+            k = sz[head] - k;
+            splitByRank(0, 0, head, k);
+            long ans = sum[lc[0]];
+            head = merge(rc[0], lc[0]);
+            return ans;
+        }
+    
+        public int rangeRankKey(int l, int r, int k) {
+            if (k == 0) {
+                return -1;
+            }
+            int ans;
+            if (l == Integer.MIN_VALUE) {
+                split(0, 0, head, r);
+                int lx = rc[0], rx = lc[0];
+                ans = sz[lx] < k ? -1 : rankKey(k, lx);
+                head = merge(lx, rx);
+            } else {
+                split(0, 0, head, r);
+                int mx = rc[0], rx = lc[0];
+                split(0, 0, mx, l - 1);
+                int lx = rc[0];
+                mx = lc[0];
+                ans = sz[mx] < k ? -1 : rankKey(k, mx);
+                head = merge(merge(lx, mx), rx);
+            }
+            return ans;
+        }
+    
         public int[] copy() {
             return sub(Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
-
+    
         // 返回所有 key ∈ [l, r] 组成的有序数组
         public int[] sub(int l, int r) {
             if (l > r) {
@@ -183,7 +266,7 @@ public class Basic {
             arr[c++] = key[i];
             return inorder(arr, rc[i], c);
         }
-
+    
         public void clear(int l, int r) {
             if (l > r) {
                 return;
@@ -197,7 +280,7 @@ public class Basic {
             rx = lc[0];
             head = merge(lx, rx);
         }
-
+    
         // 按 key 分裂： <= k 在左，> k 在右
         private void split(int l, int r, int i, int k) {
             if (i == 0) {
@@ -213,7 +296,23 @@ public class Basic {
             }
             up(i);
         }
-
+    
+        // 按 rank 分裂：<= rk 在左，> rk 在右
+        private void splitByRank(int l, int r, int i, int rk) {
+            if (i == 0) {
+                rc[l] = lc[r] = 0;
+                return;
+            }
+            if (sz[lc[i]] + 1 <= rk) {
+                rc[l] = i;
+                splitByRank(i, r, rc[i], rk - sz[lc[i]] - 1);
+            } else {
+                lc[r] = i;
+                splitByRank(l, i, lc[i], rk);
+            }
+            up(i);
+        }
+    
         private int merge(int l, int r) {
             if (l == 0 || r == 0) {
                 return l + r;
@@ -228,21 +327,24 @@ public class Basic {
                 return r;
             }
         }
-
+    
         private void up(int i) {
             sz[i] = sz[lc[i]] + sz[rc[i]] + 1;
+            sum[i] = sum[lc[i]] + sum[rc[i]] + key[i];
         }
-
+    
         private int create(int k) {
             if (++no == key.length) {
                 key = Arrays.copyOf(key, no << 1);
                 lc = Arrays.copyOf(lc, no << 1);
                 rc = Arrays.copyOf(rc, no << 1);
                 sz = Arrays.copyOf(sz, no << 1);
+                sum = Arrays.copyOf(sum, no << 1);
                 priority = Arrays.copyOf(priority, no << 1);
             }
             key[no] = k;
             sz[no] = 1;
+            sum[no] = k;
             priority[no] = Math.random();
             return no;
         }
