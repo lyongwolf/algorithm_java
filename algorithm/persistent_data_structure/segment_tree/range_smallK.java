@@ -59,35 +59,35 @@ class SegTree {
     }
 
     private int build(int l, int r) {
-        int o = ++no;
+        int u = ++no;
         if (l == r) {
-            return o;
+            return u;
         }
         int m = (l + r) >> 1;
-        lc[o] = build(l, m);
-        rc[o] = build(m + 1, r);
-        return o;
+        lc[u] = build(l, m);
+        rc[u] = build(m + 1, r);
+        return u;
     }
 
     public void insert(int x, int v) {
         root[++vs] = insert(v, 1, N, root[x]);
     }
 
-    private int insert(int v, int l, int r, int i) {
-        int o = ++no;
-        cnt[o] = cnt[i] + 1;
+    private int insert(int o, int l, int r, int i) {
+        int u = ++no;
+        cnt[u] = cnt[i] + 1;
         if (l == r) {
-            return o;
+            return u;
         }
         int m = (l + r) >> 1;
-        if (v <= m) {
-            lc[o] = insert(v, l, m, lc[i]);
-            rc[o] = rc[i];
+        if (o <= m) {
+            lc[u] = insert(o, l, m, lc[i]);
+            rc[u] = rc[i];
         } else {
-            lc[o] = lc[i];
-            rc[o] = insert(v, m + 1, r, rc[i]);
+            lc[u] = lc[i];
+            rc[u] = insert(o, m + 1, r, rc[i]);
         }
-        return o;
+        return u;
     }
 
     public int smallK(int x, int y, int k) {

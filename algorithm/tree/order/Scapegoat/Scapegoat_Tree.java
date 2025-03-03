@@ -110,7 +110,7 @@ public class Scapegoat_Tree {
         }
     
         public int floor(int k) {
-            int rk = rank(k + 1);
+            int rk = rank(k);
             if (rk == 1) {
                 return Integer.MIN_VALUE;
             }
@@ -118,7 +118,7 @@ public class Scapegoat_Tree {
         }
         
         public int ceiling(int k) {
-            int rk = rank(k);
+            int rk = rank(k + 1);
             if (rk > tot[head]) {
                 return Integer.MAX_VALUE;
             }

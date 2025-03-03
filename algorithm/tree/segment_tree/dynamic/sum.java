@@ -2,7 +2,7 @@ package algorithm.tree.segment_tree.dynamic;
 
 import java.util.Arrays;
 
-public class dynamic_segTree {
+public class sum {
     
     class SegTree {
         private int[] sum, lc, rc;
@@ -18,24 +18,23 @@ public class dynamic_segTree {
             rc = new int[2];
         }
     
-        public void add(int l, int r, int v) {
-            add(l, r, v, low, high, 1);
+        public void add(int o, int v) {
+            add(o, v, low, high, 1);
         }
     
-        private void add(int L, int R, int v, int l, int r, int i) {
-            if (L <= l && r <= R) {
+        private void add(int o, int v, int l, int r, int i) {
+            if (l == r) {
                 sum[i] += v;
                 return;
             }
-            int m = (l + r) >>> 1;
+            int m = (l + r) / 2;
             down(i);
-            if (L <= m) {
-                add(L, R, v, l, m, lc[i]);
+            if (o <= m) {
+                add(o, v, l, m, lc[i]);
+            } else {
+                add(o, v, m + 1, r, rc[i]);
             }
-            if (R > m) {
-                add(L, R, v, m + 1, r, rc[i]);
-            }
-            up(i);
+            sum[i] = sum[lc[i]] + sum[rc[i]];
         }
     
         public int query(int l, int r) {
@@ -46,7 +45,7 @@ public class dynamic_segTree {
             if (L <= l && r <= R) {
                 return sum[i];
             }
-            int m = (l + r) >>> 1;
+            int m = (l + r) / 2;
             down(i);
             int ans = 0;
             if (L <= m) {
@@ -56,10 +55,6 @@ public class dynamic_segTree {
                 ans += query(L, R, m + 1, r, rc[i]);
             }
             return ans;
-        }
-    
-        private void up(int i) {
-            sum[i] = sum[lc[i]] + sum[rc[i]];
         }
     
         private void down(int i) {
