@@ -6,7 +6,7 @@ package algorithm.math.util;
 
 public class extended_euclidean_algorithm {
     
-    static int[] exgcd(int a, int b) {
+    int[] exgcd(int a, int b) {
         if (b == 0) {
             return new int[]{1, 0};
         }

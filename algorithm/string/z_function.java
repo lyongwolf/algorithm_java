@@ -2,7 +2,7 @@ package algorithm.string;
 
 public class z_function {
     
-    public static int[] getZ(char[] str) {
+    int[] z_func(char[] str) {
         int n = str.length;
         int[] z = new int[n];
 //        z[0] = n;

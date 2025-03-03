@@ -5,7 +5,7 @@ import java.util.*;
 public class MyHashMap {
 
     // 拉链法
-    static class HashMap<K, V> {
+    class HashMap<K, V> {
         private static class Node<K, V> {
             K key;
             V val;
@@ -164,7 +164,7 @@ public class MyHashMap {
 // --------------------------------------------------------------------------------
 
     // 拉链法 + 前向星
-    static class HashMap2<K, V> {
+    class HashMap2<K, V> {
         private K[] keys;
         private V[] vals;
         private int[] head, nxt;

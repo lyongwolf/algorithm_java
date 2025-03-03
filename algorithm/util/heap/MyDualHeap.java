@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MyDualHeap {
 
-    static class DualHeap<E> {
+    class DualHeap<E> {
         private TreeSet<E> topK, rest;
         private Comparator<E> cmp;
         private int k;
@@ -86,7 +86,7 @@ public class MyDualHeap {
         }
     }
 
-    static class DualHeapLong {
+    class DualHeapLong {
         private TreeSet<Long> topK, rest;
         private Comparator<Long> cmp;
         private int k;
@@ -127,7 +127,7 @@ public class MyDualHeap {
         }
     }
 
-    static class DualHeapIntegerArray {
+    class DualHeapIntegerArray {
         private TreeSet<int[]> topK, rest;
         private Comparator<int[]> cmp;
         private int k;
@@ -168,7 +168,7 @@ public class MyDualHeap {
         }
     }
 
-    static class DualHeapLongArray {
+    class DualHeapLongArray {
         private TreeSet<long[]> topK, rest;
         private Comparator<long[]> cmp;
         private int k;

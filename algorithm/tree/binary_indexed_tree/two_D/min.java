@@ -2,7 +2,7 @@ package algorithm.tree.binary_indexed_tree.two_D;
 
 public class min {
     
-    static class Fenwick {
+    class Fenwick {
         private long[][] min;
         private int N, M;
 

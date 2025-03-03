@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class min {
     
-    static class Fenwick {
+    class Fenwick {
         private long[] min;
         private int N;
 
@@ -32,7 +32,4 @@ public class min {
 
     }
 
-    public static void main(String[] args) {
-        
-    }
 }

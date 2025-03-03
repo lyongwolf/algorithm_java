@@ -2,7 +2,7 @@ package algorithm.tree.binary_indexed_tree.two_D;
 
 public class sum {
     
-    static class Fenwick {
+    class Fenwick {
         private long[][] sum;
         private int N, M;
 

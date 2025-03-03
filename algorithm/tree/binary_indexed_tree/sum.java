@@ -3,7 +3,7 @@ package algorithm.tree.binary_indexed_tree;
 public class sum {
     
 
-    static class Fenwick {
+    class Fenwick {
         private long[] sum;
         private int N;
 

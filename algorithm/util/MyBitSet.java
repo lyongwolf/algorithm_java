@@ -2,7 +2,7 @@ package algorithm.util;
 
 public class MyBitSet {
 
-    static class BitSet {
+    class BitSet {
         private int[] mag;
         private int END;
         private int n;

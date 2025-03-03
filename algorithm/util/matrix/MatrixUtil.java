@@ -3,7 +3,7 @@ package algorithm.util.matrix;
 public class MatrixUtil {
     
     // 32位整数
-    static class MatrixQuery {
+    class MatrixQuery {
         private int n, m;
         private int[][] mat;
         private int[][] sum;
@@ -133,7 +133,7 @@ public class MatrixUtil {
     }
 
     // 64位整数
-    static class MatrixQuery2 {
+    class MatrixQuery2 {
         private int n, m;
         private long[][] mat;
         private long[][] sum;

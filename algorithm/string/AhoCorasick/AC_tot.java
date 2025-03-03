@@ -4,7 +4,7 @@ import java.util.*;
 
 public class AC_tot {
     
-    static class AhoCorasick {
+    class AhoCorasick {
         public int[][] nxt;
         public int[] len;
         public boolean[] end;

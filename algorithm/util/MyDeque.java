@@ -3,7 +3,7 @@ package algorithm.util;
 public class MyDeque {
     
     // 32 位 Deque
-    static class DequeInteger {
+    class DequeInteger {
         private int[] arr;
         private int head;
         private int tail;
@@ -59,7 +59,7 @@ public class MyDeque {
     }
 
      // 64 位 Deque
-     static class DequeLong {
+    class DequeLong {
         private long[] arr;
         private int head;
         private int tail;
@@ -115,7 +115,7 @@ public class MyDeque {
     }
 
     // 元组类型 Deque
-    static class DequeTup {
+    class DequeTup {
         private int[][] arr;
         private int head;
         private int tail;
@@ -171,7 +171,7 @@ public class MyDeque {
     }
 
     // 泛型 Deque
-    static class DequeGeneric<E> {
+    class DequeGeneric<E> {
         private E[] arr;
         private int head;
         private int tail;
