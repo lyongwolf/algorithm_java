@@ -60,6 +60,10 @@ public class HLD extends U {
         }
     }
 
+    
+
+    // --------- 以下为树链剖分更新 + 查询 -----------
+
     void add(int u, int v, long x) {
         while (top[u] != top[v]) {
             if (dep[top[u]] < dep[top[v]]) {
@@ -90,8 +94,44 @@ public class HLD extends U {
         return ans;
     }
 
+    // 如严格需要按照 u -> v 的方向跳，则启用 prepare()
+
+    // int query(int u, int v) {
+    //     prepare(u, v);
+    
+    //     while (true) {
+    //         l = u;
+    //         r = path[u];
+           
+    //         ...query...
+    
+    //         u = r;
+    //         if (u == v) {
+    //             break;
+    //         }
+    //         u = p2[u];
+    //     }
+        
+    // }
+    
+    // void prepare(int u, int v) {
+    //     while (top[u] != top[v]) {
+    //         if (dep[top[u]] >= dep[top[v]]) {
+    //             path[u] = top[u];
+    //             p2[top[u]] = fa[top[u]];
+    //             u = fa[top[u]];
+    //         } else {
+    //             path[top[v]] = v;
+    //             p2[fa[top[v]]] = top[v];
+    //             v = fa[top[v]];
+    //         }
+    //     }
+    //     path[u] = v;
+    // }
+
 
     // --------- 以下为树链剖分预处理 -----------
+
     void init2(int f, int u, int t) {
         int z = 0, no = 0;
         stk[++z] = u;
