@@ -7,7 +7,6 @@ public class Manacher {
     // 若s[i..j]为回文串，则  (j - i + 1) < pArr[i + j + 1]
     int[] pArr(String s) {
         char[] str = manacherString(s).toCharArray();
-        System.out.println(Arrays.toString(str));
         int n = str.length;
         int[] pArr = new int[n];
         for (int i = 0, r = 0, c = 0; i < n; i++) {
@@ -24,10 +23,13 @@ public class Manacher {
     }
 
     String manacherString(String s) {
-        StringBuilder sb = new StringBuilder("#");
-        for (char c : s.toCharArray()) {
-            sb.append(c).append('#');
+        byte[] str = new byte[s.length() * 2 + 1];
+        str[0] = '#';
+        int z = 1;
+        for (byte b : s.getBytes()) {
+            str[z++] = b;
+            str[z++] = '#';
         }
-        return sb.toString();
+        return new String(str);
     }
 }

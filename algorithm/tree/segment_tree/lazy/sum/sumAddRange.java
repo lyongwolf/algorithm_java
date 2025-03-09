@@ -54,7 +54,7 @@ public class sumAddRange {
         }
 
         private void add(int L, int R, long v, int l, int r, int i) {
-            if (l == r) {
+            if (L <= l && r <= R) {
                 lazy[i] += v;
                 sum[i] += v * (r - l + 1);
                 return;
