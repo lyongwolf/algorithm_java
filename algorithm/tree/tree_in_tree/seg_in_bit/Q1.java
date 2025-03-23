@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Q1 extends U {
 
-    SegInBit tree = new SegInBit(50000, 25000000);
+    SegInBit tree = new SegInBit(50000, 8000000);
 
     void solve() {
         int n = sc.nextInt(), q = sc.nextInt(), m = 1, v;
@@ -126,11 +126,16 @@ class SegInBit {
             cnt[i] += v;
             return;
         }
-        idown(i);
         int m = (l + r) / 2;
         if (o <= m) {
+            if (lc[i] == 0) {
+                lc[i] = ++no;
+            }
             iadd(o, v, l, m, lc[i]);
         } else {
+            if (rc[i] == 0) {
+                rc[i] = ++no;
+            }
             iadd(o, v, m + 1, r, rc[i]);
         }
         iup(i);
@@ -148,12 +153,6 @@ class SegInBit {
     private int ismallCount(int o, int l, int r) {
         if (l == r) {
             return 0;
-        }
-        for (int i = 0; i < fi; i++) {
-            idown(full[i]);
-        }
-        for (int i = 0; i < ri; i++) {
-            idown(rest[i]);
         }
         int m = (l + r) / 2;
         if (o <= m) {
@@ -187,12 +186,6 @@ class SegInBit {
     private int irankKey(int rk, int l, int r) {
         if (l == r) {
             return l;
-        }
-        for (int i = 0; i < fi; i++) {
-            idown(full[i]);
-        }
-        for (int i = 0; i < ri; i++) {
-            idown(rest[i]);
         }
         int m = (l + r) / 2;
         int c = 0;
@@ -258,10 +251,4 @@ class SegInBit {
         cnt[i] = cnt[lc[i]] + cnt[rc[i]];
     }
 
-    private void idown(int i) {
-        if (lc[i] == 0) {
-            lc[i] = ++no;
-            rc[i] = ++no;
-        }
-    }
 }

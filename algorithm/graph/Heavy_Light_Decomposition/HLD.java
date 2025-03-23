@@ -94,6 +94,17 @@ public class HLD extends U {
         return ans;
     }
 
+     // u != v 且 v 为 u 的祖先节点，找到 v 的子节点，该子节点为 u 的祖先节点
+     int lcason(int u, int v) {
+        while (top[u] != top[v]) {
+            if (fa[top[u]] == v) {
+                return top[u];
+            }
+            u = fa[top[u]];
+        }
+        return son[v];
+    }
+
     // 如严格需要按照 u -> v 的方向跳，则启用 prepare()
 
     // int query(int u, int v) {
