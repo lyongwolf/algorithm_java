@@ -50,23 +50,11 @@ class SegTree {
 
     public SegTree(int len, int version) {
         N = len;
-        int tot = N * 2 + version * (33 - Integer.numberOfLeadingZeros(N - 1));
+        int tot = version * (33 - Integer.numberOfLeadingZeros(N - 1)) + 1;
         root = new int[version + 1];
         lc = new int[tot];
         rc = new int[tot];
         cnt = new int[tot];
-        root[0] = build(1, N);
-    }
-
-    private int build(int l, int r) {
-        int u = ++no;
-        if (l == r) {
-            return u;
-        }
-        int m = (l + r) >> 1;
-        lc[u] = build(l, m);
-        rc[u] = build(m + 1, r);
-        return u;
     }
 
     public void insert(int x, int v) {
