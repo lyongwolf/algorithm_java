@@ -1,14 +1,15 @@
-package algorithm.graph.Heavy_Light_Decomposition;
+package algorithm.graph.tree_chain_decomposition;
 
 import java.util.*;
 
 /**
- * 树链剖分（模板）
+ * 重链剖分（模板）
  */
 
 public class HLD extends U {
 
-    int[] stk;
+    int[] stk = new int[1000001];
+
     int[] head, nxt, to, val;
     int[] fa, dep, sz, son;
     int[] top, dfn;
@@ -17,7 +18,8 @@ public class HLD extends U {
 
     void solve() {
         int n = sc.nextInt(), q = sc.nextInt();
-        stk = new int[n + 1]; head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1]; val = new int[n + 1];
+        head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1]; val = new int[n + 1];
+        fa = new int[n + 1]; dep = new int[n + 1]; sz = new int[n + 1]; son = new int[n + 1]; top = new int[n + 1]; dfn = new int[n + 1];
         for (int i = 1; i <= n; i++) {
             val[i] = sc.nextInt();
         }
@@ -26,9 +28,7 @@ public class HLD extends U {
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
-        fa = new int[n + 1]; dep = new int[n + 1]; sz = new int[n + 1]; son = new int[n + 1];
-        init(0, 1);
-        top = new int[n + 1]; dfn = new int[n + 1];
+        init1(0, 1);
         init2(0, 1, 1);
 
         int[] a = new int[n + 1];
@@ -141,7 +141,7 @@ public class HLD extends U {
     // }
 
 
-    // --------- 以下为树链剖分预处理 -----------
+    // --------- 以下为重链剖分预处理 -----------
 
     void init2(int f, int u, int t) {
         int z = 0, no = 0;
@@ -151,9 +151,7 @@ public class HLD extends U {
             u = stk[z];
             f = fa[u];
             t = top[u];
-            if (dfn[u] != 0) {
-                z--;
-            } else {
+            if (dfn[u] == 0) {
                 dfn[u] = ++no;
                 top[u] = t;
                 for (int e = head[u], v; e != 0; e = nxt[e]) {
@@ -166,11 +164,13 @@ public class HLD extends U {
                     stk[++z] = son[u];
                     top[son[u]] = t;
                 }
+            } else {
+                z--;
             }
         }
     }
 
-    void init(int f, int u) {
+    void init1(int f, int u) {
         int z = 0;
         stk[++z] = u;
         dep[u] = 1;

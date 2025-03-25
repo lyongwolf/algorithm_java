@@ -27,7 +27,7 @@ public class rmqs {
             }
         }
         
-        int query(int l, int r) {
+        public int query(int l, int r) {
             int g = log[r - l + 1];
             return op(st[l][g], st[r - (1 << g) + 1][g]);
         }
@@ -60,7 +60,7 @@ public class rmqs {
             }
         }
         
-        long query(int l, int r) {
+        public long query(int l, int r) {
             int g = log[r - l + 1];
             return op(st[l][g], st[r - (1 << g) + 1][g]);
         }
