@@ -1,12 +1,16 @@
 package algorithm.string;
 
-import java.util.*;
-
 public class Manacher {
     
     // 若s[i..j]为回文串，则  (j - i + 1) < pArr[i + j + 1]
-    int[] pArr(String s) {
-        char[] str = manacherString(s).toCharArray();
+    int[] pArr(char[] s) {
+        char[] str = new char[s.length * 2 + 1];
+        str[0] = '#';
+        int z = 1;
+        for (char b : s) {
+            str[z++] = b;
+            str[z++] = '#';
+        }
         int n = str.length;
         int[] pArr = new int[n];
         for (int i = 0, r = 0, c = 0; i < n; i++) {
@@ -22,14 +26,4 @@ public class Manacher {
         return pArr;
     }
 
-    String manacherString(String s) {
-        byte[] str = new byte[s.length() * 2 + 1];
-        str[0] = '#';
-        int z = 1;
-        for (byte b : s.getBytes()) {
-            str[z++] = b;
-            str[z++] = '#';
-        }
-        return new String(str);
-    }
 }

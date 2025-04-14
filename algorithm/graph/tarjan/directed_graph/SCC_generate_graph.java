@@ -1,7 +1,6 @@
 package algorithm.graph.tarjan.directed_graph;
-
+import static algorithm.zz.U.*;
 import java.util.*;
-import java.io.*;
 
 /**
  * SCC 缩点建图  有向无环图（拓扑图）
@@ -9,15 +8,15 @@ import java.io.*;
  */
 public class SCC_generate_graph {
 
-    static int[] head, nxt, to, val;
-    static int[] dfn, low, stk, scc;
-    static boolean[] vis;
-    static int ts, top, no;
-    static List<Integer>[] graph;
-    static int[] val2;
-    static int[] memo;
+    int[] head, nxt, to, val;
+    int[] dfn, low, stk, scc;
+    boolean[] vis;
+    int ts, top, no;
+    List<Integer>[] graph;
+    int[] val2;
+    int[] memo;
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt(), m = sc.nextInt();
         head = new int[n + 1];
         nxt = new int[m + 1];
@@ -61,7 +60,7 @@ public class SCC_generate_graph {
         out.println(ans);
     }
 
-    static int dfs(int u) {
+    int dfs(int u) {
         if (memo[u] != -1) {
             return memo[u];
         }
@@ -72,7 +71,7 @@ public class SCC_generate_graph {
         return memo[u] += val2[u];
     }
 
-    static void tarjan(int u) {
+    void tarjan(int u) {
         dfn[u] = low[u] = ++ts;
         stk[++top] = u;
         vis[u] = true;
@@ -95,27 +94,4 @@ public class SCC_generate_graph {
         }
     }
 
-
-
-    
-
-
-   
-    static boolean retest = true;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

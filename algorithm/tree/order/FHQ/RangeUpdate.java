@@ -1,5 +1,4 @@
 package algorithm.tree.order.FHQ;
-
 import java.util.*;
 /**
  * 维护新增节点的相对顺序（key仅存储值，不再具有大小关系）

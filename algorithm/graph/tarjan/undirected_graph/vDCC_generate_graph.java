@@ -1,21 +1,21 @@
 package algorithm.graph.tarjan.undirected_graph;
-
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
+
 /**
  * 点双连通分量建图
  * 测试链接：https://www.luogu.com.cn/problem/P8435
  */
 public class vDCC_generate_graph {
 
-    static int[] head, nxt, to;
-    static int[] dfn, low, stk, id;
-    static boolean[] cut;
-    static List<Integer>[] dcc;
-    static int root, ts, top, no;
-    static List<Integer>[] garph;
+    int[] head, nxt, to;
+    int[] dfn, low, stk, id;
+    boolean[] cut;
+    List<Integer>[] dcc;
+    int root, ts, top, no;
+    List<Integer>[] garph;
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt(), m = sc.nextInt();
         head = new int[n + 1];
         nxt = new int[(m + 1) << 1];
@@ -68,7 +68,7 @@ public class vDCC_generate_graph {
 
     }
 
-    static void tarjan(int u) {
+    void tarjan(int u) {
         dfn[u] = low[u] = ++ts;
         stk[++top] = u;
         int child = 0;
@@ -95,26 +95,4 @@ public class vDCC_generate_graph {
         }
     }
 
-   
-
-
-
-  
-    static boolean retest = false;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

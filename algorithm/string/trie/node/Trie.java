@@ -5,14 +5,15 @@ package algorithm.string.trie.node;
  */
 public class Trie {
 
-    static class Node {
+    class Node {
         int end;
         int cnt;
         Node[] nxt = new Node[26];
     }
-    static Node root;
 
-    static void insert(String word) {
+    Node root;
+
+    void insert(String word) {
         Node cur = root;
         for (char c : word.toCharArray()) {
             int j = c - 'a';
@@ -26,7 +27,7 @@ public class Trie {
     }
 
     // 字符串在前缀树中
-    static void delete(String word) {
+    void delete(String word) {
         Node cur = root;
         for (char c : word.toCharArray()) {
             int j = c - 'a';
@@ -39,7 +40,7 @@ public class Trie {
         cur.end--;
     }
 
-    static boolean search(String word) {
+    boolean search(String word) {
         Node cur = root;
         for (char c : word.toCharArray()) {
             cur = cur.nxt[c - 'a'];
@@ -50,7 +51,7 @@ public class Trie {
         return cur.end > 0;
     }
 
-    static int prefixNumber(String pre) {
+    int prefixNumber(String pre) {
         Node cur = root;
         for (char c : pre.toCharArray()) {
             cur = cur.nxt[c - 'a'];

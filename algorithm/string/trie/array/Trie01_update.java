@@ -1,6 +1,5 @@
 package algorithm.string.trie.array;
 
-import java.util.*;
 /**
  * 维护异或和
  * 全局加一

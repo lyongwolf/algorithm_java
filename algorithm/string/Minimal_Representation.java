@@ -1,7 +1,6 @@
 package algorithm.string;
-
+import static algorithm.zz.U.*;
 import java.util.*;
-import java.io.*;
 
 /**
  * test link：https://www.luogu.com.cn/problem/P1368
@@ -9,7 +8,7 @@ import java.io.*;
 
 public class Minimal_Representation {
     
-    static void solve() {
+    void solve() {
         int n = sc.nextInt();
         int[] arr = new int[n << 1];
         for (int i = 0; i < n; i++) {
@@ -33,26 +32,7 @@ public class Minimal_Representation {
         for (j = 0; j < n; j++) {
             out.print(arr[i++] + " ");
         }   
-        out.println();
+        out.writeln();
     }
 
-
-
-    static boolean retest = false;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

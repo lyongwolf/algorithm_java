@@ -1,6 +1,5 @@
 package algorithm.graph.tarjan;
-
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
 
 /**
@@ -9,13 +8,13 @@ import java.util.*;
  */
 public class LCA {
 
-    static int[] head, nxt, to;
-    static int[] parent;
-    static boolean[] mark;
-    static List<int[]>[] task;
-    static int[] ans;
+    int[] head, nxt, to;
+    int[] parent;
+    boolean[] mark;
+    List<int[]>[] task;
+    int[] ans;
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt(), m = sc.nextInt(), s = sc.nextInt();
         head = new int[n + 1];
         nxt = new int[n << 1];
@@ -44,7 +43,7 @@ public class LCA {
         }
     }
 
-    static void dfs(int f, int u) {
+    void dfs(int f, int u) {
         mark[u] = true;
         for (int i = head[u], v; i != 0; i = nxt[i]) {
             v = to[i];
@@ -60,29 +59,8 @@ public class LCA {
         }
     }
 
-    static int find(int v) {
+    int find(int v) {
         return parent[v] == v ? v : (parent[v] = find(parent[v]));
     }
 
-
-
-   
-   
-    static boolean retest = true;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

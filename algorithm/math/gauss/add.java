@@ -1,5 +1,5 @@
 package algorithm.math.gauss;
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
 
 /**
@@ -8,13 +8,10 @@ import java.util.*;
  * 测试链接：https://www.luogu.com.cn/problem/P2455
  */
 public class add {
-    public static void main(String[] args) {/* int t = sc.nextInt(); while (t-- > 0) */ solve(); out.flush(); out.close();} static class FastReader {BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); StringTokenizer s; int nextInt() {return Integer.parseInt(next());} long nextLong() {return Long.parseLong(next());} double nextDouble() {return Double.parseDouble(next());} String next() {try {while (s == null || !s.hasMoreTokens()) s = new StringTokenizer(r.readLine());} catch (Exception e) {} return s.nextToken();}}
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    static FastReader sc = new FastReader();
 
-    static double eps = 1e-7;
+    double eps = 1e-7;
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt();
         double[][] mat = new double[n][n + 1];
         for (int i = 0; i < n; i++) {
@@ -63,7 +60,7 @@ public class add {
             return;
         }
         for (int i = 0; i < n; i++) {
-            out.printf("%.2f\n", mat[i][n]);
+            out.println(mat[i][n], 2);
         }
     }
 

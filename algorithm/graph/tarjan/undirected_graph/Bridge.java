@@ -1,6 +1,5 @@
 package algorithm.graph.tarjan.undirected_graph;
-
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
 
 /**
@@ -8,12 +7,12 @@ import java.util.*;
  */
 public class Bridge {
     
-    static int[] head, nxt, to;
-    static int[] dfn, low;
-    static int ts;
-    static List<int[]> bridge;
+    int[] head, nxt, to;
+    int[] dfn, low;
+    int ts;
+    List<int[]> bridge;
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt(), m = sc.nextInt();
         head = new int[n + 1];
         nxt = new int[(m + 1) << 1];
@@ -38,7 +37,7 @@ public class Bridge {
         }
     }
 
-    static void tarjan(int u, int ep) {
+    void tarjan(int u, int ep) {
         dfn[u] = low[u] = ++ts;
         for (int e = head[u], v = to[e]; e != 0; e = nxt[e], v = to[e]) {
             if (dfn[v] == 0) {
@@ -53,26 +52,4 @@ public class Bridge {
         }
     }
 
-   
-
-
-
-  
-    static boolean retest = true;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

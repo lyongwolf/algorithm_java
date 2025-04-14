@@ -1,22 +1,23 @@
 package algorithm.graph.tarjan.undirected_graph;
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
+
 /**
  * 边双连通分量缩点建图
  * 测试链接：https://codeforces.com/contest/1986/problem/F
  */
 public class eDCC_generate_graph {
     
-    static int n, m;
-    static int[] head, nxt, to;
-    static int[] dfn, low, stk, dcc;
-    static boolean[] bri;
-    static int ts, top, no;
-    static List<Integer>[] garph;
-    static int[] val;
-    static long ans;
+    int n, m;
+    int[] head, nxt, to;
+    int[] dfn, low, stk, dcc;
+    boolean[] bri;
+    int ts, top, no;
+    List<Integer>[] garph;
+    int[] val;
+    long ans;
 
-    static void solve() {
+    void solve() {
         n = sc.nextInt();
         m = sc.nextInt();
         head = new int[n + 1];
@@ -54,7 +55,7 @@ public class eDCC_generate_graph {
         out.println((long) n * (n - 1) / 2 - ans);
     }
 
-    static int dfs(int f, int u) {
+    int dfs(int f, int u) {
         int size = val[u];
         for (int v : garph[u]) {
             if (v != f) {
@@ -65,7 +66,7 @@ public class eDCC_generate_graph {
         return size;
     }
 
-    static void tarjan(int u, int ep) {
+    void tarjan(int u, int ep) {
         dfn[u] = low[u] = ++ts;
         stk[++top] = u;
         for (int e = head[u], v = to[e]; e != 0; e = nxt[e], v = to[e]) {
@@ -89,27 +90,4 @@ public class eDCC_generate_graph {
         }
     }
 
-   
-
-
-
-    
-  
-    static boolean retest = true;
-    static FastReader sc = new FastReader();
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    public static void main(String[] args) {
-        if (retest) {int t = sc.nextInt(); while (t-- > 0) solve();} else solve(); out.flush(); out.close();
-    }
-    static class FastReader {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
-        StringTokenizer st;
-        String next() {
-            try {while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine()); return st.nextToken();} 
-            catch (Exception e) {return null;}
-        }
-        int nextInt() {return Integer.parseInt(next());}
-        long nextLong() {return Long.parseLong(next());}
-        double nextDouble() {return Double.parseDouble(next());}
-    }
 }

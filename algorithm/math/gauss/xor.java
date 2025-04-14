@@ -1,21 +1,18 @@
 package algorithm.math.gauss;
-
-import java.io.*;
+import static algorithm.zz.U.*;
 import java.util.*;
+
 /**
  * 高斯消元解异或方程组
  * 测试链接：https://acm.hdu.edu.cn/showproblem.php?pid=5833
  */
 public class xor {
-    public static void main(String[] args) {int t = sc.nextInt(); while (t-- > 0) solve(); out.flush(); out.close();} static class FastReader {BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); StringTokenizer s; int nextInt() {return Integer.parseInt(next());} long nextLong() {return Long.parseLong(next());} double nextDouble() {return Double.parseDouble(next());} String next() {try {while (s == null || !s.hasMoreTokens()) s = new StringTokenizer(r.readLine());} catch (Exception e) {} return s.nextToken();}}
-    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    static FastReader sc = new FastReader();
 
-    static int testCase;
-    static int MOD = (int) 1e9 + 7;
-    static long[] A = new long[301];
-    static int[] p = new int[303];
-    static {
+    int testCase;
+    int MOD = (int) 1e9 + 7;
+    long[] A = new long[301];
+    int[] p = new int[303];
+    xor() {
         A[0] = 1;
         for (int i = 1; i <= 300; i++) {
             A[i] = A[i - 1] * 2 % MOD;
@@ -34,7 +31,7 @@ public class xor {
         }
     }
 
-    static void solve() {
+    void solve() {
         int n = sc.nextInt();
         int[][] mat = new int[303][304];
         for (int j = 0; j < n; j++) {
