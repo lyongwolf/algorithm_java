@@ -62,7 +62,7 @@ public class HLD {
 
     
 
-    // --------- 以下为树链剖分更新 + 查询 -----------
+    // --------- 以下为重链剖分更新 + 查询 -----------
 
     void add(int u, int v, long x) {
         while (top[u] != top[v]) {
