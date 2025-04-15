@@ -6,7 +6,7 @@ import java.util.*;
  * 可撤销并查集（模板）
  */
 
- class DSURollback {
+class DSURollback {
     private static final int MAXN = 500000;
     private static int[] stkF0 = new int[MAXN], stkF1 = new int[MAXN];
     private int op;
