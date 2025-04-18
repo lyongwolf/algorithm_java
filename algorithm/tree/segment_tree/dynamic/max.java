@@ -22,7 +22,7 @@ class SegTree {
 
     private void set(int o, int v, int l, int r, int i) {
         if (l == r) {
-            mx[i] = Math.max(mx[i], v);
+            mx[i] = v;
             return;
         }
         int m = (l + r) / 2;
@@ -31,6 +31,25 @@ class SegTree {
             set(o, v, l, m, lc[i]);
         } else {
             set(o, v, m + 1, r, rc[i]);
+        }
+        mx[i] = Math.max(mx[lc[i]], mx[rc[i]]);
+    }
+
+    public void add(int o, int v) {
+        add(o, v, low, high, 1);
+    }
+
+    private void add(int o, int v, int l, int r, int i) {
+        if (l == r) {
+            mx[i] += v;
+            return;
+        }
+        int m = (l + r) / 2;
+        down(i);
+        if (o <= m) {
+            add(o, v, l, m, lc[i]);
+        } else {
+            add(o, v, m + 1, r, rc[i]);
         }
         mx[i] = Math.max(mx[lc[i]], mx[rc[i]]);
     }
