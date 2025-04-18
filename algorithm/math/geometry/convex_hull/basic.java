@@ -11,7 +11,7 @@ public class basic {
         public int compareTo(Vec o) { return x < o.x ? -1 : x > o.x ? 1 : Long.compare(y, o.y); }
         Vec  sub(Vec o) { return new Vec(x - o.x, y - o.y); }
         long dot(Vec o) { return x * o.x + y * o.y; }
-        long det(Vec o) { return x * o.y - y * o.x; }
+        double det(Vec o) { return (double) x * o.y - (double) y * o.x; }
     }
 
     // dot: 求向量 a 和 b 的点积。几何意义为：b 在 a 方向上的投影长度，再乘以 a 的模长
