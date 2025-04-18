@@ -9,7 +9,7 @@ public class basic {
     
     record Vec(long x, long y) implements Comparable<Vec> {
         public int compareTo(Vec o) { return x < o.x ? -1 : x > o.x ? 1 : Long.compare(y, o.y); }
-        Vec  sub(Vec o) { return new Vec(x - o.x, y - o.y); }
+        Vec sub(Vec o) { return new Vec(x - o.x, y - o.y); }
         long dot(Vec o) { return x * o.x + y * o.y; }
         double det(Vec o) { return (double) x * o.y - (double) y * o.x; }
     }
