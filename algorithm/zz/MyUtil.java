@@ -1,17 +1,18 @@
 package algorithm.zz;
 
 import java.util.*;
-
+/**
+ * 读写工具类+常用基本方法
+ */
 class MyUtil {
     FastReader sc = new FastReader();
     FastWriter out = new FastWriter();
 
     class FastReader {
         private java.io.InputStream is = System.in;
-        private byte[] inbuf = new byte[65536];
-        private byte[] str = new byte[65536];
-        private byte b;
+        private byte[] inbuf = new byte[8192], str = new byte[16];
         private int lenbuf, ptrbuf;
+        private byte b;
 
         private byte readByte() {
             if (ptrbuf == lenbuf) {
@@ -74,7 +75,7 @@ class MyUtil {
 
     class FastWriter {
         private java.io.OutputStream out = System.out;
-        private int tr = 0, BUF_SIZE = 65536;
+        private int tr = 0, BUF_SIZE = 8192;
         private byte[] buf = new byte[BUF_SIZE];
 
         private int countDigits(int v) {
