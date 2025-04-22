@@ -11,6 +11,13 @@ public class Bit {
         return t | m;
     }
 
+    /*
+    对集合 s 的子集遍历：
+    for (int i = s; i > 0; i = (i - 1) & s) {
+        
+    }
+    */
+
     // 求前 n 个整数的二进制状态1的个数
     long[] cnt(long n) {
         n++;
