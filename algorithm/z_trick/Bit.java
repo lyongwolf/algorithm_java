@@ -1,5 +1,3 @@
-
-
 public class Bit {
     
     // 下一个大于 x 的 二进制1个数与 x 等同的数
