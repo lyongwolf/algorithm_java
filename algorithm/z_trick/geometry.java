@@ -1,5 +1,3 @@
-package algorithm.z_trick;
-
 /**
 * 二维点
 */

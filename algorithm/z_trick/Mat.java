@@ -1,5 +1,3 @@
-package algorithm.z_trick;
-
 public class Mat {
     
     // 矩阵乘法

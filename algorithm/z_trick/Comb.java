@@ -1,5 +1,3 @@
-package algorithm.z_trick;
-
 class Comb {
     private final int MOD;
     private final long[] F, IF;

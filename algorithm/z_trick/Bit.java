@@ -1,4 +1,4 @@
-package algorithm.z_trick;
+
 
 public class Bit {
     
