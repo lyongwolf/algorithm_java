@@ -22,21 +22,22 @@ abstract class SegTree<A> {
         a[i] = up(a[i << 1], a[i << 1 | 1]);
     }
 
-    public void update(int o, int v) {
-        update(o, v, low, high, 1);
+    public void update(int l, int r, int v) {
+        update(l, r, v, low, high, 1);
     }
 
-    private void update(int o, int v, int l, int r, int i) {
+    private void update(int L, int R, int v, int l, int r, int i) {
         if (l == r) {
             a[i] = create(v);
             return;
         }
         down(i);
         int m = (l + r) >> 1;
-        if (o <= m) {
-            update(o, v, l, m, i << 1);
-        } else {
-            update(o, v, m + 1, r, i << 1 | 1);
+        if (L <= m) {
+            update(L, R, v, l, m, i << 1);
+        }
+        if (R > m) {
+            update(L, R, v, m + 1, r, i << 1 | 1);
         }
         a[i] = up(a[i << 1], a[i << 1 | 1]);
     }
