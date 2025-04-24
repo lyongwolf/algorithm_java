@@ -1,5 +1,5 @@
 abstract class RMQ {
-    private static final int MAXN = 500000;
+    private static final int MAXN = 1000000;
     private static final int[] log = new int[MAXN + 1];
     static {
         log[0] = -1;
@@ -30,7 +30,7 @@ abstract class RMQ {
 }
 
 abstract class RMQ2 {
-    private static final int MAXN = 500000;
+    private static final int MAXN = 1000000;
     private static final int[] log = new int[MAXN + 1];
     static {
         log[0] = -1;
