@@ -130,4 +130,38 @@ class SegTree {
             return count(o, m + 1, r, rc[i], rc[j]);
         }
     }
+
+    // 查询 a[l:r] 中 小于 v 的数量
+    public int countSmall(int l, int r, int v) {
+        return countSmall(v, 0, N - 1, l == 0 ? 0 : root[l - 1], root[r]);
+    }
+
+    private int countSmall(int o, int l, int r, int i, int j) {
+        if (l == r) {
+            return val[l] < o ? cnt[j] - cnt[i] : 0;
+        }
+        int m = (l + r) >> 1;
+        if (o > val[m]) {
+            return cnt[lc[j]] - cnt[lc[i]] + countSmall(o, m + 1, r, rc[i], rc[j]);
+        } else {
+            return countSmall(o, l, m, lc[i], lc[j]);
+        }
+    }
+
+    // 查询 a[l:r] 中 大于 v 的数量
+    public int countMore(int l, int r, int v) {
+        return countMore(v, 0, N - 1, l == 0 ? 0 : root[l - 1], root[r]);
+    }
+
+    private int countMore(int o, int l, int r, int i, int j) {
+        if (l == r) {
+            return val[l] > o ? cnt[j] - cnt[i] : 0;
+        }
+        int m = (l + r) >> 1;
+        if (o >= val[m]) {
+            return countMore(o, m + 1, r, rc[i], rc[j]);
+        } else {
+            return cnt[rc[j]] - cnt[rc[i]] + countMore(o, l, m, lc[i], lc[j]);
+        }
+    }
 }
