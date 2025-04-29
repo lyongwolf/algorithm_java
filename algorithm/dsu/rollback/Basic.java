@@ -1,4 +1,4 @@
-package algorithm.uinion_find.rollback;
+package algorithm.dsu.rollback;
 
 /**
  * 可撤销并查集（模板）

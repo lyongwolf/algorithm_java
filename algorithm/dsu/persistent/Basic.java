@@ -1,4 +1,4 @@
-package algorithm.uinion_find.persistent;
+package algorithm.dsu.persistent;
 import static algorithm.zz.U.*;
 import java.util.*;
 /**
