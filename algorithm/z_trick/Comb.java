@@ -6,7 +6,7 @@ class Comb {
         this.MOD = MOD;
         F = new long[MAXN + 1];
         IF = new long[MAXN + 1];
-        F[0] = F[1] = IF[0] = IF[1] = 1;
+        F[0] = F[1] = IF[1] = 1;
         for (int i = 2; i <= MAXN; i++) {
             F[i] = F[i - 1] * i % MOD;
         }
@@ -17,14 +17,23 @@ class Comb {
     }
 
     public long comb(int n, int m) {
+        if (m < 0 || m > n) {
+            throw new RuntimeException();
+        }
+        if (m == 0 || m == n) {
+            return 1;
+        }
         return F[n] * IF[n - m] % MOD * IF[m] % MOD;
     }
 
     public long comb2(long n, long m) {
-        m = Math.min(m, n - m);
-        if (m == 0) {
+        if (m < 0 || m > n) {
+           throw new RuntimeException();
+        }
+        if (m == 0 || m == n) {
             return 1;
         }
+        m = Math.min(m, n - m);
         long ans = IF[(int) m];
         for (long i = n - m + 1; i <= n; i++) {
             ans = ans * (i % MOD) % MOD;
