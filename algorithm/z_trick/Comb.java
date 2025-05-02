@@ -18,7 +18,7 @@ class Comb {
 
     public long comb(int n, int m) {
         if (m < 0 || m > n) {
-            throw new RuntimeException();
+            return 0;
         }
         if (m == 0 || m == n) {
             return 1;
@@ -28,7 +28,7 @@ class Comb {
 
     public long comb2(long n, long m) {
         if (m < 0 || m > n) {
-           throw new RuntimeException();
+           return 0;
         }
         if (m == 0 || m == n) {
             return 1;
