@@ -207,17 +207,29 @@ class BitSet {
         }
     }
 
+    // 当前位集拷贝 st 的状态
     public void copy(BitSet st) {
         for (int i = 0; i < mag.length; i++) {
             mag[i] = st.mag[i];
         }
     }
 
+    // 当前位集元素数量
     public int count() {
         int ans = 0;
         for (int v : mag) {
             ans += Integer.bitCount(v);
         }
         return ans;
+    }
+
+    // 判断当前位集与 st 是否存在公共元素
+    public boolean intersect(BitSet st) {
+        for (int i = 0; i < mag.length; i++) {
+            if ((mag[i] & st.mag[i]) != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
