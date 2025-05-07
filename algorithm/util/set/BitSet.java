@@ -206,4 +206,10 @@ class BitSet {
             mag[j] ^= tmp[i];
         }
     }
+
+    public void copy(BitSet st) {
+        for (int i = 0; i < mag.length; i++) {
+            mag[i] = st.mag[i];
+        }
+    }
 }
