@@ -1,14 +1,14 @@
 package algorithm.util.set;
 
 class BitSet {
-    private int[] mag;
-    private int END;
-    private int n;
+    private int[] mag, tmp;
+    private int n, END;
     
     public BitSet(int MAXV) {
         n = MAXV / 32 + 1;
-        mag = new int[n];
         END = -1 >>> (31 - MAXV % 32);
+        mag = new int[n];
+        tmp = new int[n + 1];
     }
 
     public boolean contains(int v) {
@@ -112,7 +112,7 @@ class BitSet {
     // 将 st 的 sl ~ sr 的状态 与 当前对象的 l ~ r 的状态进行 与 运算
     public void and(BitSet st, int sl, int sr, int l, int r) {
         int i0 = sl / 32, j0 = sl % 32, i1 = sr / 32, j1 = sr % 32, m = i1 - i0 + 2;
-        int[] tmp = new int[m];
+        tmp[m - 1] = 0;
         for (int i = 0, j = i0; j <= i1; i++, j++) {
             tmp[i] = st.mag[j];
         }
@@ -148,7 +148,7 @@ class BitSet {
     // 将 st 的 sl ~ sr 的状态 与 当前对象的 l ~ r 的状态进行 或 运算
     public void or(BitSet st, int sl, int sr, int l, int r) {
         int i0 = sl / 32, j0 = sl % 32, i1 = sr / 32, j1 = sr % 32, m = i1 - i0 + 2;
-        int[] tmp = new int[m];
+        tmp[m - 1] = 0;
         for (int i = 0, j = i0; j <= i1; i++, j++) {
             tmp[i] = st.mag[j];
         }
@@ -179,7 +179,7 @@ class BitSet {
     // 将 st 的 sl ~ sr 的状态 与 当前对象的 l ~ r 的状态进行 异或 运算
     public void xor(BitSet st, int sl, int sr, int l, int r) {
         int i0 = sl / 32, j0 = sl % 32, i1 = sr / 32, j1 = sr % 32, m = i1 - i0 + 2;
-        int[] tmp = new int[m];
+        tmp[m - 1] = 0;
         for (int i = 0, j = i0; j <= i1; i++, j++) {
             tmp[i] = st.mag[j];
         }
@@ -211,5 +211,13 @@ class BitSet {
         for (int i = 0; i < mag.length; i++) {
             mag[i] = st.mag[i];
         }
+    }
+
+    public int count() {
+        int ans = 0;
+        for (int v : mag) {
+            ans += Integer.bitCount(v);
+        }
+        return ans;
     }
 }
