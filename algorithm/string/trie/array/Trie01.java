@@ -10,11 +10,10 @@ class Trie01 {
     private static int[] cnt = new int[MAXT];
     private static int no;
 
+    private int root;
+
     public Trie01() {
-        for (int i = 0; i <= no; i++) {
-            nxt0[i] = nxt1[i] = cnt[i] = 0;
-        }
-        no = 0;
+        root = ++no;
     }
 
     public void insert(int v) {
@@ -36,7 +35,7 @@ class Trie01 {
     }
 
     public void delete(int v) {
-        int u = 0;
+        int u = root;
         for (int i = H; i >= 0; i--) {
             if ((v >> i & 1) == 0) {
                 if (--cnt[nxt0[u]] == 0) {
@@ -55,7 +54,7 @@ class Trie01 {
     }
 
     public int maxXor(int v) {
-        int u = 0;
+        int u = root;
         int ans = 0;
         for (int i = H; i >= 0; i--) {
             if ((v >> i & 1) == 0) {
@@ -78,7 +77,7 @@ class Trie01 {
     }
 
     public int minXor(int v) {
-        int u = 0;
+        int u = root;
         int ans = 0;
         for (int i = H; i >= 0; i--) {
             if ((v >> i & 1) == 0) {
