@@ -144,7 +144,7 @@ class MyUtil {
         x -= (long) x;
         for (int i = 0; i < precision; i++) {
             x *= 10;
-            print((char) ('0' + (int) x));
+            print((byte) ('0' + (int) x));
             x -= (int) x;
         }
     }
