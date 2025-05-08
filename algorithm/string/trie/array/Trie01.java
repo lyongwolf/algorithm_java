@@ -17,7 +17,7 @@ class Trie01 {
     }
 
     public void insert(int v) {
-        int u = 0;
+        int u = root;
         for (int i = H; i >= 0; i--) {
             if ((v >> i & 1) == 0) {
                 if (nxt0[u] == 0) {
