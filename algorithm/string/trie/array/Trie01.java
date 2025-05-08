@@ -5,7 +5,7 @@ package algorithm.string.trie.array;
  * 测试链接：https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/
  */
 class Trie01 {
-    private static final int H = 30, MAXN = 200000, MAXT = MAXN * (H + 2);
+    private static final int H = 30, MAXN = 200000, MAXT = MAXN * (H + 2) + 1;
     private static int[] nxt0 = new int[MAXT], nxt1 = new int[MAXT];
     private static int[] cnt = new int[MAXT];
     private static int no;
