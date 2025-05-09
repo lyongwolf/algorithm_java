@@ -133,7 +133,7 @@ class SegTree {
         return L <= m ? right(L, R, v, l, m, i << 1) : -1;
     }
 
-    // [L, R] 上小于等于 v 的最左侧下标
+    // [L, R] 上大于等于 v 的最左侧下标
     public int left(int L, int R, long v) {
         int ans;
         if (L - 1 >= low) {
