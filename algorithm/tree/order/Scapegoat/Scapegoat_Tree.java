@@ -3,26 +3,24 @@ import java.util.*;
  * 替罪羊树
  */
 class ScapegoatTree {
-    private final double ALPHA = 0.7;// 平衡因子
+    private static final double ALPHA = 0.7;// 平衡因子
+    private static final int MAXT = 2000000;
+    private static int[] lc = new int[MAXT], rc = new int[MAXT], key = new int[MAXT], val = new int[MAXT];
+    private static int[] sz = new int[MAXT], tot = new int[MAXT], sd = new int[MAXT];// 基本信息
+    private static int ab[] = new int[MAXT], nb, tb, fb, sb;// 平衡调整
+    private static int no;// 已新建节点数量（节点最大编号）
+
     private int head;// 头节点编号
-    private int no;// 已新建节点数量（节点最大编号）
-    private int[] key, val, lc, rc, sz, tot, sd;// 基本信息
-    private int ab[], nb, tb, fb, sb;// 平衡调整
 
     public ScapegoatTree() {
-        this(0);
+        head = ++no;
     }
-    
-    public ScapegoatTree(int len) {
-        len++;
-        key = new int[len];
-        val = new int[len];
-        lc = new int[len];
-        rc = new int[len];
-        sz = new int[len];
-        tot = new int[len];
-        sd = new int[len];
-        ab = new int[len];
+
+    public static void clear() {
+        for (int i = 1; i <= no; i++) {
+            lc[i] = rc[i] = key[i] = val[i] = sz[i] = tot[i] = sd[i] = 0;
+        }
+        no = 0;
     }
 
     public int size() {
@@ -108,19 +106,19 @@ class ScapegoatTree {
     }
 
     public int floor(int k) {
-        int rk = rank(k);
-        if (rk == 1) {
+        int c = smallCount(k + 1, head);
+        if (c == 0) {
             return Integer.MIN_VALUE;
         }
-        return rankKey(rk - 1);
+        return rankKey(c);
     }
     
     public int ceiling(int k) {
-        int rk = rank(k + 1);
-        if (rk > tot[head]) {
+        int c = smallCount(k, head);
+        if (c == tot[head]) {
             return Integer.MAX_VALUE;
         }
-        return rankKey(rk);
+        return rankKey(c + 1);
     }
 
     public int first() {
@@ -240,18 +238,7 @@ class ScapegoatTree {
     }
 
     private int create(int k) {
-        if (++no == key.length) {
-            int t = no << 1;
-            key = Arrays.copyOf(key, t);
-            val = Arrays.copyOf(val, t);
-            lc = Arrays.copyOf(lc, t);
-            rc = Arrays.copyOf(rc, t);
-            sz = Arrays.copyOf(sz, t);
-            tot = Arrays.copyOf(tot, t);
-            sd = Arrays.copyOf(sd, t);
-            ab = Arrays.copyOf(ab, t);
-        }
-        key[no] = k;
+        key[++no] = k;
         val[no] = sz[no] = tot[no] = sd[no] = 1;
         return no;
     }
