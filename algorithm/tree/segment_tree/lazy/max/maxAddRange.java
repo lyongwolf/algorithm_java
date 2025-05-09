@@ -109,16 +109,7 @@ class SegTree {
 
     // [L, R] 上大于等于 v 的最右侧下标
     public int right(int L, int R, long v) {
-        int ans;
-        if (R + 1 <= high) {
-            long p = v - mx[1] - 1;
-            add(R + 1, high, p, low, high, 1);
-            ans = right(L, R, v, low, high, 1);
-            add(R + 1, high, -p, low, high, 1);
-        } else {
-            ans = right(L, R, v, low, high, 1);
-        }
-        return ans;
+        return right(L, R, v, low, high, 1);
     }
 
     private int right(int L, int R, long v, int l, int r, int i) {
@@ -127,24 +118,22 @@ class SegTree {
         }
         int m = (l + r) >> 1;
         down(i);
-        if (R > m && mx[i << 1 | 1] >= v) {
-            return right(L, R, v, m + 1, r, i << 1 | 1);
+        if (L <= l && r <= R) {
+            return mx[i] < v ? -1 : mx[i << 1 | 1] >= v ? right(L, R, v, m + 1, r, i << 1 | 1) : right(L, R, v, l, m, i << 1);
         }
-        return L <= m ? right(L, R, v, l, m, i << 1) : -1;
+        int ans = -1;
+        if (R > m) {
+            ans = right(L, R, v, m + 1, r, i << 1 | 1);
+        }
+        if (ans == -1 && L <= m) {
+            ans = right(L, R, v, l, m, i << 1);
+        }
+        return ans;
     }
 
     // [L, R] 上大于等于 v 的最左侧下标
     public int left(int L, int R, long v) {
-        int ans;
-        if (L - 1 >= low) {
-            long p = v - mx[1] - 1;
-            add(low, L - 1, p, low, high, 1);
-            ans = left(L, R, v, low, high, 1);
-            add(low, L - 1, -p, low, high, 1);
-        } else {
-            ans = left(L, R, v, low, high, 1);
-        }
-        return ans;
+        return left(L, R, v, low, high, 1);
     }
 
     private int left(int L, int R, long v, int l, int r, int i) {
@@ -153,9 +142,16 @@ class SegTree {
         }
         int m = (l + r) >> 1;
         down(i);
-        if (L <= m && mx[i << 1] >= v) {
-            return left(L, R, v, l, m, i << 1);
+        if (L <= l && r <= R) {
+            return mx[i] < v ? -1 : mx[i << 1] >= v ? left(L, R, v, l, m, i << 1) : left(L, R, v, m + 1, r, i << 1 | 1);
         }
-        return R > m ? left(L, R, v, m + 1, r, i << 1 | 1) : -1;
+        int ans = -1;
+        if (L <= m) {
+            ans = left(L, R, v, l, m, i << 1);
+        }
+        if (ans == -1 && R > m) {
+            ans = left(L, R, v, m + 1, r, i << 1 | 1);
+        }
+        return ans;
     }
 }
