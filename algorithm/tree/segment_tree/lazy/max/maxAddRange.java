@@ -106,4 +106,56 @@ class SegTree {
             return query(o, m + 1, r, i << 1 | 1);
         }
     }
+
+    // [L, R] 上大于等于 v 的最右侧下标
+    public int right(int L, int R, long v) {
+        int ans;
+        if (R + 1 <= high) {
+            long p = v - mx[1] - 1;
+            add(R + 1, high, p, low, high, 1);
+            ans = right(L, R, v, low, high, 1);
+            add(R + 1, high, -p, low, high, 1);
+        } else {
+            ans = right(L, R, v, low, high, 1);
+        }
+        return ans;
+    }
+
+    private int right(int L, int R, long v, int l, int r, int i) {
+        if (l == r) {
+            return mx[i] >= v ? l : -1;
+        }
+        int m = (l + r) >> 1;
+        down(i);
+        if (R > m && mx[i << 1 | 1] >= v) {
+            return right(L, R, v, m + 1, r, i << 1 | 1);
+        }
+        return L <= m ? right(L, R, v, l, m, i << 1) : -1;
+    }
+
+    // [L, R] 上小于等于 v 的最左侧下标
+    public int left(int L, int R, long v) {
+        int ans;
+        if (L - 1 >= low) {
+            long p = v - mx[1] - 1;
+            add(low, L - 1, p, low, high, 1);
+            ans = left(L, R, v, low, high, 1);
+            add(low, L - 1, -p, low, high, 1);
+        } else {
+            ans = left(L, R, v, low, high, 1);
+        }
+        return ans;
+    }
+
+    private int left(int L, int R, long v, int l, int r, int i) {
+        if (l == r) {
+            return mx[i] >= v ? l : -1;
+        }
+        int m = (l + r) >> 1;
+        down(i);
+        if (L <= m && mx[i << 1] >= v) {
+            return left(L, R, v, l, m, i << 1);
+        }
+        return R > m ? left(L, R, v, m + 1, r, i << 1 | 1) : -1;
+    }
 }
