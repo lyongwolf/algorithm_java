@@ -5,21 +5,23 @@ package algorithm.tree.segment_tree.lazy.min;
 class SegTree {
     private long[] mn;
     private long[] lazy;
-    private int N;
+    private final int low, high;
 
-    public SegTree(int len) {
-        N = len;
-        int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+    public SegTree(int low, int high) {
+        this.low = low;
+        this.high = high;
+        int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mn = new long[tot];
         lazy = new long[tot];
     }
 
-    public SegTree(int[] arr) {
-        N = arr.length - 1;
-        int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+    public SegTree(int[] arr, int low, int high) {
+        this.low = low;
+        this.high = high;
+        int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mn = new long[tot];
         lazy = new long[tot];
-        build(arr, 1, N, 1);
+        build(arr, low, high, 1);
     }
 
     private void build(int[] arr, int l, int r, int i) {
@@ -48,7 +50,7 @@ class SegTree {
     }
 
     public void add(int l, int r, long v) {
-        add(l, r, v, 1, N, 1);
+        add(l, r, v, low, high, 1);
     }
 
     private void add(int L, int R, long v, int l, int r, int i) {
@@ -69,7 +71,7 @@ class SegTree {
     }
 
     public long query(int l, int r) {
-        return query(l, r, 1, N, 1);
+        return query(l, r, low, high, 1);
     }
 
     private long query(int L, int R, int l, int r, int i) {
@@ -89,7 +91,7 @@ class SegTree {
     }
 
     public long query(int o) {
-        return query(o, 1, N, 1);
+        return query(o, low, high, 1);
     }
 
     private long query(int o, int l, int r, int i) {
