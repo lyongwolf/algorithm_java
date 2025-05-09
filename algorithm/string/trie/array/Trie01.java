@@ -16,6 +16,13 @@ class Trie01 {
         root = ++no;
     }
 
+    public static void clear() {
+        for (int i = 1; i <= no; i++) {
+            nxt0[i] = nxt1[i] = cnt[i] = 0;
+        }
+        no = 0;
+    }
+
     public void insert(int v) {
         int u = root;
         for (int i = H; i >= 0; i--) {
