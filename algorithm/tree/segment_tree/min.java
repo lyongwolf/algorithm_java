@@ -1,5 +1,4 @@
 package algorithm.tree.segment_tree;
-import java.util.*;
 
 class SegTree {
     private long[] mn;
@@ -8,7 +7,6 @@ class SegTree {
     public SegTree(int len) {
         N = len;
         mn = new long[1 << (33 - Integer.numberOfLeadingZeros(N - 1))];
-        Arrays.fill(mn, Long.MAX_VALUE);
     }
     
     public SegTree(int[] arr) {

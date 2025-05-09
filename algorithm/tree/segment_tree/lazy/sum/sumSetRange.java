@@ -1,7 +1,5 @@
 package algorithm.tree.segment_tree.lazy.sum;
-
-import java.util.Arrays;
-
+import java.util.*;
 /**
  * 区间设置值
  */

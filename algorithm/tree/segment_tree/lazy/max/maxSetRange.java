@@ -1,6 +1,5 @@
 package algorithm.tree.segment_tree.lazy.max;
-
-import java.util.Arrays;
+import java.util.*;
 /**
  * 区间设置值
  */
@@ -14,7 +13,6 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
         mx = new long[tot];
         lazy = new long[tot];
-        Arrays.fill(mx, Long.MIN_VALUE);
         Arrays.fill(lazy, Long.MIN_VALUE);
     }
 

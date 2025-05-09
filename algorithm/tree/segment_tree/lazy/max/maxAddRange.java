@@ -1,5 +1,4 @@
 package algorithm.tree.segment_tree.lazy.max;
-
 /**
  * 区间添加值
  */
