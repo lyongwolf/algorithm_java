@@ -38,7 +38,7 @@ class SegTree {
 
     private void add(int o, long v, int l, int r, int i) {
         if (l == r) {
-            mx[i] = v;
+            mx[i] += v;
             return;
         }
         int m = (l + r) >> 1;
