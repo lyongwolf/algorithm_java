@@ -9,13 +9,7 @@ class ScapegoatTree {
     private static int[] sz = new int[MAXT], tot = new int[MAXT], sd = new int[MAXT];// 基本信息
     private static int ab[] = new int[MAXT], nb, tb, fb, sb;// 平衡调整
     private static int no;// 已新建节点数量（节点最大编号）
-
-    private int head;// 头节点编号
-
-    public ScapegoatTree() {
-        head = ++no;
-    }
-
+    
     public static void clear() {
         for (int i = 1; i <= no; i++) {
             lc[i] = rc[i] = key[i] = val[i] = sz[i] = tot[i] = sd[i] = 0;
@@ -23,6 +17,8 @@ class ScapegoatTree {
         no = 0;
     }
 
+    private int head;// 头节点编号
+    
     public int size() {
         return tot[head];
     }
