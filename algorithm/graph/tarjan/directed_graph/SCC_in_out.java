@@ -34,18 +34,18 @@ public class SCC_in_out {
                 tarjan(u);
             }
         }
-        int[] din = new int[no + 1], dout = new int[no + 1];
+        int[] in = new int[no + 1], out = new int[no + 1];
         for (int u = 1; u <= n; u++) {
             for (int e = head[u], v = to[e]; e != 0; e = nxt[e], v = to[e]) {
                 if (scc[u] != scc[v]) {
-                    din[scc[v]]++;
-                    dout[scc[u]]++;
+                    in[scc[v]]++;
+                    out[scc[u]]++;
                 }
             }
         }
         int cnt = 0, sum = 0;
         for (int i = 1; i <= no; i++) {
-            if (dout[i] == 0) {
+            if (out[i] == 0) {
                 cnt++;
                 sum = siz[i];
             }

@@ -34,15 +34,15 @@ public class eDCC_degree {
                 tarjan(u, 0);
             }
         }
-        int[] degree = new int[no + 1];
+        int[] deg = new int[no + 1];
         for (int e = 2; e < (m + 1) << 1; e++) {
             if (bri[e]) {
-                degree[dcc[to[e]]]++;
+                deg[dcc[to[e]]]++;
             }
         }
         int sum = 0;
         for (int i = 1; i <= no; i++) {
-            if (degree[i] == 1) {
+            if (deg[i] == 1) {
                 sum++;
             }
         }
