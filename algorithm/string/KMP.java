@@ -1,21 +1,20 @@
 package algorithm.string;
-
 import java.util.*;
-
 
 public class KMP {
     
-    public List<Integer> kmp(String s, String t) {
+    public int[] kmp(String s, String t) {
         char[] str = s.toCharArray(), tar = t.toCharArray();
         int n = str.length, m = tar.length, x = 0, y = 0;
         int[] next = next(tar);
-        List<Integer> ans = new ArrayList<>();
+        int[] ans = new int[n];
+        int z = 0;
         while (x < n) {
             if (str[x] == tar[y]) {
                 x++;
                 y++;
                 if (y == m) {
-                    ans.add(x - m);
+                    ans[z++] = x - m;
                     y = next[y];
                 }
             } else if (y == 0) {
@@ -24,7 +23,7 @@ public class KMP {
                 y = next[y];
             }
         }
-        return ans;
+        return Arrays.copyOf(ans, z);
     }
 
     public int[] next(char[] str) {

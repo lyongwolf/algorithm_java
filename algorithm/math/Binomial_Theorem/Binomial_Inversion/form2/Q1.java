@@ -9,7 +9,7 @@ import java.util.*;
 public class Q1 {     
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         long f = 1;
         for (int i = 1; i <= n; i++) {
             f *= i;
@@ -24,6 +24,6 @@ public class Q1 {
                 ans -= f / fi;
             }
         }
-        out.println(ans);
+        println(ans);
     }
 }

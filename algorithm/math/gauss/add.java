@@ -12,11 +12,11 @@ public class add {
     double eps = 1e-7;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         double[][] mat = new double[n][n + 1];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j <= n; j++) {
-                mat[i][j] = sc.nextDouble();
+                mat[i][j] = nd();
             }
         }
         for (int i = 0; i < n; i++) {
@@ -49,18 +49,18 @@ public class add {
         for (int i = 0; i < n; i++) {
             if (Math.abs(mat[i][i]) < eps) {
                 if (Math.abs(mat[i][n]) >= eps) {
-                    out.println(-1);
+                    println(-1);
                     return;
                 }
                 multi = true;
             }
         }
         if (multi) {
-            out.println(0);
+            println(0);
             return;
         }
         for (int i = 0; i < n; i++) {
-            out.println(mat[i][n], 2);
+            println(mat[i][n], 2);
         }
     }
 

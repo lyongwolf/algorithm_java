@@ -12,42 +12,42 @@ public class Q1 {
     BalancedInSeg tree = new BalancedInSeg(1900000);
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt(), l, r, k, pos, v;
+        int n = ni(), m = ni(), l, r, k, pos, v;
         tree.init(1, n, 0, 100000000);
         for (int i = 1; i <= n; i++) {
-            tree.add(i, sc.nextInt());
+            tree.add(i, ni());
         }
         while (m-- > 0) {
-            switch (sc.nextInt()) {
+            switch (ni()) {
                 case 1 -> {
-                    l = sc.nextInt();
-                    r = sc.nextInt();
-                    k = sc.nextInt();
-                    out.println(tree.rank(l, r, k));
+                    l = ni();
+                    r = ni();
+                    k = ni();
+                    println(tree.rank(l, r, k));
                 }
                 case 2 -> {
-                    l = sc.nextInt();
-                    r = sc.nextInt();
-                    k = sc.nextInt();
-                    out.println(tree.rankKey(l, r, k));
+                    l = ni();
+                    r = ni();
+                    k = ni();
+                    println(tree.rankKey(l, r, k));
                 }
                 case 3 -> {
-                    pos = sc.nextInt();
-                    k = sc.nextInt();
+                    pos = ni();
+                    k = ni();
                     tree.set(pos, k);
                 }
                 case 4 -> {
-                    l = sc.nextInt();
-                    r = sc.nextInt();
-                    k = sc.nextInt();
+                    l = ni();
+                    r = ni();
+                    k = ni();
                     v = tree.floor(l, r, k);
-                    out.println(v == Integer.MIN_VALUE ? -2147483647 : v);
+                    println(v == Integer.MIN_VALUE ? -2147483647 : v);
                 }
                 case 5 -> {
-                    l = sc.nextInt();
-                    r = sc.nextInt();
-                    k = sc.nextInt();
-                    out.println(tree.ceiling(l, r, k));
+                    l = ni();
+                    r = ni();
+                    k = ni();
+                    println(tree.ceiling(l, r, k));
                 }
             }
         }

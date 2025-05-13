@@ -14,12 +14,12 @@ public class SCC {
     int ts, top, no;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         head = new int[n + 1];
         nxt = new int[m + 1];
         to = new int[m + 1];
         for (int i = 0, j = 1; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u];
             head[u] = j;
             to[j++] = v;
@@ -44,7 +44,7 @@ public class SCC {
                 cnt++;
             }
         }
-        out.println(cnt);
+        println(cnt);
     }
 
     void tarjan(int u) {

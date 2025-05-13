@@ -11,18 +11,18 @@ public class Q1 {
     SegInSeg tree = new SegInSeg(15000000);
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         int[] op = new int[m], left = new int[m], right = new int[m];
         long[] val = new long[m];
         int tot = 0;
         for (int i = 0; i < m; i++) {
-            op[i] = sc.nextInt();
+            op[i] = ni();
             if (op[i] == 1) {
                 tot++;
             }
-            left[i] = sc.nextInt();
-            right[i] = sc.nextInt();
-            val[i] = sc.nextLong();
+            left[i] = ni();
+            right[i] = ni();
+            val[i] = nl();
         }
         int[] a = new int[tot];
         for (int i = 0, j = 0; i < m; i++) {
@@ -42,7 +42,7 @@ public class Q1 {
             if (op[i] == 1) {
                 tree.add(Arrays.binarySearch(a, 0, tot, (int) val[i]), left[i], right[i]);
             } else {
-                out.println(a[tree.query(val[i], left[i], right[i])]);
+                println(a[tree.query(val[i], left[i], right[i])]);
             }
         }
     }

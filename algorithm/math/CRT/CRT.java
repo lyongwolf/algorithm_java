@@ -12,16 +12,16 @@ public class CRT {
     long MOD;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         long[] a = new long[n], b = new long[n];
         long s = 1;
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
-            b[i] = sc.nextLong();
+            a[i] = nl();
+            b[i] = nl();
             s *= a[i];
         }
         if (n == 1) {
-            out.println(b[0]);
+            println(b[0]);
             return;
         }
         MOD = s;
@@ -30,7 +30,7 @@ public class CRT {
             long x = s / a[i];
             ans = (ans + times(times(b[i], x), inv(x, a[i]))) % MOD;
         }
-        out.println(ans);
+        println(ans);
     }
 
     long times(long a, long b) {

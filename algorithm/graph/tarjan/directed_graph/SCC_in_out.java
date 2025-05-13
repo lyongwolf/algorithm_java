@@ -14,12 +14,12 @@ public class SCC_in_out {
     int ts, top, no;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         head = new int[n + 1];
         nxt = new int[m + 1];
         to = new int[m + 1];
         for (int i = 1; i <= m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[i] = head[u]; head[u] = i; to[i] = v;
         }
         dfn = new int[n + 1];
@@ -50,7 +50,7 @@ public class SCC_in_out {
                 sum = siz[i];
             }
         }
-        out.println(cnt == 1 ? sum : 0);
+        println(cnt == 1 ? sum : 0);
     }
 
     void tarjan(int u) {

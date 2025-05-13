@@ -9,13 +9,13 @@ import java.util.*;
 public class maximum_match_dinic {
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt(), e = sc.nextInt();
+        int n = ni(), m = ni(), e = ni();
         MF mf = new MF(n, m, e);
         for (int i = 0; i < e; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             mf.addBiEdge(u, v);
         }
-        out.println(mf.maxFlow());
+        println(mf.maxFlow());
     }
 
 }

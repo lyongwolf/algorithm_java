@@ -14,24 +14,24 @@ public class Q2 {
     int[] head, nxt, to, w, dep, pa[], sz, dfn;
 
     void solve() {
-        int n = sc.nextInt(), q = sc.nextInt();
+        int n = ni(), q = ni();
         head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1]; w = new int[n + 1]; dep = new int[n + 1]; pa = new int[n + 1][17]; sz = new int[n + 1]; dfn = new int[n + 1];
         int[] val = new int[n + q];
         int z = 0;
         for (int i = 1; i <= n; i++) {
-            w[i] = sc.nextInt();
+            w[i] = ni();
             val[z++] = w[i];
         }
         for (int i = 1, j = 2; i < n; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
         int[][] query = new int[q][3];
         for (int i = 0; i < q; i++) {
-            query[i][0] = sc.nextInt();
-            query[i][1] = sc.nextInt();
-            query[i][2] = sc.nextInt();
+            query[i][0] = ni();
+            query[i][1] = ni();
+            query[i][2] = ni();
             if (query[i][0] == 0) {
                 val[z++] = query[i][2];
             }
@@ -60,9 +60,9 @@ public class Q2 {
             } else {
                 int a = lca(u, v), f = pa[a][0], tot = dep[u] + dep[v] - dep[a] - dep[f];
                 if (tot < k) {
-                    out.println("invalid request!");
+                    println("invalid request!");
                 } else {
-                    out.println(val[tree.query(dfn[u], dfn[v], dfn[a], dfn[f], tot - k + 1)]);
+                    println(val[tree.query(dfn[u], dfn[v], dfn[a], dfn[f], tot - k + 1)]);
                 }
             }
         }

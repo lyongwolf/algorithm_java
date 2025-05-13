@@ -17,14 +17,14 @@ public class HLD {
     SegTree tree;
 
     void solve() {
-        int n = sc.nextInt(), q = sc.nextInt();
+        int n = ni(), q = ni();
         head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1]; val = new int[n + 1];
         fa = new int[n + 1]; dep = new int[n + 1]; sz = new int[n + 1]; son = new int[n + 1]; top = new int[n + 1]; dfn = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            val[i] = sc.nextInt();
+            val[i] = ni();
         }
         for (int i = 1, j = 2; i < n; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
@@ -39,22 +39,22 @@ public class HLD {
 
         int x, y, z;
         while (q-- > 0) {
-            switch (sc.nextInt()) {
+            switch (ni()) {
                 case 1 -> {
-                    x = sc.nextInt(); y = sc.nextInt(); z = sc.nextInt();
+                    x = ni(); y = ni(); z = ni();
                     add(x, y, z);
                 }
                 case 2 -> {
-                    x = sc.nextInt(); y = sc.nextInt();
-                    out.println(query(x, y));
+                    x = ni(); y = ni();
+                    println(query(x, y));
                 }
                 case 3 -> {
-                    x = sc.nextInt(); z = sc.nextInt();
+                    x = ni(); z = ni();
                     tree.add(dfn[x], dfn[x] + sz[x] - 1, z);
                 }
                 default -> {
-                    x = sc.nextInt();
-                    out.println(tree.query(dfn[x], dfn[x] + sz[x] - 1));
+                    x = ni();
+                    println(tree.query(dfn[x], dfn[x] + sz[x] - 1));
                 }
             }
         }

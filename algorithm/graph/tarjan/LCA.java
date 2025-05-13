@@ -15,12 +15,12 @@ public class LCA {
     int[] ans;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt(), s = sc.nextInt();
+        int n = ni(), m = ni(), s = ni();
         head = new int[n + 1];
         nxt = new int[n << 1];
         to = new int[n << 1];
         for (int i = 1, j = 1; i < n; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
@@ -33,13 +33,13 @@ public class LCA {
         ans = new int[m];
         Arrays.setAll(task, v -> new ArrayList<>());
         for (int i = 0; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             task[u].add(new int[]{v, i});
             task[v].add(new int[]{u, i});
         }
         dfs(0, s);
         for (int v : ans) {
-            out.println(v + " ");
+            println(v + " ");
         }
     }
 

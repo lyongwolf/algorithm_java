@@ -18,13 +18,13 @@ public class eDCC_generate_graph {
     long ans;
 
     void solve() {
-        n = sc.nextInt();
-        m = sc.nextInt();
+        n = ni();
+        m = ni();
         head = new int[n + 1];
         nxt = new int[(m + 1) << 1];
         to = new int[(m + 1) << 1];
         for (int i = 0, j = 2; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
@@ -52,7 +52,7 @@ public class eDCC_generate_graph {
         }
         ans = 0;
         dfs(0, 1);
-        out.println((long) n * (n - 1) / 2 - ans);
+        println((long) n * (n - 1) / 2 - ans);
     }
 
     int dfs(int f, int u) {

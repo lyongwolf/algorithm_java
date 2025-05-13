@@ -10,11 +10,11 @@ import java.util.*;
 public class EXCRT {
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         long[] m = new long[n], r = new long[n];
         for (int i = 0; i < n; i++) {
-            m[i] = sc.nextLong();
-            r[i] = sc.nextLong();
+            m[i] = nl();
+            r[i] = nl();
         }
         long lcm = 1, tail = 0;
         for (int i = 0; i < n; i++) {
@@ -22,14 +22,14 @@ public class EXCRT {
             long[] ans = exgcd(a, b);
             long x0 = ans[0], y0 = ans[1], g = a * x0 + b * y0;
             if (c % g != 0) {
-                out.println(-1);
+                println(-1);
                 return;
             }
             lcm = a / g * b;
             x0 = times(x0, c / g, b / g);
             tail = (tail + times(a, x0, lcm)) % lcm;
         }
-        out.println(tail);
+        println(tail);
     }
 
     long[] exgcd(long a, long b) {

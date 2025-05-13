@@ -11,16 +11,16 @@ public class AC_classic {
     boolean[] vis;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         String[] pattern = new String[n];
         AhoCorasick ac = new AhoCorasick();
         for (int i = 0; i < n; i++) {
-            pattern[i] = sc.next();
+            pattern[i] = ns();
             ac.insert(pattern[i]);
         }
         ac.setFail();
         int tot = ac.no + 1;
-        char[] str = sc.next().toCharArray();
+        char[] str = ns().toCharArray();
         freq = new int[tot];
         for (int i = 0, u = 0; i < str.length; i++) {
             u = ac.nxt[u][str[i] - 'a'];
@@ -58,7 +58,7 @@ public class AC_classic {
             for (char c : s.toCharArray()) {
                 u = ac.nxt[u][c - 'a'];
             }
-            out.println(freq[u]);
+            println(freq[u]);
         }
     }
 

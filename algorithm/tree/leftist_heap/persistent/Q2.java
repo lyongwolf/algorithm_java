@@ -17,14 +17,14 @@ public class Q2 {
 	int cntd, cnth;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
-        double rest = sc.nextDouble();
+        int n = ni(), m = ni();
+        double rest = nd();
         int[] head = new int[n + 1], nxt = new int[(m + 1) << 1], to = new int[(m + 1) << 1], path = new int[n + 1], rt = new int[n + 1];
         double[] wt = new double[(m + 1) << 1], dis = new double[n + 1];
         for (int i = 1, j = 2, u, v; i <= m; i++) {
-            u = sc.nextInt();
-            v = sc.nextInt();
-            double w = sc.nextDouble();
+            u = ni();
+            v = ni();
+            double w = nd();
             if (u == n) {
                 continue;
             }
@@ -109,7 +109,7 @@ public class Q2 {
                 }
             }
         }
-        out.println(ans);
+        println(ans);
     }
 
     // (k, v)组成一个数据，放到堆上，根据v来组织小根堆

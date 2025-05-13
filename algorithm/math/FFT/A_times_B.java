@@ -10,7 +10,7 @@ import java.util.*;
 public class A_times_B {    
 
     void solve() {
-        char[] s1 = sc.next().toCharArray(), s2 = sc.next().toCharArray();
+        char[] s1 = ns().toCharArray(), s2 = ns().toCharArray();
         int n = s1.length, m = s2.length;
         int[] a = new int[n], b = new int[m];
         for (int i = 0, j = n - 1; i < n; i++, j--) {
@@ -31,9 +31,9 @@ public class A_times_B {
             i--;
         }
         while (i >= 0) {
-            out.print(ans[i--]);
+            print(ans[i--]);
         }
-        out.writeln();
+        writeln();
     }
 
 }

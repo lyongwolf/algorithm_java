@@ -8,25 +8,25 @@ import java.util.*;
 public class Basic {
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         DSUPersistent dsu = new DSUPersistent(n);
         for (int i = 1, opt, k, a, b; i <= m; i++) {
-            opt = sc.nextInt();
+            opt = ni();
             if (opt == 1) {
-                a = sc.nextInt();
-                b = sc.nextInt();
+                a = ni();
+                b = ni();
                 dsu.rollback(i - 1);
                 dsu.union(a, b);
             } else if (opt == 2) {
-                k = sc.nextInt();
+                k = ni();
                 dsu.rollback(k);
             } else {
-                a = sc.nextInt();
-                b = sc.nextInt();
+                a = ni();
+                b = ni();
                 dsu.rollback(i - 1);
                 a = dsu.find(a);
                 b = dsu.find(b);
-                out.println(a == b ? 1 : 0);
+                println(a == b ? 1 : 0);
             }
         }
     }

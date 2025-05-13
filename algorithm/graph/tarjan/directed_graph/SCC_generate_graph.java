@@ -17,16 +17,16 @@ public class SCC_generate_graph {
     int[] memo;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         head = new int[n + 1];
         nxt = new int[m + 1];
         to = new int[m + 1];
         val = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            val[i] = sc.nextInt();
+            val[i] = ni();
         }
         for (int i = 1; i <= m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[i] = head[u]; head[u] = i; to[i] = v;
         }
         dfn = new int[n + 1];
@@ -55,9 +55,9 @@ public class SCC_generate_graph {
         Arrays.fill(memo, -1);
         int ans = 0;
         for (int u = 1; u <= no; u++) {
-            ans = Math.max(ans, dfs(u));
+            ans = max(ans, dfs(u));
         }
-        out.println(ans);
+        println(ans);
     }
 
     int dfs(int u) {
@@ -66,7 +66,7 @@ public class SCC_generate_graph {
         }
         memo[u] = 0;
         for (int v : graph[u]) {
-            memo[u] = Math.max(memo[u], dfs(v));
+            memo[u] = max(memo[u], dfs(v));
         }
         return memo[u] += val2[u];
     }
@@ -78,9 +78,9 @@ public class SCC_generate_graph {
         for (int e = head[u], v = to[e]; e != 0; e = nxt[e], v = to[e]) {
             if (dfn[v] == 0) {
                 tarjan(v);
-                low[u] = Math.min(low[u], low[v]);
+                low[u] = min(low[u], low[v]);
             } else if (vis[v]) {
-                low[u] = Math.min(low[u], dfn[v]);
+                low[u] = min(low[u], dfn[v]);
             }
         }
         if (dfn[u] == low[u]) {

@@ -9,10 +9,10 @@ public class ChthollyTree {
     int n, m, seed, vmax;
 
     void solve() {
-        n = sc.nextInt();
-        m = sc.nextInt();
-        seed = sc.nextInt();
-        vmax = sc.nextInt();
+        n = ni();
+        m = ni();
+        seed = ni();
+        vmax = ni();
         int[] arr = new int[n + 1];
         for (int i = 1; i <= n; i++) {
             arr[i] = (rnd() % vmax) + 1;
@@ -27,7 +27,7 @@ public class ChthollyTree {
             }
             if (op == 3) {
                 int x = (rnd() % (r - l + 1)) + 1;
-                out.println(tree.minK(l, r, x));
+                println(tree.minK(l, r, x));
             } else {
                 int x = (rnd() % vmax) + 1;
                 if (op == 1) {
@@ -36,7 +36,7 @@ public class ChthollyTree {
                     tree.assign(l, r, x);
                 } else  {
                     int y = (rnd() % vmax) + 1;
-                    out.println(tree.calP(l, r, x, y));
+                    println(tree.calP(l, r, x, y));
                 }
             }
         }

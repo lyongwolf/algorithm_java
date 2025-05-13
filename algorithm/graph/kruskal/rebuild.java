@@ -11,25 +11,25 @@ public class rebuild {
     int[] head, nxt, to, dep, pa[], root, val;
 
     void solve() {
-        n = sc.nextInt();
+        n = ni();
         H = 32 - Integer.numberOfLeadingZeros(n);
-        int m = sc.nextInt();
+        int m = ni();
         int[][] edge = new int[m][3]; 
         for (int i = 0; i < m; i++) {
-            edge[i][0] = sc.nextInt();
-            edge[i][1] = sc.nextInt();
-            edge[i][2] = sc.nextInt();
+            edge[i][0] = ni();
+            edge[i][1] = ni();
+            edge[i][2] = ni();
         }
         Arrays.sort(edge, (i, j) -> i[2] - j[2]);
         kruskalReBuild(edge);
 
-        for (int q = sc.nextInt(), u, v; q > 0; q--) {
-            u = sc.nextInt();
-            v = sc.nextInt();
+        for (int q = ni(), u, v; q > 0; q--) {
+            u = ni();
+            v = ni();
             if (root[u] != root[v]) {
-                out.println("impossible");
+                println("impossible");
             } else {
-                out.println(val[lca(u, v)]);
+                println(val[lca(u, v)]);
             }
         }
     }

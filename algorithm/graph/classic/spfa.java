@@ -14,14 +14,14 @@ public class spfa {
     int[] dis;
 
     void solve() {
-        n = sc.nextInt();
-        int m = sc.nextInt();
+        n = ni();
+        int m = ni();
         head = new int[n + 1];
         nxt = new int[m + 1];
         to = new int[m + 1];
         wt = new int[m + 1];
         for (int i = 1; i <= m; i++) {
-            int v = sc.nextInt(), u = sc.nextInt(), w = sc.nextInt();
+            int v = ni(), u = ni(), w = ni();
             nxt[i] = head[u];
             head[u] = i;
             wt[i] = w;
@@ -39,13 +39,13 @@ public class spfa {
         //     }
         // }
         if (bfs()) {
-            out.println("NO");
+            println("NO");
             return;
         }
         for (int i = 1; i <= n; i++) {
-            out.print(dis[i] + " ");
+            print(dis[i] + " ");
         }
-        out.writeln();
+        writeln();
     }
 
     boolean dfs(int u) {

@@ -10,16 +10,16 @@ public class AC_setLast {
     int MOD = (int) 1e9 + 7;
 
     void solve() {
-        char[] str = sc.next().toCharArray();
+        char[] str = ns().toCharArray();
         int n = str.length;
         int[] num = new int[n];
         for (int i = 0; i < n; i++) {
             num[i] = str[i] - '0';
         }
         AhoCorasick ac = new AhoCorasick();
-        int m = sc.nextInt();
+        int m = ni();
         for (int i = 0; i < m; i++) {
-            ac.insert(sc.next());
+            ac.insert(ns());
         }
         ac.setFail();
         m = ac.no;
@@ -45,7 +45,7 @@ public class AC_setLast {
                 }
             }
         }
-        out.println(dp[0][0][0][0]);
+        println(dp[0][0][0][0]);
     }
 
 }

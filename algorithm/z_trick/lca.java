@@ -7,10 +7,10 @@ public class lca {
     int H = 17;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1]; dep = new int[n + 1]; pa = new int[n + 1][H];
         for (int i = 1, j = 2; i < n; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }

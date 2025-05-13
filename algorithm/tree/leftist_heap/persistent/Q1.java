@@ -11,13 +11,13 @@ public class Q1 {
     int INF = (int) 1e9;
 
     void solve() {
-        int n = sc.nextInt(), k = sc.nextInt();
+        int n = ni(), k = ni();
         int[][] mat = new int[n][];
         for (int i = 0; i < n; i++) {
-            int m = sc.nextInt();
+            int m = ni();
             mat[i] = new int[m];
             for (int j = 0; j < m; j++) {
-                mat[i][j] = sc.nextInt();
+                mat[i][j] = ni();
             }
             Arrays.sort(mat[i]);
         }
@@ -53,10 +53,10 @@ public class Q1 {
             }
         }
         for (int v : ans) {
-            out.print(v);
-            out.print(' ');
+            print(v);
+            print(' ');
         }
-        out.writeln();
+        writeln();
     }
 
 }

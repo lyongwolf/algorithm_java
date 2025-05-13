@@ -12,22 +12,22 @@ public class Q1 {
     SegInBit tree = new SegInBit(50000, 8000000);
 
     void solve() {
-        int n = sc.nextInt(), q = sc.nextInt(), m = 1, v;
+        int n = ni(), q = ni(), m = 1, v;
         int[] a = new int[n + 1];
         int[] val = new int[n + q];
         for (int i = 1; i <= n; i++) {
-            a[i] = sc.nextInt();
+            a[i] = ni();
             val[i - 1] = a[i];
         }    
         int[][] query = new int[q][4];
         for (int i = 0, j = n; i < q; i++) {
-            query[i][0] = sc.nextInt();
-            query[i][1] = sc.nextInt();
-            query[i][2] = sc.nextInt();
+            query[i][0] = ni();
+            query[i][1] = ni();
+            query[i][2] = ni();
             if (query[i][0] == 3) {
                 val[j++] = query[i][2];
             } else {
-                query[i][3] = sc.nextInt();
+                query[i][3] = ni();
                 val[j++] = query[i][3];
             }
         }
@@ -44,8 +44,8 @@ public class Q1 {
         }
         for (int[] t : query) {
             switch (t[0]) {
-                case 1 -> out.println(tree.rank(t[1], t[2], Arrays.binarySearch(val, 0, m, t[3])));
-                case 2 -> out.println(val[tree.rankKey(t[1], t[2], t[3])]);
+                case 1 -> println(tree.rank(t[1], t[2], Arrays.binarySearch(val, 0, m, t[3])));
+                case 2 -> println(val[tree.rankKey(t[1], t[2], t[3])]);
                 case 3 -> {
                     tree.remove(t[1], a[t[1]]);
                     a[t[1]] = Arrays.binarySearch(val, 0, m, t[2]);
@@ -53,11 +53,11 @@ public class Q1 {
                 }
                 case 4 -> {
                     v = tree.floor(t[1], t[2], Arrays.binarySearch(val, 0, m, t[3]));
-                    out.println(v == Integer.MIN_VALUE ? -2147483647 : val[v]);
+                    println(v == Integer.MIN_VALUE ? -2147483647 : val[v]);
                 }
                 case 5 -> {
                     v = tree.ceiling(t[1], t[2], Arrays.binarySearch(val, 0, m, t[3]));
-                    out.println(v == Integer.MAX_VALUE ? v : val[v]);
+                    println(v == Integer.MAX_VALUE ? v : val[v]);
                 }
             }
         }

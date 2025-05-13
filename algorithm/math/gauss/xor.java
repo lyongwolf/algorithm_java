@@ -32,10 +32,10 @@ public class xor {
     }
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         int[][] mat = new int[303][304];
         for (int j = 0; j < n; j++) {
-            long v = sc.nextLong();
+            long v = nl();
             for (int i = 0; i < 303; i++) {
                 while (v % p[i] == 0) {
                     v /= p[i];
@@ -70,8 +70,8 @@ public class xor {
         for (int i = 0; i < n; i++) {
             cnt -= mat[i][i];
         }
-        out.println("Case #" + (++testCase) + ":");
-        out.println((A[cnt] - 1 + MOD) % MOD);
+        println("Case #" + (++testCase) + ":");
+        println((A[cnt] - 1 + MOD) % MOD);
     }
 
 }

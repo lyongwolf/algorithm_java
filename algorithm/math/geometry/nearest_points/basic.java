@@ -18,16 +18,16 @@ public class basic {
     Point ans1, ans2;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         Point[] arr = new Point[n];
         for (int i = 0, s = 0; i < n; i++) {
-            s += sc.nextInt();
+            s += ni();
             arr[i] = new Point(i, s);
         }
         Arrays.sort(arr, Point::cmpx);
         minDis = Double.POSITIVE_INFINITY;
         dfs(new Point[n], arr, 0, n - 1);
-        out.println((long) ((ans1.x - ans2.x) * (ans1.x - ans2.x) + (ans1.y - ans2.y) * (ans1.y - ans2.y)));
+        println((long) ((ans1.x - ans2.x) * (ans1.x - ans2.x) + (ans1.y - ans2.y) * (ans1.y - ans2.y)));
     }
 
     // 分治

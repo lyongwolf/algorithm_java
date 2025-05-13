@@ -9,15 +9,15 @@ import java.util.*;
 public class range_smallK {
 
     void solve() {
-        int n = sc.nextInt(), q = sc.nextInt();
+        int n = ni(), q = ni();
         int[] a = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            a[i] = sc.nextInt();
+            a[i] = ni();
         }
         SegTree tree = new SegTree(a);
         while (q-- > 0) {
-            int l = sc.nextInt(), r = sc.nextInt(), k = sc.nextInt();
-            out.println(tree.smallK(l, r, k));
+            int l = ni(), r = ni(), k = ni();
+            println(tree.smallK(l, r, k));
         }
     }
 

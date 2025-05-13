@@ -23,7 +23,7 @@ public class Q1 {
     }
 
     void solve() {
-        int n = sc.nextInt(), k = sc.nextInt();
+        int n = ni(), k = ni();
         long[] g = new long[n + 1];
         g[n] = 2;
         for (int i = n - 1; i >= 0; i--) {
@@ -40,7 +40,7 @@ public class Q1 {
                 ans += comb(i, k) * g[i] % MOD * (MOD - 1) % MOD;
             }
         }
-        out.println(ans % MOD);
+        println(ans % MOD);
     }
 
     long comb(int n, int m) {

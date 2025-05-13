@@ -10,31 +10,31 @@ public class Q2 {
 
     void solve() {
         FHQTreap fhq = new FHQTreap(200000);
-        int n = sc.nextInt();
+        int n = ni();
         long ans = 0, p, x, l, r;
         for (int cur = 1, i, opt; cur <= n; cur++) {
-            i = sc.nextInt();
-            opt = sc.nextInt();
+            i = ni();
+            opt = ni();
             switch (opt) {
                 case 1:
-                    p = sc.nextLong() ^ ans;
-                    x = sc.nextLong() ^ ans;
+                    p = nl() ^ ans;
+                    x = nl() ^ ans;
                     fhq.add(cur, i, (int) p, (int) x);
                     break;
                 case 2:
-                    p = sc.nextLong() ^ ans;
+                    p = nl() ^ ans;
                     fhq.remove(cur, i, (int) p);
                     break;
                 case 3:
-                    l = sc.nextLong() ^ ans;
-                    r = sc.nextLong() ^ ans;
+                    l = nl() ^ ans;
+                    r = nl() ^ ans;
                     fhq.reverseRange(cur, i, (int) l, (int) r);
                     break;
                 default:
-                    l = sc.nextLong() ^ ans;
-                    r = sc.nextLong() ^ ans;
+                    l = nl() ^ ans;
+                    r = nl() ^ ans;
                     ans = fhq.rangeSum(cur, i, (int) l, (int) r);
-                    out.println(ans);
+                    println(ans);
                     break;
             }
         }

@@ -10,13 +10,13 @@ import java.util.*;
 public class MaxFlow {
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt(), s = sc.nextInt(), t = sc.nextInt();
+        int n = ni(), m = ni(), s = ni(), t = ni();
         MF mf = new MF(n, m, s, t);
         for (int i = 0; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt(), w = sc.nextInt();
+            int u = ni(), v = ni(), w = ni();
             mf.addBiEdge(u, v, w);
         }
-        out.println(mf.maxFlow());
+        println(mf.maxFlow());
     }
 
 }

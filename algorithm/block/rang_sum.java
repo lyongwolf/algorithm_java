@@ -10,19 +10,19 @@ import static algorithm.zz.U.*;
 public class rang_sum {
     
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         int[] arr = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = ni();
         }
         Block block = new Block(arr);
         while (m-- > 0) {
-            if (sc.nextInt() == 1) {
-                int x = sc.nextInt(), y = sc.nextInt(), k = sc.nextInt();
+            if (ni() == 1) {
+                int x = ni(), y = ni(), k = ni();
                 block.add(x, y, k);
             } else {
-                int x = sc.nextInt(), y = sc.nextInt();
-                out.println(block.query(x, y));
+                int x = ni(), y = ni();
+                println(block.query(x, y));
             }
         }
     }

@@ -9,14 +9,14 @@ import java.util.*;
 public class fft {        
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         int tot = 1 << (32 - Integer.numberOfLeadingZeros(n + m));
         Complex[] A = new Complex[tot], B = new Complex[tot];
         for (int i = 0; i <= n; i++) {
-            A[i] = new Complex(sc.nextInt(), 0);
+            A[i] = new Complex(ni(), 0);
         }
         for (int i = 0; i <= m; i++) {
-            B[i] = new Complex(sc.nextInt(), 0);
+            B[i] = new Complex(ni(), 0);
         }
         for (int i = n + 1; i < tot; i++) {
             A[i] = Complex.ZERO;
@@ -31,9 +31,9 @@ public class fft {
         }
         FFT(A, tot, -1);
         for (int i = 0; i <= n + m; i++) {
-            out.print((int) (A[i].x / tot + 0.5) + " ");
+            print((int) (A[i].x / tot + 0.5) + " ");
         }
-        out.writeln();
+        writeln();
     }
 
     // 迭代版 + 位逆序变换（蝴蝶变换）
@@ -110,10 +110,10 @@ class Complex {
 
 // FFT 封装类
 class FFT {
-    private double x, y, t, w1x, w1y, wkx, wky, ax, ay, bx, by;
-    private int[] r;
+    private static double x, y, t, w1x, w1y, wkx, wky, ax, ay, bx, by;
+    private static int[] r;
 
-    public int[] mul(int[] a, int[] b) {
+    public static long[] mul(int[] a, int[] b) {
         int n = a.length - 1, m = b.length - 1;
         int N = 1 << (32 - Integer.numberOfLeadingZeros(n + m));
         r = new int[N];
@@ -136,14 +136,14 @@ class FFT {
             Ay[i] = y;
         }
         fft(Ax, Ay, N, -1);
-        int[] ans = new int[n + m + 1];
+        long[] ans = new long[n + m + 1];
         for (int i = 0; i <= n + m; i++) {
-            ans[i] = (int) (Ax[i] / N + 0.5);
+            ans[i] = (long) (Ax[i] / N + (Ax[i] > 0 ? 0.5 : -0.5));
         }
         return ans;
     }
 
-    private void fft(double[] Ax, double[] Ay, int n, int op) {
+    private static void fft(double[] Ax, double[] Ay, int n, int op) {
         for (int i = 0; i < n; i++) {
             if (i < r[i]) {
                 t = Ax[i];

@@ -17,11 +17,11 @@ public class LCD {
     int[] ans;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         head = new int[n + 1]; nxt = new int[n << 1]; to = new int[n << 1];
         fa = new int[n + 1]; dep = new int[n + 1]; len = new int[n + 1]; son = new int[n + 1]; top = new int[n + 1]; dfn = new int[n + 1];
         for (int i = 1, j = 2; i < n; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
@@ -32,7 +32,7 @@ public class LCD {
         ans = new int[n + 1];
         dfs(0, 1);
         for (int i = 1; i <= n; i++) {
-            out.println(ans[i]);
+            println(ans[i]);
         }
     }
 

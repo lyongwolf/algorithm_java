@@ -9,20 +9,20 @@ import java.util.*;
 public class history_version {
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         int[] arr = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = ni();
         }
         SegTree tree = new SegTree(arr, n, m);
         while (m-- > 0) {
-            int x = sc.nextInt();
-            if (sc.nextInt() == 1) {
-                int i = sc.nextInt(), v = sc.nextInt();
+            int x = ni();
+            if (ni() == 1) {
+                int i = ni(), v = ni();
                 tree.update(x, i, v);
             } else {
-                int i = sc.nextInt();
-                out.println(tree.query(x, i));
+                int i = ni();
+                println(tree.query(x, i));
             }
         }
     }

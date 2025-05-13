@@ -16,12 +16,12 @@ public class vDCC_generate_graph {
     List<Integer>[] garph;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         head = new int[n + 1];
         nxt = new int[(m + 1) << 1];
         to = new int[(m + 1) << 1];
         for (int i = 0, j = 2; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }

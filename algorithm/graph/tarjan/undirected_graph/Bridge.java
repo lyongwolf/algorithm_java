@@ -13,12 +13,12 @@ public class Bridge {
     List<int[]> bridge;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         head = new int[n + 1];
         nxt = new int[(m + 1) << 1];
         to = new int[(m + 1) << 1];
         for (int i = 0, j = 2; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt();
+            int u = ni(), v = ni();
             nxt[j] = head[u]; head[u] = j; to[j++] = v;
             nxt[j] = head[v]; head[v] = j; to[j++] = u;
         }
@@ -33,7 +33,7 @@ public class Bridge {
         }
         bridge.sort((i, j) -> i[0] == j[0] ? i[1] - j[1] : i[0] - j[0]);
         for (int[] tup : bridge) {
-            out.println(tup[0] + " " + tup[1]);
+            println(tup[0] + " " + tup[1]);
         }
     }
 

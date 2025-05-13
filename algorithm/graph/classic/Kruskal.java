@@ -10,7 +10,7 @@ public class Kruskal {
     int[] parent, sizeMap;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt();
+        int n = ni(), m = ni();
         parent = new int[n + 1];
         sizeMap = new int[n + 1];
         for (int i = 1; i <= n; i++) {
@@ -19,7 +19,7 @@ public class Kruskal {
         }
         int[][] edge = new int[m][3];
         for (int i = 0; i < m; i++) {
-            int u = sc.nextInt(), v = sc.nextInt(), w = sc.nextInt();
+            int u = ni(), v = ni(), w = ni();
             edge[i][0] = u;
             edge[i][1] = v;
             edge[i][2] = w;
@@ -33,7 +33,7 @@ public class Kruskal {
                 max = Math.max(max, e[2]);
             }
         }
-        out.println(s + " " + max);
+        println(s + " " + max);
     }
 
     int find(int v) {

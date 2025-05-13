@@ -16,11 +16,11 @@ public class Q1 {
     int no;
 
     void solve() {
-        int n = sc.nextInt();
+        int n = ni();
         for (int cur = 1, i, opt, x; cur <= n; cur++) {
-            i = sc.nextInt();
-            opt = sc.nextInt();
-            x = sc.nextInt();
+            i = ni();
+            opt = ni();
+            x = ni();
             switch (opt) {
                 case 1:
                     add(cur, i, x);
@@ -29,16 +29,16 @@ public class Q1 {
                     remove(cur, i, x);
                     break;
                 case 3:
-                    out.println(rank(cur, i, x));
+                    println(rank(cur, i, x));
                     break;
                 case 4:
-                    out.println(rankKey(cur, i, x));
+                    println(rankKey(cur, i, x));
                     break;
                 case 5:
-                    out.println(floor(cur, i, x - 1));
+                    println(floor(cur, i, x - 1));
                     break;
                 default:
-                    out.println(ceiling(cur, i, x + 1));
+                    println(ceiling(cur, i, x + 1));
                     break;
             }
         }

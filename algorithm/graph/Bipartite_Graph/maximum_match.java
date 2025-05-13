@@ -12,12 +12,12 @@ public class maximum_match {
     int[] match;
 
     void solve() {
-        int n = sc.nextInt(), m = sc.nextInt(), e = sc.nextInt();
+        int n = ni(), m = ni(), e = ni();
         head = new int[n + m + 1];
         nxt = new int[e + 1];
         to = new int[e + 1];
         for (int i = 1; i <= e; i++) {
-            int u = sc.nextInt(), v = sc.nextInt() + n;
+            int u = ni(), v = ni() + n;
             nxt[i] = head[u]; head[u] = i; to[i] = v;
         }
         vis = new boolean[n + m + 1];
@@ -29,7 +29,7 @@ public class maximum_match {
                 cnt++;
             }
         }
-        out.println(cnt);
+        println(cnt);
     }
 
     boolean dfs(int u) {
