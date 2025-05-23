@@ -1,5 +1,7 @@
-public class Bit {
-    
+package algorithm.z_trick;
+
+public final class Bit {
+
     // 下一个大于 x 的 二进制1个数与 x 等同的数
     int g(int x){
         int o = x & -x;

@@ -1,3 +1,5 @@
+package algorithm.z_trick;
+
 abstract class RMQ {
     private static final int MAXN = 1000000;
     private static final int[] log = new int[MAXN + 1];
