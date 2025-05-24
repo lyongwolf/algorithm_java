@@ -1,7 +1,3 @@
-package algorithm.tree.segment_tree.lazy.min;
-/**
- * 区间添加值
- */
 class SegTree {
     private long[] mn;
     private long[] lazy;

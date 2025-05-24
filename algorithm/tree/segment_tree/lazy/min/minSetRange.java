@@ -1,8 +1,3 @@
-package algorithm.tree.segment_tree.lazy.min;
-import java.util.*;
-/**
- * 区间设置值
- */
 class SegTree {
     private long[] mn;
     private long[] lazy;
@@ -14,7 +9,9 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mn = new long[tot];
         lazy = new long[tot];
-        Arrays.fill(lazy, Long.MIN_VALUE);
+        for (int i = 0; i < tot; i++) {
+            lazy[i] = Long.MAX_VALUE;
+        }
     }
 
     public SegTree(int[] arr, int low, int high) {
@@ -23,7 +20,9 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mn = new long[tot];
         lazy = new long[tot];
-        Arrays.fill(lazy, Long.MIN_VALUE);
+        for (int i = 0; i < tot; i++) {
+            lazy[i] = Long.MAX_VALUE;
+        }
         build(arr, low, high, 1);
     }
 
