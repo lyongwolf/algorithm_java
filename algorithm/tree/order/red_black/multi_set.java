@@ -1,5 +1,3 @@
-package algorithm.tree.order.red_black;
-
 class RedBlackTree {
     private static final boolean RED = false, BLACK = true;
     private static final int MAXT = 1000000;
