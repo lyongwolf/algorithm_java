@@ -1,7 +1,3 @@
-package algorithm.tree.segment_tree.lazy.max;
-/**
- * 区间添加值
- */
 class SegTree {
     private long[] mx;
     private long[] lazy;
@@ -10,7 +6,7 @@ class SegTree {
     public SegTree(int low, int high) {
         this.low = low;
         this.high = high;
-        int tot = 1 << (33 - Integer.numberOfLeadingZeros(N - 1));
+        int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mx = new long[tot];
         lazy = new long[tot];
     }
