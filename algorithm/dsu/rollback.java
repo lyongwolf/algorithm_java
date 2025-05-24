@@ -1,9 +1,3 @@
-package algorithm.dsu;
-
-/**
- * 可撤销并查集（模板）
- */
-
 class DSURollback {
     private static final int MAXN = 1000000;
     private static int[] stkF0 = new int[MAXN], stkF1 = new int[MAXN];

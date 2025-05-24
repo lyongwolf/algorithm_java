@@ -1,4 +1,3 @@
-package algorithm.dsu;
 class DSUPersistent {
     private static final int MAXN = 200001, MAXT = 8000001;
     private static int[] rootPa = new int[MAXN], rootSz = new int[MAXN];
