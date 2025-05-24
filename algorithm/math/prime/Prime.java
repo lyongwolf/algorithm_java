@@ -74,7 +74,7 @@ class Prime {
                 }
             }
         }
-        prime = Arrays.copyOf(prime, j);
+        prime = java.util.Arrays.copyOf(prime, j);
         factory = new int[N + 1][];
         for (int i = 1; i <= N; i++) {
             factory[i] = new int[len[i]];
@@ -140,7 +140,7 @@ class Prime {
         for (int i = 0; i < fi; i++) {
             ans[i] = (int) fac[i];
         }
-        Arrays.sort(ans);
+        java.util.Arrays.sort(ans);
         return ans;
     }
 
