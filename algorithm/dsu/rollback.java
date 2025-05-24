@@ -1,4 +1,4 @@
-package algorithm.dsu.rollback;
+package algorithm.dsu;
 
 /**
  * 可撤销并查集（模板）

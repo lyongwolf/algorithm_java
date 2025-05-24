@@ -1,6 +1,3 @@
-package algorithm.math.prime;
-import java.util.*;
-
 class Prime {
     private final int[] x32 = {2, 7, 61}, x78 = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
     private final int N;
@@ -10,7 +7,7 @@ class Prime {
     private int[][] factory;
 
     private final long i31 = 1L << 31;
-    private Random rnd = new Random();
+    private java.util.Random rnd = new java.util.Random();
     private long[] fac = new long[64];
     private int fi;
 
@@ -39,7 +36,7 @@ class Prime {
                 }
             }
         }
-        prime = Arrays.copyOf(prime, j);
+        prime = java.util.Arrays.copyOf(prime, j);
     }
 
     public Prime(int MAXN, boolean generateFactory) {
@@ -154,7 +151,7 @@ class Prime {
         for (int i = 0; i < fi; i++) {
             ans[i] = fac[i];
         }
-        Arrays.sort(ans);
+        java.util.Arrays.sort(ans);
         return ans;
     }
     

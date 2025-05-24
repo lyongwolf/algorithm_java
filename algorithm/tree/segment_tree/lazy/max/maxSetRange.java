@@ -9,9 +9,7 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mx = new long[tot];
         lazy = new long[tot];
-        for (int i = 0; i < tot; i++) {
-            lazy[i] = Long.MIN_VALUE;
-        }
+        java.util.Arrays.fill(lazy, Long.MIN_VALUE);
     }
 
     public SegTree(int[] arr, int low, int high) {
@@ -20,9 +18,7 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         mx = new long[tot];
         lazy = new long[tot];
-        for (int i = 0; i < tot; i++) {
-            lazy[i] = Long.MIN_VALUE;
-        }
+        java.util.Arrays.fill(lazy, Long.MIN_VALUE);
         build(arr, low, high, 1);
     }
 

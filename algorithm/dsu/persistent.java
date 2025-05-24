@@ -1,38 +1,4 @@
-package algorithm.dsu.persistent;
-import static algorithm.zz.U.*;
-import java.util.*;
-/**
- * 可持久化并查集（模板）
- * 测试链接：https://www.luogu.com.cn/problem/P3402
- */
-public class Basic {
-
-    void solve() {
-        int n = ni(), m = ni();
-        DSUPersistent dsu = new DSUPersistent(n);
-        for (int i = 1, opt, k, a, b; i <= m; i++) {
-            opt = ni();
-            if (opt == 1) {
-                a = ni();
-                b = ni();
-                dsu.rollback(i - 1);
-                dsu.union(a, b);
-            } else if (opt == 2) {
-                k = ni();
-                dsu.rollback(k);
-            } else {
-                a = ni();
-                b = ni();
-                dsu.rollback(i - 1);
-                a = dsu.find(a);
-                b = dsu.find(b);
-                println(a == b ? 1 : 0);
-            }
-        }
-    }
-
-}
-
+package algorithm.dsu;
 class DSUPersistent {
     private static final int MAXN = 200001, MAXT = 8000001;
     private static int[] rootPa = new int[MAXN], rootSz = new int[MAXN];

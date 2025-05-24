@@ -1,5 +1,3 @@
-package algorithm.dsu.basic;
-
 class DSU {
     private int[] stk;
 
