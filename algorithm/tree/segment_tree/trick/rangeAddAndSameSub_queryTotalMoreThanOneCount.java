@@ -1,5 +1,3 @@
-package algorithm.tree.segment_tree.trick;
-
 // 不带权
 class SegTree {
     private int[] sum, cnt;

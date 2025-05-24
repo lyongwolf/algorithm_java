@@ -1,5 +1,3 @@
-package algorithm.tree.segment_tree;
-
 class SegTree {
     private long[] mx;
     private final int low, high;

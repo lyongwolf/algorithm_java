@@ -1,28 +1,3 @@
-package algorithm.tree.segment_tree.persistent;
-import static algorithm.zz.U.*;
-import java.util.*;
-
-/**
- * 静态区间第 k 小
- * 测试链接：https://www.luogu.com.cn/problem/P3834
- */
-public class range_smallK {
-
-    void solve() {
-        int n = ni(), q = ni();
-        int[] a = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            a[i] = ni();
-        }
-        SegTree tree = new SegTree(a);
-        while (q-- > 0) {
-            int l = ni(), r = ni(), k = ni();
-            println(tree.smallK(l, r, k));
-        }
-    }
-
-}
-
 class SegTree {
     private int[] root, cnt, lc, rc;
     private int[] val;
@@ -32,7 +7,7 @@ class SegTree {
     public SegTree(int[] a) {
         int n = a.length;
         val = a.clone();
-        Arrays.sort(val);
+        java.util.Arrays.sort(val);
         N = 1;
         for (int i = 1; i < n; i++) {
             if (val[i - 1] != val[i]) {
@@ -53,9 +28,9 @@ class SegTree {
         sum = new long[tot];
 
         // a[:i] 的权值线段树 基于 a[:i-1] 的权值线段树 来生成
-        root[0] = insert(Arrays.binarySearch(val, 0, N, a[0]), 0, N - 1, 0);
+        root[0] = insert(java.util.Arrays.binarySearch(val, 0, N, a[0]), 0, N - 1, 0);
         for (int i = 1; i < n; i++) {
-            root[i] = insert(Arrays.binarySearch(val, 0, N, a[i]), 0, N - 1, root[i - 1]);
+            root[i] = insert(java.util.Arrays.binarySearch(val, 0, N, a[i]), 0, N - 1, root[i - 1]);
         }
     }
 
@@ -115,7 +90,7 @@ class SegTree {
 
     // 查询 a[l:r] 中 v 的数量
     public int count(int l, int r, int v) {
-        v = Arrays.binarySearch(val, 0, N, v);
+        v = java.util.Arrays.binarySearch(val, 0, N, v);
         return v < 0 ? 0 : count(v, 0, N - 1, l == 0 ? 0 : root[l - 1], root[r]);
     }
 

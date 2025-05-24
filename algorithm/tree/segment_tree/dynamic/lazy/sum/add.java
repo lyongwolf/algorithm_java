@@ -1,5 +1,3 @@
-package algorithm.tree.segment_tree.dynamic.lazy.sum;
-
 class SegTree {
     private static final int MAXT = 3000000;
     private static int[] lc = new int[MAXT], rc = new int[MAXT];

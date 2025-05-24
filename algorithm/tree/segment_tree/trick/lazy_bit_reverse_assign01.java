@@ -1,7 +1,3 @@
-package algorithm.tree.segment_tree.trick;
-
-import java.util.*;
-
 class SegTree {
     private final int low, high;
     private int[] cnt, lc, rc;
@@ -164,12 +160,12 @@ class SegTree {
 
     private void create() {
         if (++no == cnt.length) {
-            cnt = Arrays.copyOf(cnt, no << 1);
-            lc = Arrays.copyOf(lc, no << 1);
-            rc = Arrays.copyOf(rc, no << 1);
-            rev = Arrays.copyOf(rev, no << 1);
-            set0 = Arrays.copyOf(set0, no << 1);
-            set1 = Arrays.copyOf(set1, no << 1);
+            cnt = java.util.Arrays.copyOf(cnt, no << 1);
+            lc = java.util.Arrays.copyOf(lc, no << 1);
+            rc = java.util.Arrays.copyOf(rc, no << 1);
+            rev = java.util.Arrays.copyOf(rev, no << 1);
+            set0 = java.util.Arrays.copyOf(set0, no << 1);
+            set1 = java.util.Arrays.copyOf(set1, no << 1);
         }
     }
 }

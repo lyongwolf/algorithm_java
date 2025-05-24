@@ -1,6 +1,3 @@
-package algorithm.tree.segment_tree.dynamic;
-import java.util.*;
-
 class SegTree {
     private static final int MAXT = 3000000;
     private static final long MAX = Long.MAX_VALUE, INIT = 0;
@@ -8,7 +5,7 @@ class SegTree {
     private static long[] mn = new long[MAXT];
     private static int no;
     static {
-        Arrays.fill(mn, INIT);
+        java.util.Arrays.fill(mn, INIT);
     }
     
     private final int root, low, high;

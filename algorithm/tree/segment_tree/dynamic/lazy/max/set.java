@@ -1,6 +1,3 @@
-package algorithm.tree.segment_tree.dynamic.lazy.max;
-import java.util.*;
-
 class SegTree {
     private static final int MAXT = 3000000;
     private static final long MIN = Long.MIN_VALUE, INIT = 0;
@@ -8,8 +5,8 @@ class SegTree {
     private static long[] mx = new long[MAXT], tag = new long[MAXT];
     private static int no;
     static {
-        Arrays.fill(mx, INIT);
-        Arrays.fill(tag, Long.MIN_VALUE);
+        java.util.Arrays.fill(mx, INIT);
+        java.util.Arrays.fill(tag, Long.MIN_VALUE);
     }
     
     private final int root, low, high;

@@ -1,7 +1,3 @@
-package algorithm.tree.segment_tree.lazy.sum;
-/**
- * 区间添加值
- */
 class SegTree {
     private long[] sum;
     private long[] lazy;

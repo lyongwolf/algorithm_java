@@ -1,13 +1,10 @@
-package algorithm.tree.segment_tree.dynamic.lazy.sum;
-import java.util.*;
-
 class SegTree {
     private static final int MAXT = 3000000;
     private static int[] lc = new int[MAXT], rc = new int[MAXT];
     private static long[] sum = new long[MAXT], tag = new long[MAXT];
     private static int no;
     static {
-        Arrays.fill(tag, Long.MIN_VALUE);
+        java.util.Arrays.fill(tag, Long.MIN_VALUE);
     }
     
     private final int root, low, high;

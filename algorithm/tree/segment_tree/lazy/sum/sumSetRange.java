@@ -1,8 +1,3 @@
-package algorithm.tree.segment_tree.lazy.sum;
-import java.util.*;
-/**
- * 区间设置值
- */
 class SegTree {
     private long[] sum;
     private long[] lazy;
@@ -14,7 +9,7 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         sum = new long[tot];
         lazy = new long[tot];
-        Arrays.fill(lazy, Long.MIN_VALUE);
+        java.util.Arrays.fill(lazy, Long.MIN_VALUE);
     }
 
     public SegTree(int[] arr, int low, int high) {
@@ -23,7 +18,7 @@ class SegTree {
         int tot = 1 << (33 - Integer.numberOfLeadingZeros(high - low));
         sum = new long[tot];
         lazy = new long[tot];
-        Arrays.fill(lazy, Long.MIN_VALUE);
+        java.util.Arrays.fill(lazy, Long.MIN_VALUE);
         build(arr, low, high, 1);
     }
 

@@ -1,5 +1,3 @@
-package algorithm.tree.segment_tree.range_merge;
-
 abstract class SegTree<A> {
     private final int low, high;
     private A[] a;
