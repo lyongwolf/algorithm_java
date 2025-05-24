@@ -1,7 +1,3 @@
-import java.util.*;
-/**
- * 替罪羊树
- */
 class ScapegoatTree {
     private static final double ALPHA = 0.7;// 平衡因子
     private static final int MAXT = 2000000;

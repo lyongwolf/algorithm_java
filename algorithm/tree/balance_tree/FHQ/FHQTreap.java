@@ -1,4 +1,4 @@
-package algorithm.tree.order.FHQ;
+package algorithm.tree.balance_tree.FHQ;
 
 import java.util.*;
 
