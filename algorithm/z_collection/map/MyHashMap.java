@@ -1,5 +1,3 @@
-package algorithm.z_collection.map;
-
 import java.util.*;
 
 // 拉链法
