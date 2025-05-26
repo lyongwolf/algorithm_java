@@ -7,16 +7,16 @@ class RedBlackTree2 {
         color[0] = BLACK;// 空节点颜色为黑
     }
 
-    static int[] key1 = new int[MAXT + 1], key2 = new int[MAXT + 1];
+    static int[] first = new int[MAXT + 1], second = new int[MAXT + 1];
     static int no;
 
-    private static int cmp(int o1, int o2) {
-        return key1[o1] != key1[o2] ? key1[o2] - key1[o1] : key2[o2] - key2[o1];
+    private static int cmp(int o1, int o2) {// 节点比较逻辑
+        return first[o1] != first[o2] ? first[o2] - first[o1] : second[o2] - second[o1];
     }
 
     private static void load(int k1, int k2) {
-        key1[MAXT] = k1;
-        key2[MAXT] = k2;
+        first[MAXT] = k1;
+        second[MAXT] = k2;
     }
 
     public static void clear() {
@@ -53,6 +53,7 @@ class RedBlackTree2 {
         return false;
     }
 
+    // 返回 >= {k1, k2} 的 节点编号，若不存在返回 0
     public int ceiling(int k1, int k2) {
         load(k1, k2);
         int n = head;
@@ -68,6 +69,7 @@ class RedBlackTree2 {
         return ans;
     }
 
+    // 返回 <= {k1, k2} 的 节点编号，若不存在返回 0
     public int floor(int k1, int k2) {
         load(k1, k2);
         int n = head;
@@ -83,6 +85,7 @@ class RedBlackTree2 {
         return ans;
     }
 
+    // 返回 最小值 的 节点编号
     public int first() {
         int n = head;
         while (lc[n] != 0) {
@@ -91,6 +94,7 @@ class RedBlackTree2 {
         return n;
     }
 
+    // 返回 最大值 的 节点编号
     public int last() {
         int n = head;
         while (rc[n] != 0) {
@@ -99,18 +103,21 @@ class RedBlackTree2 {
         return n;
     }
 
+    // 弹出 最大值 ，并返回 节点编号
     public int pollFirst() {
         int o = first();
-        remove(key1[o], key2[o]);
+        remove(first[o], second[o]);
         return MAXT;
     }
 
+    // 弹出 最小值 ，并返回 节点编号
     public int pollLast() {
         int o = last();
-        remove(key1[o], key2[o]);
+        remove(first[o], second[o]);
         return MAXT;
     }
 
+    // 返回节点编号集合
     public int[] view() {
         int[] arr = new int[size];
         inorder(arr, head, 0);
@@ -126,6 +133,7 @@ class RedBlackTree2 {
         return inorder(arr, rc[i], c);
     }
 
+    // 插入一个 {k1, k2}
     public void add(int k1, int k2) {
         load(k1, k2);
         int p = 0, n = head;
@@ -190,6 +198,7 @@ class RedBlackTree2 {
         color[head] = BLACK;
     }
 
+    // 删除一个 {k1, k2}
     public void remove(int k1, int k2) {
         load(k1, k2);
         int x = head;
@@ -209,8 +218,8 @@ class RedBlackTree2 {
             while (lc[nx] != 0) {
                 nx = lc[nx];
             }
-            key1[x] = key1[nx];
-            key2[x] = key2[nx];
+            first[x] = first[nx];
+            second[x] = second[nx];
             x = nx;
         }
         int n = lc[x] != 0 ? lc[x] : rc[x], p = fa[x];
@@ -330,8 +339,8 @@ class RedBlackTree2 {
     }
 
     private int create(int k1, int k2) {
-        key1[++no] = k1;
-        key2[no] = k2;
+        first[++no] = k1;
+        second[no] = k2;
         color[no] = RED;
         return no;
     }

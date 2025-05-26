@@ -1,10 +1,15 @@
 class Heap {
-    private int[] arr;
+    private int[] key = new int[1];
     private int size;
 
+    private java.util.function.IntBinaryOperator cmp;
+
     public Heap() {
-        arr = new int[1];
-        size = 0;
+        cmp = Integer::compare;
+    }
+
+    public Heap(java.util.function.IntBinaryOperator cmp) {
+        this.cmp = cmp;
     }
 
     public boolean isEmpty() {
@@ -20,25 +25,25 @@ class Heap {
     }
 
     public int peek() {
-        return arr[0];
+        return key[0];
     }
 
     public int poll() {
         swap(0, --size);
         heapify(0);
-        return arr[size];
+        return key[size];
     }
 
-    public void add(int v) {
-        if (size == arr.length) {
-            arr = java.util.Arrays.copyOf(arr, arr.length << 1);
+    public void add(int k) {
+        if (size == key.length) {
+            key = java.util.Arrays.copyOf(key, key.length << 1);
         }
-        arr[size++] = v;
+        key[size++] = k;
         heapInsert(size - 1);
     }
 
     private void heapInsert(int i) {
-        while (arr[i] < arr[(i - 1) / 2]) {
+        while (cmp.applyAsInt(key[i], key[(i - 1) / 2]) < 0) {
             swap(i, (i - 1) / 2);
             i = (i - 1) / 2;
         }
@@ -47,8 +52,8 @@ class Heap {
     private void heapify(int i) {
         int l = i * 2 + 1;
         while (l < size) {
-            int b = l + 1 < size && arr[l + 1] < arr[l] ? l + 1 : l;
-            b = arr[b] < arr[i] ? b : i;
+            int b = l + 1 < size && cmp.applyAsInt(key[l + 1], key[l]) < 0 ? l + 1 : l;
+            b = cmp.applyAsInt(key[b], key[i]) < 0 ? b : i;
             if (b == i) {
                 break;
             }
@@ -59,8 +64,8 @@ class Heap {
     }
 
     private void swap(int i, int j) {
-        int t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
+        int t = key[i];
+        key[i] = key[j];
+        key[j] = t;
     }
 }
