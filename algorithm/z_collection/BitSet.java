@@ -1,5 +1,3 @@
-package algorithm.util.set;
-
 class BitSet {
     private int[] mag;
     private int n, END, MAXV;

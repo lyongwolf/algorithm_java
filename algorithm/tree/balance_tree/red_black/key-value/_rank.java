@@ -113,34 +113,36 @@ class RedBlackTree {
     }
 
     public int rank(int k) {
-        return smallCount(k, head) + 1;
-    }
-
-    private int smallCount(int k, int i) {
-        if (i == 0) {
-            return 0;
-        }
-        if (key[i] >= k) {
-            return smallCount(k, lc[i]);
-        } else {
-            return sz[lc[i]] + 1 + smallCount(k, rc[i]);
-        }
+        return lessCount(k) + 1;
     }
 
     public int rankKey(int rk) {
-        if (rk < 1 || rk > sz[head]) {
-            return -1;
+        int i = head;
+        while (i != 0) {
+            if (sz[lc[i]] >= rk) {
+                i = lc[i];
+            } else if (sz[lc[i]] + 1 < rk) {
+                rk -= sz[lc[i]] + 1;
+                i = rc[i];
+            } else {
+                return key[i];
+            }
         }
-        return rankKey(rk, head);
+        return Integer.MIN_VALUE;
     }
-    
-    private int rankKey(int rk, int i) {
-        if (sz[lc[i]] >= rk) {
-            return rankKey(rk, lc[i]);
-        } else if (sz[lc[i]] + 1 < rk) {
-            return rankKey(rk - sz[lc[i]] - 1, rc[i]);
+
+    public int lessCount(int k) {
+        int cnt = 0;
+        int i = head;
+        while (i != 0) {
+            if (key[i] < k) {
+                cnt += sz[lc[i]] + 1;
+                i = rc[i];
+            } else {
+                i = lc[i];
+            }
         }
-        return key[i];
+        return cnt;
     }
 
     public int[][] view() {

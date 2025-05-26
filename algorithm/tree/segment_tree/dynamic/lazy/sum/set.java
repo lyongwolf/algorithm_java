@@ -77,5 +77,4 @@ class SegTree {
             tag[i] = Long.MIN_VALUE;
         }
     }
-
 }

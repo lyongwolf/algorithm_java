@@ -83,5 +83,4 @@ class SegTree {
     void up(int i) {
         mx[i] = Math.max(mx[lc[i]], mx[rc[i]]);
     }
-
 }

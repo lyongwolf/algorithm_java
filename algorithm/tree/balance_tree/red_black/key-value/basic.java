@@ -1,8 +1,8 @@
 class RedBlackTree {
     private static final boolean RED = false, BLACK = true;
     private static final int MAXT = 1000000;
-    private static int[] key = new int[MAXT];
-    private static int[] lc = new int[MAXT], rc = new int[MAXT], fa = new int[MAXT], sz = new int[MAXT];
+    private static int[] key = new int[MAXT], val = new int[MAXT];
+    private static int[] lc = new int[MAXT], rc = new int[MAXT], fa = new int[MAXT];
     private static boolean[] color = new boolean[MAXT];
     private static int no;
     static {
@@ -18,15 +18,17 @@ class RedBlackTree {
 
     private int head;// 头节点编号
 
+    private int size;
+
     public int size() {
-        return sz[head];
+        return size;
     }
 
     public boolean isEmpty() {
-        return sz[head] == 0;
+        return size == 0;
     }
 
-    public boolean contains(int k) {
+    public boolean containsKey(int k) {
         int n = head;
         while (n != 0) {
             if (key[n] > k) {
@@ -40,7 +42,35 @@ class RedBlackTree {
         return false;
     }
 
-    public int floor(int k) {
+    public int get(int k) {
+        int n = head;
+        while (n != 0) {
+            if (key[n] > k) {
+                n = lc[n];
+            } else if (key[n] < k) {
+                n = rc[n];
+            } else {
+                break;
+            }
+        }
+        return val[n];
+    }
+
+    public int getOrDefault(int k, int defaultValue) {
+        int n = head;
+        while (n != 0) {
+            if (key[n] > k) {
+                n = lc[n];
+            } else if (key[n] < k) {
+                n = rc[n];
+            } else {
+                return val[n];
+            }
+        }
+        return defaultValue;
+    }
+
+    public int floorKey(int k) {
         int ans = Integer.MIN_VALUE;
         int n = head;
         while (n != 0) {
@@ -54,7 +84,7 @@ class RedBlackTree {
         return ans;
     }
 
-    public int ceiling(int k) {
+    public int ceilingKey(int k) {
         int ans = Integer.MAX_VALUE;
         int n = head;
         while (n != 0) {
@@ -68,7 +98,7 @@ class RedBlackTree {
         return ans;
     }
 
-    public int first() {
+    public int firstKey() {
         int n = head;
         while (lc[n] != 0) {
             n = lc[n];
@@ -76,7 +106,7 @@ class RedBlackTree {
         return key[n];
     }
 
-    public int last() {
+    public int lastKey() {
         int n = head;
         while (rc[n] != 0) {
             n = rc[n];
@@ -84,76 +114,38 @@ class RedBlackTree {
         return key[n];
     }
 
-    public int pollFirst() {
-        int k = first();
-        remove(k);
-        return k;
-    }
-
-    public int pollLast() {
-        int k = last();
-        remove(k);
-        return k;
-    }
-
-    public int rank(int k) {
-        return smallCount(k, head) + 1;
-    }
-
-    private int smallCount(int k, int i) {
-        if (i == 0) {
-            return 0;
-        }
-        if (key[i] >= k) {
-            return smallCount(k, lc[i]);
-        } else {
-            return sz[lc[i]] + 1 + smallCount(k, rc[i]);
-        }
-    }
-
-    public int rankKey(int rk) {
-        if (rk < 1 || rk > sz[head]) {
-            return -1;
-        }
-        return rankKey(rk, head);
-    }
-    
-    private int rankKey(int rk, int i) {
-        if (sz[lc[i]] >= rk) {
-            return rankKey(rk, lc[i]);
-        } else if (sz[lc[i]] + 1 < rk) {
-            return rankKey(rk - sz[lc[i]] - 1, rc[i]);
-        }
-        return key[i];
-    }
-
-    public int[] view() {
-        int[] arr = new int[sz[head]];
+    public int[][] view() {
+        int[][] arr = new int[size][2];
         inorder(arr, head, 0);
         return arr;
     }
 
-    private int inorder(int[] arr, int i, int c) {
+    private int inorder(int[][] arr, int i, int c) {
         if (i == 0) {
             return c;
         }
         c = inorder(arr, lc[i], c);
-        arr[c++] = key[i];
+        arr[c][0] = key[i];
+        arr[c++][1] = val[i];
         return inorder(arr, rc[i], c);
     }
 
-    public void add(int k) {
+    public void put(int k, int v) {
         int p = 0, n = head;
         while (n != 0) {
             if (key[n] > k) {
                 p = n;
                 n = lc[n];
-            } else {
+            } else if (key[n] < k) {
                 p = n;
                 n = rc[n];
+            } else {
+                val[n] = v;
+                return;
             }
         }
-        n = create(k);
+        size++;
+        n = create(k, v);
         if (p == 0) { // 新插入节点是根节点
             head = n;
             color[head] = BLACK;
@@ -165,7 +157,96 @@ class RedBlackTree {
             rc[p] = n;
         }
         fa[n] = p;
-        maintainFa(n, 1);
+        insertFixup(n);
+    }
+
+    public void add(int k, int v) {
+        int p = 0, n = head;
+        while (n != 0) {
+            if (key[n] > k) {
+                p = n;
+                n = lc[n];
+            } else if (key[n] < k) {
+                p = n;
+                n = rc[n];
+            } else {
+                val[n] += v;
+                return;
+            }
+        }
+        size++;
+        n = create(k, v);
+        if (p == 0) { // 新插入节点是根节点
+            head = n;
+            color[head] = BLACK;
+            return;
+        }
+        if (key[p] > k) {
+            lc[p] = n;
+        } else {
+            rc[p] = n;
+        }
+        fa[n] = p;
+        insertFixup(n);
+    }
+
+    public void setMax(int k, int v) {
+        int p = 0, n = head;
+        while (n != 0) {
+            if (key[n] > k) {
+                p = n;
+                n = lc[n];
+            } else if (key[n] < k) {
+                p = n;
+                n = rc[n];
+            } else {
+                val[n] = Math.max(val[n], v);
+                return;
+            }
+        }
+        size++;
+        n = create(k, v);
+        if (p == 0) { // 新插入节点是根节点
+            head = n;
+            color[head] = BLACK;
+            return;
+        }
+        if (key[p] > k) {
+            lc[p] = n;
+        } else {
+            rc[p] = n;
+        }
+        fa[n] = p;
+        insertFixup(n);
+    }
+
+    public void setMin(int k, int v) {
+        int p = 0, n = head;
+        while (n != 0) {
+            if (key[n] > k) {
+                p = n;
+                n = lc[n];
+            } else if (key[n] < k) {
+                p = n;
+                n = rc[n];
+            } else {
+                val[n] = Math.min(val[n], v);
+                return;
+            }
+        }
+        size++;
+        n = create(k, v);
+        if (p == 0) { // 新插入节点是根节点
+            head = n;
+            color[head] = BLACK;
+            return;
+        }
+        if (key[p] > k) {
+            lc[p] = n;
+        } else {
+            rc[p] = n;
+        }
+        fa[n] = p;
         insertFixup(n);
     }
 
@@ -213,6 +294,7 @@ class RedBlackTree {
         if (x == 0) {
             return;
         }
+        size--;
         if (lc[x] != 0 && rc[x] != 0) {
             int nx = rc[x];
             while (lc[nx] != 0) {
@@ -231,7 +313,6 @@ class RedBlackTree {
             } else {
                 rc[p] = n;
             }
-            maintainFa(n, -1);
             if (color[x] == BLACK) {
                 deleteFixUp(n);
             }
@@ -242,7 +323,6 @@ class RedBlackTree {
             if (color[x] == BLACK) {
                 deleteFixUp(x);
             }
-            maintainFa(x, -1);
             p = fa[x];
             if (lc[p] == x) {
                 lc[p] = 0;
@@ -307,14 +387,6 @@ class RedBlackTree {
         color[x] = BLACK;
     }
 
-    private void maintainFa(int o, int v) {
-        o = fa[o];
-        while (o != 0) {
-            sz[o] += v;
-            o = fa[o];
-        }
-    }
-
     private void rotateLeft(int o) {
         int f = fa[o], r = rc[o], rl = lc[r];
         if (f == 0) {
@@ -329,8 +401,6 @@ class RedBlackTree {
         fa[o] = r;
         rc[o] = rl;
         fa[rl] = o;
-        sz[r] = sz[o];
-        sz[o] = sz[lc[o]] + sz[rl] + 1;
     }
 
     private void rotateRight(int o) {
@@ -347,14 +417,12 @@ class RedBlackTree {
         fa[o] = l;
         lc[o] = lr;
         fa[lr] = o;
-        sz[l] = sz[o];
-        sz[o] = sz[lr] + sz[rc[o]] + 1;
     }
 
-    private int create(int k) {
+    private int create(int k, int v) {
         key[++no] = k;
+        val[no] = v;
         color[no] = RED;
-        sz[no] = 1;
         return no;
     }
 }

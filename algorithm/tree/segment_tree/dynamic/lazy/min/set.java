@@ -84,5 +84,4 @@ class SegTree {
     void up(int i) {
         mn[i] = Math.min(mn[lc[i]], mn[rc[i]]);
     }
-
 }

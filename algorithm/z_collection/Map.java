@@ -1,6 +1,4 @@
-package algorithm.util.map.STATIC;
-
-class MapInt {
+class Map {
     private static final int NULL = Integer.MIN_VALUE, MAXN = 1 << 20, MOD = MAXN - 1;
     private static int[] keys = new int[MAXN], vals = new int[MAXN];
     private static int[] head = new int[MAXN], nxt = new int[MAXN];
@@ -14,7 +12,7 @@ class MapInt {
 
     private final int RND;
 
-    public MapInt() {
+    public Map() {
         RND = (int) (Integer.MAX_VALUE * Math.random());
         clear();
     }
@@ -115,7 +113,7 @@ class MapInt {
         create(u, key, val);
     }
 
-    public int[][] tuple() {
+    public int[][] view() {
         int[][] tup = new int[size][2];
         for (int i = 0, j = 0; i < no; i++) {
             if (keys[i] != NULL) {
@@ -144,7 +142,7 @@ class MapInt {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        int[][] tup = tuple();
+        int[][] tup = view();
         sb.append("(" + tup[0][0] + ", " + tup[0][1]);
         for (int i = 1; i < size; i++) {
             sb.append("), (" + tup[i][0] + ", " + tup[i][1]);

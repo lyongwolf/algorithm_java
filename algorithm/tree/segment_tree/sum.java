@@ -100,5 +100,4 @@ class SegTree {
             return query(o, m + 1, r, i << 1 | 1);
         }
     }
-
 }

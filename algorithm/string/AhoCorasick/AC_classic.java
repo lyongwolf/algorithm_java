@@ -1,5 +1,6 @@
 package algorithm.string.AhoCorasick;
 import static algorithm.zz.U.*;
+
 import java.util.*;
 
 /**

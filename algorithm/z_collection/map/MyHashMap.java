@@ -1,4 +1,4 @@
-package algorithm.util.map.dynamic;
+package algorithm.z_collection.map;
 
 import java.util.*;
 

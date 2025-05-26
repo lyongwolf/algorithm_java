@@ -1,5 +1,6 @@
 package algorithm.graph.kruskal;
 import static algorithm.zz.U.*;
+
 import java.util.*;
 /**
  * kruskal 重构树

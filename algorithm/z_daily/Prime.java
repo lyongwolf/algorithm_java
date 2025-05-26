@@ -3,7 +3,7 @@ class Prime {
     private final int N;
     private boolean[] isp;
     private int[] mf;
-    private int[] prime;
+    private int[] num;
     private int[][] factory;
 
     private final long i31 = 1L << 31;
@@ -15,16 +15,16 @@ class Prime {
         N = MAXN;
         isp = new boolean[N + 1];
         mf = new int[N + 1];
-        prime = new int[N / 2 + 1];
+        num = new int[N / 2 + 1];
         boolean[] vis = new boolean[N + 1];
         int j = 0;
         for (int i = 2, v; i <= N; i++) {
             if (!vis[i]) {
                 isp[i] = true;
-                prime[j++] = i;
+                num[j++] = i;
                 mf[i] = i;
             }
-            for (int p : prime) {
+            for (int p : num) {
                 v = p * i;
                 if (v > N) {
                     break;
@@ -36,52 +36,37 @@ class Prime {
                 }
             }
         }
-        prime = java.util.Arrays.copyOf(prime, j);
+        num = java.util.Arrays.copyOf(num, j);
     }
 
     public Prime(int MAXN, boolean generateFactory) {
         N = MAXN;
-        isp = new boolean[N + 1];
-        mf = new int[N + 1];
-        prime = new int[N / 2 + 1];
         int[] len = new int[N + 1];
-        int[] num = new int[N + 1];
-        len[1] = 1;
-        boolean[] vis = new boolean[N + 1];
-        int j = 0;
-        for (int i = 2, v; i <= N; i++) {
-            if (!vis[i]) {
-                isp[i] = true;
-                prime[j++] = i;
-                mf[i] = i;
-                len[i] = 2;
-                num[i] = 1;
-            }
-            for (int p : prime) {
-                v = p * i;
-                if (v > N) {
-                    break;
-                }
-                vis[v] = true;
-                mf[v] = p;
-                if (i % p == 0) {
-                    len[v] = len[i] / (num[i] + 1) * (num[i] + 2);
-                    num[v] = num[i] + 1;
-                    break;
-                } else {
-                    len[v] = len[i] << 1;
-                    num[v] = 1;
-                }
+        for (int i = 1; i <= N; i++) {
+            for (int j = i; j <= N; j += i) {
+                len[j]++;
             }
         }
-        prime = java.util.Arrays.copyOf(prime, j);
         factory = new int[N + 1][];
         for (int i = 1; i <= N; i++) {
             factory[i] = new int[len[i]];
         }
+        int n = 0;
         for (int i = N; i >= 1; i--) {
-            for (j = i; j <= N; j += i) {
+            if (len[i] == 2) {
+                n++;
+            }
+            for (int j = i; j <= N; j += i) {
                 factory[j][--len[j]] = i;
+            }
+        }
+        isp = new boolean[N + 1];
+        mf = new int[N + 1];
+        num = new int[n];
+        for (int i = 2, j = 0; i <= N; i++) {
+            if ((mf[i] = factory[i][2]) == i) {
+                isp[i] = true;
+                num[j++] = i;
             }
         }
     }
@@ -95,7 +80,7 @@ class Prime {
     }
     
     public int[] primes() {
-        return prime;
+        return num;
     }
 
     public int[] factories(int n) {

@@ -1,5 +1,6 @@
 package algorithm.math.geometry.nearest_points;
 import static algorithm.zz.U.*;
+
 import java.util.*;
 /**
  * 平面最近点对

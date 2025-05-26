@@ -73,5 +73,4 @@ class SegTree {
             tag[i] = 0;
         }
     }
-
 }
