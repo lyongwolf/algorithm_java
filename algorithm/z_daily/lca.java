@@ -1,7 +1,5 @@
 import static algorithm.zz.U.*;
 
-import java.util.*;
-
 public class lca {
     
     int[] head, nxt, to, dep, pa[];
