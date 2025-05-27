@@ -4,7 +4,7 @@ class E {
        
     }
 
-    E merge(E er) {
+    E merge(E e) {
         return null;
     }
 
