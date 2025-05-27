@@ -1,52 +1,70 @@
-abstract class SegTree<A> {
-    private final int low, high;
-    private A[] a;
+class E {
 
-    public SegTree(int[] arr, int low, int high) {
-        this.low = low;
-        this.high = high;
-        a = (A[]) new Object[1 << (33 - Integer.numberOfLeadingZeros(high - low))];
-        build(arr, low, high, 1);
+    E() {
+       
     }
 
-    private void build(int[] arr, int l, int r, int i) {
+    E merge(E er) {
+        return null;
+    }
+
+    void lazy(E e) {
+        
+    }
+    
+    void clearTag() {
+        
+    }
+}
+class SegTree {
+    private final int low, high;
+    private E[] tree;
+
+    public SegTree(E[] origin, int low, int high) {
+        this.low = low;
+        this.high = high;
+        tree = new E[1 << (33 - Integer.numberOfLeadingZeros(high - low))];
+        build(origin, low, high, 1);
+    }
+
+    private void build(E[] origin, int l, int r, int i) {
         if (l == r) {
-            a[i] = create(arr[l]);
+            tree[i] = origin[l];
             return;
         }
         int m = (l + r) >> 1;
-        build(arr, l, m, i << 1);
-        build(arr, m + 1, r, i << 1 | 1);
-        a[i] = up(a[i << 1], a[i << 1 | 1]);
+        build(origin, l, m, i << 1);
+        build(origin, m + 1, r, i << 1 | 1);
+        tree[i] = tree[i << 1].merge(tree[i << 1 | 1]);
     }
 
-    public void update(int l, int r, int v) {
-        update(l, r, v, low, high, 1);
+    public void update(int l, int r, E e) {
+        update(l, r, e, low, high, 1);
     }
 
-    private void update(int L, int R, int v, int l, int r, int i) {
-        if (l == r) {
-            a[i] = create(v);
+    private void update(int L, int R, E e, int l, int r, int i) {
+        if (L <= l && r <= R) {
+            tree[i].lazy(e);
             return;
         }
         down(i);
         int m = (l + r) >> 1;
         if (L <= m) {
-            update(L, R, v, l, m, i << 1);
+            update(L, R, e, l, m, i << 1);
         }
         if (R > m) {
-            update(L, R, v, m + 1, r, i << 1 | 1);
+            update(L, R, e, m + 1, r, i << 1 | 1);
         }
-        a[i] = up(a[i << 1], a[i << 1 | 1]);
+        tree[i] = tree[i << 1].merge(tree[i << 1 | 1]);
     }
 
-    public A query(int l, int r) {
+    public E query(int l, int r) {
         return query(l, r, low, high, 1);
     }
 
-    private A query(int L, int R, int l, int r, int i) {
+    private E query(int L, int R, int l, int r, int i) {
         if (L <= l && r <= R) {
-            return a[i];
+            return tree[i];
         }
         down(i);
         int m = (l + r) >> 1;
@@ -56,12 +74,25 @@ abstract class SegTree<A> {
         if (L > m) {
             return query(L, R, m + 1, r, i << 1 | 1);
         }
-        return up(query(L, R, l, m, i << 1), query(L, R, m + 1, r, i << 1 | 1));
+        return query(L, R, l, m, i << 1).merge(query(L, R, m + 1, r, i << 1 | 1));
     }
 
-    abstract A create(int v);
+    private void down(int i) {
+        tree[i << 1].lazy(tree[i]);
+        tree[i << 1 | 1].lazy(tree[i]);
+        tree[i].clearTag();
+    }
 
-    abstract A up(A l, A r);
+    public String toString() {
+        return "[" + print(low, high, 1).trim() + "]";
+    }
 
-    abstract void down(int i);
+    private String print(int l, int r, int i) {
+        if (l == r) {
+            return tree[i].toString();
+        }
+        int m = (l + r) >> 1;
+        down(i);
+        return print(l, m, i << 1) + ", " + print(m + 1, r, i << 1 | 1);
+    }
 }
