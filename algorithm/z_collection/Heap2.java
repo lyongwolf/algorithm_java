@@ -1,11 +1,11 @@
 class Heap2 {
     int[] first = new int[1], second = new int[1];// 0 下标为堆顶
 
-    private int size;
-
     private int cmp(int i, int j) {
         return first[i] != first[j] ? first[i] - first[j] : second[i] - second[j];
     }
+    
+    private int size;
 
     public boolean isEmpty() {
         return size == 0;
