@@ -64,7 +64,7 @@ class Prime {
         mf = new int[N + 1];
         num = new int[n];
         for (int i = 2, j = 0; i <= N; i++) {
-            if ((mf[i] = factory[i][2]) == i) {
+            if ((mf[i] = factory[i][1]) == i) {
                 isp[i] = true;
                 num[j++] = i;
             }
