@@ -1,8 +1,6 @@
 package algorithm.graph.tree_chain_decomposition;
 import static algorithm.zz.U.*;
 
-import java.util.*;
-
 /**
  * 长链剖分（模板）
  * 测试链接：https://codeforces.com/contest/1009/problem/F
