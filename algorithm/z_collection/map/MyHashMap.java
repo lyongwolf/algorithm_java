@@ -428,7 +428,7 @@ class MapInt {
         create(u, key, val);
     }
 
-    public int[][] tuple() {
+    public int[][] view() {
         int[][] tup = new int[size][2];
         for (int i = 0, j = 0; i < no; i++) {
             if (keys[i] != NULL) {
@@ -457,7 +457,7 @@ class MapInt {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        int[][] tup = tuple();
+        int[][] tup = view();
         sb.append("(" + tup[0][0] + ", " + tup[0][1]);
         for (int i = 1; i < size; i++) {
             sb.append("), (" + tup[i][0] + ", " + tup[i][1]);
@@ -628,7 +628,7 @@ class MapLong {
         create(u, key, val);
     }
 
-    public long[][] tuple() {
+    public long[][] view() {
         long[][] tup = new long[size][2];
         for (int i = 0, j = 0; i < no; i++) {
             if (keys[i] != NULL) {
@@ -657,7 +657,7 @@ class MapLong {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        long[][] tup = tuple();
+        long[][] tup = view();
         sb.append("(" + tup[0][0] + ", " + tup[0][1]);
         for (int i = 1; i < size; i++) {
             sb.append("), (" + tup[i][0] + ", " + tup[i][1]);

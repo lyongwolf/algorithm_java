@@ -1,4 +1,4 @@
-class Map {
+class MapInt {
     private static final int NULL = Integer.MIN_VALUE, MAXN = 1 << 20, MOD = MAXN - 1;
     private static int[] keys = new int[MAXN], vals = new int[MAXN];
     private static int[] head = new int[MAXN], nxt = new int[MAXN];
@@ -12,7 +12,7 @@ class Map {
 
     private final int RND;
 
-    public Map() {
+    public MapInt() {
         RND = (int) (Integer.MAX_VALUE * Math.random());
         clear();
     }
