@@ -84,15 +84,14 @@ class SegTree {
     }
 
     public String toString() {
-        return "[" + print(low, high, 1).trim() + "]";
+        return "[" + toString(low, high, 1).trim() + "]";
     }
 
-    private String print(int l, int r, int i) {
+    private String toString(int l, int r, int i) {
         if (l == r) {
             return tree[i].toString();
         }
         int m = (l + r) >> 1;
-        down(i);
-        return print(l, m, i << 1) + ", " + print(m + 1, r, i << 1 | 1);
+        return toString(l, m, i << 1) + ", " + toString(m + 1, r, i << 1 | 1);
     }
 }
