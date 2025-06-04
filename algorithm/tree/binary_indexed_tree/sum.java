@@ -1,16 +1,14 @@
-package algorithm.tree.binary_indexed_tree;
-
 class Fenwick {
-    private long[] sum;
+    private int[] sum;
     private int N;
 
     public Fenwick(int len) {
-        N = len + 1;
-        sum = new long[N + 1];
+        N = len;
+        sum = new int[N + 1];
     }
 
-    public void add(int i, long v) {
-        while (i < N) {
+    public void add(int i, int v) {
+        while (i <= N) {
             sum[i] += v;
             i += i & -i;
         }
