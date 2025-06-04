@@ -6,16 +6,14 @@ import java.util.*;
  */
 class MyUtil {
     
-    private java.io.InputStream is = System.in;
     private byte[] inbuf = new byte[8192], str = new byte[16];
     private int lenbuf, ptrbuf;
-    private byte b;
 
     private byte readByte() {
         if (ptrbuf == lenbuf) {
             ptrbuf = 0;
             try {
-                lenbuf = is.read(inbuf);
+                lenbuf = System.in.read(inbuf);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -25,10 +23,15 @@ class MyUtil {
     }
 
     String ns() {
+        byte b;
         while ((b = readByte()) < 33);
         int i = 0;
         while (b > 32) {
-            if (i == str.length) str = Arrays.copyOf(str, str.length << 1);
+            if (i == str.length) {
+                byte[] tmp = new byte[i << 1];
+                System.arraycopy(str, 0, tmp, 0, i);
+                str = tmp;
+            }
             str[i++] = b;
             b = readByte();
         }
@@ -36,6 +39,7 @@ class MyUtil {
     }
 
     char nc() {
+        byte b;
         while ((b = readByte()) < 33);
         return (char) b;
     }
@@ -45,6 +49,7 @@ class MyUtil {
     }
 
     long nl() {
+        byte b;
         while ((b = readByte()) < 33);
         boolean neg = b == '-';
         long num = neg ? 0 : b - '0';
@@ -53,6 +58,7 @@ class MyUtil {
     }
 
     double nd() {
+        byte b;
         double num = 0, div = 1;
         while ((b = readByte()) < 33);
         boolean neg = false;
@@ -74,7 +80,6 @@ class MyUtil {
         return neg ? -num : num;
     }
 
-    private java.io.OutputStream out = System.out;
     private int tr = 0, BUF_SIZE = 8192;
     private byte[] buf = new byte[BUF_SIZE];
 
@@ -256,21 +261,13 @@ class MyUtil {
     }
 
     private void innerflush() {
-        try {
-            out.write(buf, 0, tr);
-            tr = 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.write(buf, 0, tr);
+        tr = 0;
     }
 
     void flush() {
         innerflush();
-        try {
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.flush();
     }
 
     int min(int a, int b) {
