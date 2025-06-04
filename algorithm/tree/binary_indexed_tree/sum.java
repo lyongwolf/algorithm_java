@@ -14,8 +14,8 @@ class Fenwick {
         }
     }
 
-    public long query(int i) {
-        long ans = 0;
+    public int pre(int i) {
+        int ans = 0;
         while (i > 0) {
             ans += sum[i];
             i -= i & -i;
@@ -23,7 +23,11 @@ class Fenwick {
         return ans;
     }
 
-    public long range(int l, int r) {
-        return l > r ? 0 : query(r) - query(l - 1);
+    public int suf(int i) {
+        return range(i, N);
+    }
+
+    public int range(int l, int r) {
+        return l > r ? 0 : pre(r) - pre(l - 1);
     }
 }
