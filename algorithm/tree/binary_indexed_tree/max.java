@@ -1,26 +1,25 @@
-package algorithm.tree.binary_indexed_tree;
-
-import java.util.Arrays;
-
 class Fenwick {
-    private long[] mx;
+    private static final int MIN = -(int) 1e9;
+    private int[] mx;
     private int N;
 
     public Fenwick(int len) {
-        N = len + 1;
-        mx = new long[N + 1];
-        Arrays.fill(mx, Long.MIN_VALUE);
+        N = len;
+        mx = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            mx[i] = MIN;
+        }
     }
 
-    public void update(int i, long v) {
-        while (i < N) {
+    public void update(int i, int v) {
+        while (i <= N) {
             mx[i] = Math.max(mx[i], v);
             i += i & -i;
         }
     }
 
-    public long query(int i) {
-        long ans = Long.MIN_VALUE;
+    public int query(int i) {
+        int ans = MIN;
         while (i > 0) {
             ans = Math.max(ans, mx[i]);
             i -= i & -i;
