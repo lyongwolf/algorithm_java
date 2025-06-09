@@ -84,7 +84,7 @@ class SegTree {
     }
 
     public String toString() {
-        return "[" + toString(low, high, 1).trim() + "]";
+        return "{\n" + toString(low, high, 1).trim() + "\n}";
     }
 
     private String toString(int l, int r, int i) {
@@ -92,6 +92,7 @@ class SegTree {
             return tree[i].toString();
         }
         int m = (l + r) >> 1;
-        return toString(l, m, i << 1) + ", " + toString(m + 1, r, i << 1 | 1);
+        down(i);
+        return toString(l, m, i << 1) + "\n" + toString(m + 1, r, i << 1 | 1);
     }
 }
