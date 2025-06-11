@@ -1,5 +1,5 @@
 class Fenwick {
-    private static final int MAX = (int) 1e9;
+    private static final int MAX = 0x3f3f3f3f;
     private int[] mn;
     private boolean[] mark;
     private int[] use;

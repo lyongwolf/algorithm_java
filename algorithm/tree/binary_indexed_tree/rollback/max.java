@@ -1,5 +1,5 @@
 class Fenwick {
-    private static final int MIN = -(int) 1e9;
+    private static final int MIN = -0x3f3f3f3f;
     private int[] mx;
     private boolean[] mark;
     private int[] use;
