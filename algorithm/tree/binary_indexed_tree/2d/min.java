@@ -1,5 +1,3 @@
-package algorithm.tree.binary_indexed_tree.two_D;
-
 class Fenwick {
     private long[][] min;
     private int N, M;
