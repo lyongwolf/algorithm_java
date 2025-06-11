@@ -184,7 +184,6 @@ class Chtholly {// 区间范围 [1, n]
         for (int i = N + 1; i <= N + n; i = end[i] + 1) {
             sb.append("[(").append(i - N).append(", ").append(end[i] - N).append("): ").append(val[i]).append(']');
         }
-        sb.append('\n');
         return sb.toString();
     }
 
@@ -217,7 +216,6 @@ class Chtholly {// 区间范围 [1, n]
     //             sb.append(' ');
     //         }
     //     }
-    //     sb.append('\n');
     //     return sb.toString();
     // }
 }
