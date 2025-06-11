@@ -38,16 +38,18 @@ class Chtholly {// 区间范围 [1, n]
 
     // 推平 [l, r] -> x
     public void assign(int l, int r, int x) {
+        l += N;
+        r += N;
         split(l, r);
+        val[l] = x;
         merge(l, r);
-        val[N + l] = x;
     }
  
     // 修改 [l, r] + x
     public void add(int l, int r, int x) {
-        split(l, r);
         l += N;
         r += N;
+        split(l, r);
         for (int i = l; i <= r; i = end[i] + 1) {
             val[i] += x;
         }
@@ -55,18 +57,16 @@ class Chtholly {// 区间范围 [1, n]
 
     // 拆分包含 l 的区间 和 包含 r 的区间
     private void split(int l, int r) {
-        if (r < n) {
-            split(r + 1);
+        if (sum[l] == 0) {
+            split(l);
         }
-        split(l);
+        if (++r <= N + n && sum[r] == 0) {
+            split(r);
+        }
     }
 
-    // 将下标 m 所在的区间 [l, r] 拆分为 [l, m-1] 和 [m, r]
+    // m 一定不是区间左端， 将下标 m 所在的区间 [l, r] 拆分为 [l, m-1] 和 [m, r]
     private void split(int m) {
-        m += N;
-        if (sum[m] == 1) {
-            return;
-        }
         for (int i = m, p;;) {
             sum[i]++;
             while ((i & 1) == 0) {
@@ -101,8 +101,7 @@ class Chtholly {// 区间范围 [1, n]
         if (l == r) {
             return;
         }
-        l = pre(l + N);
-        r += N;
+        l = pre(l);
         if (end[l] >= r) {
             return;
         }
