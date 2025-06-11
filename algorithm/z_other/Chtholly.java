@@ -1,4 +1,4 @@
-class Chtholly {// 区间范围 [1, n]
+class Chtholly {
     private static int[] stk = new int[32];
     static {stk[0] = 1;}
     private final int N, n;
