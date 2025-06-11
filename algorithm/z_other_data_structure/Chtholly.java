@@ -189,36 +189,36 @@ class Chtholly {// 区间范围 [1, n]
         return sb.toString();
     }
 
-    public String viewTree() {
-        java.util.List<String> list = new java.util.ArrayList<>();
-        int m = N + 1;
-        for (int i = m >> 1, p = 4, t = p, q = 16; i >= 1; i >>= 1, p <<= 1, t += p, q <<= 1) {
-            StringBuilder tmp = new StringBuilder();
-            for (int j = 0; j < t; j++) {
-                tmp.append(' ');
-            }
-            for (int j = i; j < i << 1; j++) {
-                int len = ("" + sum[i]).length();
-                tmp.append(sum[j]);
-                while (len++ < q) {
-                    tmp.append(' ');
-                }
-            }
-            tmp.append('\n');
-            list.add(tmp.toString());
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = list.size() - 1; i >= 0; i--) {
-            sb.append(list.get(i)).append('\n');
-        }
-        for (int i = m; i < m << 1; i++) {
-            int len = ("" + sum[i]).length();
-            sb.append(sum[i]);
-            while (len++ < 8) {
-                sb.append(' ');
-            }
-        }
-        sb.append('\n');
-        return sb.toString();
-    }
+    // public String viewTree() {
+    //     java.util.List<String> list = new java.util.ArrayList<>();
+    //     int m = N + 1;
+    //     for (int i = m >> 1, p = 4, t = p, q = 16; i >= 1; i >>= 1, p <<= 1, t += p, q <<= 1) {
+    //         StringBuilder tmp = new StringBuilder();
+    //         for (int j = 0; j < t; j++) {
+    //             tmp.append(' ');
+    //         }
+    //         for (int j = i; j < i << 1; j++) {
+    //             int len = ("" + sum[i]).length();
+    //             tmp.append(sum[j]);
+    //             while (len++ < q) {
+    //                 tmp.append(' ');
+    //             }
+    //         }
+    //         tmp.append('\n');
+    //         list.add(tmp.toString());
+    //     }
+    //     StringBuilder sb = new StringBuilder();
+    //     for (int i = list.size() - 1; i >= 0; i--) {
+    //         sb.append(list.get(i)).append('\n');
+    //     }
+    //     for (int i = m; i < m << 1; i++) {
+    //         int len = ("" + sum[i]).length();
+    //         sb.append(sum[i]);
+    //         while (len++ < 8) {
+    //             sb.append(' ');
+    //         }
+    //     }
+    //     sb.append('\n');
+    //     return sb.toString();
+    // }
 }
