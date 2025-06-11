@@ -3,7 +3,6 @@ class Chtholly {// 区间范围 [1, n]
     static {stk[0] = 1;}
     private final int N, n;
     private int[] sum, end;
-
     private int[] val;
 
     // 初始化单个区间 [1, n]，区间值默认为 0
