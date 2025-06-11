@@ -202,62 +202,49 @@ class MyUtil {
 
     void println(Object o) {
         deepPrint(o, true);
+        writeln();
     }
 
-    private void deepPrint(Object o, boolean f) {
+    void deepPrint(Object o, boolean f) {
         if (o == null) {
-            print(f ? "null\n" : "null");
+            print("null");
             return;
         }
         Class<?> c = o.getClass();
+        int[] j = new int[1];
+        boolean b;
         if (c.isArray()) {
-            if (o instanceof Object[]) {
-                Object[] t = (Object[]) o;
-                int n = t.length;
-                boolean b = f && n > 0 && t[0] != null;
-                print(b ? "[\n" : "[");
-                for (int i = 0; i < n; i++) {
-                    deepPrint(t[i], false);
-                    if (i < n - 1) print(b ? ", \n" : ", ");
-                    else if (b) writeln();
-                }
-                print("]");
-            } else {
-                print(o instanceof byte[] ? Arrays.toString((byte[]) o)
-                        : o instanceof short[] ? Arrays.toString((short[]) o)
-                        : o instanceof int[] ? Arrays.toString((int[]) o)
-                        : o instanceof long[] ? Arrays.toString((long[]) o)
-                        : o instanceof char[] ? Arrays.toString((char[]) o)
-                        : o instanceof float[] ? Arrays.toString((float[]) o)
-                        : o instanceof double[] ? Arrays.toString((double[]) o)
-                        : Arrays.toString((boolean[]) o));
+            int n = java.lang.reflect.Array.getLength(o);
+            b = f && n > 0 && o instanceof Object[];
+            print(b ? "[\n" : "[");
+            for (int i = 0; i < n;) {
+                deepPrint(java.lang.reflect.Array.get(o, i), false);
+                if (++i < n) print(b ? ", \n" : ", ");
             }
+            print(b ? "\n]" : "]");
         } else if (o instanceof Collection) {
             Collection<?> t = (Collection<?>) o;
-            print("[");
-            int i = 0;
-            for (Object v : t) {
+            b = f && !t.isEmpty();
+            print(b ? "[\n" : "[");
+            t.forEach(v -> {
                 deepPrint(v, false);
-                if (i < t.size() - 1) print(", ");
-                i++;
-            }
-            print("]");
+                if (++j[0] < t.size()) print(b ? ", \n" : ", ");
+            });
+            print(b ? "\n]" : "]");
         } else if (o instanceof Map) {
             Map<?, ?> t = (Map<?, ?>) o;
-            print(!t.isEmpty() && f ? "{\n" : "{");
-            int i = 0;
-            for (Map.Entry<?, ?> v : t.entrySet()) {
-                deepPrint(v.getKey(), false);
+            b = f && !t.isEmpty();
+            print(b ? "{\n" : "{");
+            t.forEach((k, v) -> {
+                deepPrint(k, false);
                 print(" = ");
-                deepPrint(v.getValue(), false);
-                if (++i < t.size()) print(f ? ", \n" : ", ");
-                else if (f) writeln();
-            }
-            print("}");
+                deepPrint(v, false);
+                if (++j[0] < t.size()) print(b ? ", \n" : ", ");
+            });
+            print(b ? "\n}" : "}");
         } else {
             print(o.toString());
         }
-        if (f) writeln();
     }
 
     private void innerflush() {
