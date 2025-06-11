@@ -61,17 +61,39 @@ class Chtholly {// 区间范围 [1, n]
         split(l);
     }
 
-    // 将下标 pos 所在的区间 [l, r] 拆分为 [l, pos-1] 和 [pos, r]
-    private void split(int pos) {
-        pos += N;
-        if (sum[pos] == 1) {
+    // 将下标 m 所在的区间 [l, r] 拆分为 [l, m-1] 和 [m, r]
+    private void split(int m) {
+        m += N;
+        if (sum[m] == 1) {
             return;
         }
-        int p = pre(pos);
-        add(pos, 1);
-        end[pos] = end[p];
-        end[p] = pos - 1;
-        val[pos] = val[p];
+        for (int i = m, p;;) {
+            sum[i]++;
+            while ((i & 1) == 0) {
+                i >>= 1;
+                sum[i]++;
+            }
+            p = i >> 1;
+            if (sum[p << 1] > 0) {
+                p <<= 1;
+                while (p < N) {
+                    if (sum[p << 1 | 1] > 0) {
+                        p = p << 1 | 1;
+                    } else {
+                        p <<= 1;
+                    }
+                }
+                while (i > 1) {
+                    i >>= 1;
+                    sum[i]++;
+                }
+                end[m] = end[p];
+                end[p] = m - 1;
+                val[m] = val[p];
+                return;
+            }
+            i = p;
+        }
     }
 
     // 将 下标 l 所在的区间 ~ 下标 r 所在的区间合并，仅保留下标 l 所在区间的信息
@@ -91,19 +113,21 @@ class Chtholly {// 区间范围 [1, n]
             end[s] = end[l];
         } else {
             // 类似虚树生成
-            int z = 0, f, i = l;
+            int z = 0, f, p, i = l;
             l = end[l] + 1;
             for (;;) {
                 sum[i] = 0;
                 f = i >> (32 - Integer.numberOfLeadingZeros(i ^ l));
                 i >>= 1;
-                while (i > stk[z]) {
+                p = Math.max(f, stk[z]);
+                while (i > p) {
                     sum[i] = sum[i << 1] + sum[i << 1 | 1];
                     i >>= 1;
                 }
                 while (f < stk[z]) {
                     i = stk[z--];
-                    while (i > stk[z]) {
+                    p = Math.max(f, stk[z]);
+                    while (i > p) {
                         sum[i] = sum[i << 1] + sum[i << 1 | 1];
                         i >>= 1;
                     }
@@ -112,18 +136,10 @@ class Chtholly {// 区间范围 [1, n]
                     end[s] = end[l];
                     sum[l] = 0;
                     l >>= 1;
-                    while (l > stk[z]) {
+                    while (l > 0) {
                         sum[l] = sum[l << 1] + sum[l << 1 | 1];
                         l >>= 1;
                     }
-                    while (z > 0) {
-                        i = stk[z--];
-                        while (i > stk[z]) {
-                            sum[i] = sum[i << 1] + sum[i << 1 | 1];
-                            i >>= 1;
-                        }
-                    }
-                    sum[1] = sum[2] + sum[3];
                     return;
                 }
                 if (f != stk[z]) {
