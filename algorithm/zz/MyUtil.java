@@ -6,66 +6,66 @@ import java.util.*;
  */
 class MyUtil {
     
-    private byte[] inbuf = new byte[8192], str = new byte[16];
-    private int lenbuf, ptrbuf;
+    byte[] inBuf = new byte[8192], outBuf = new byte[8192];
+    int lenBuf, ptrBuf, tr;
 
-    private byte readByte() {
-        if (ptrbuf == lenbuf) {
-            ptrbuf = 0;
+    byte readByte() {
+        if (ptrBuf == lenBuf) {
+            ptrBuf = 0;
             try {
-                lenbuf = System.in.read(inbuf);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (lenbuf <= 0) return -1;
+                lenBuf = System.in.read(inBuf);
+            } catch (Exception e) {}
+            if (lenBuf <= 0) return -1;
         }
-        return inbuf[ptrbuf++];
+        return inBuf[ptrBuf++];
     }
 
-    String ns() {
+    String nextString() {
         byte b;
         while ((b = readByte()) < 33);
-        int i = 0;
+        StringBuilder sb = new StringBuilder();
         while (b > 32) {
-            if (i == str.length) {
-                byte[] tmp = new byte[i << 1];
-                System.arraycopy(str, 0, tmp, 0, i);
-                str = tmp;
-            }
-            str[i++] = b;
+            sb.append(b);
             b = readByte();
         }
-        return new String(str, 0, i);
+        return sb.toString();
     }
 
-    char nc() {
+    char nextChar() {
         byte b;
         while ((b = readByte()) < 33);
         return (char) b;
     }
 
-    int ni() {
-        return (int) nl();
+    int nextInt() {
+        byte b;
+        while ((b = readByte()) < 33);
+        boolean neg = b == '-';
+        int num = neg ? 0 : b - '0';
+        while ((b = readByte()) > 32)
+            num = num * 10 + (b - '0');
+        return neg ? -num : num;
     }
 
-    long nl() {
+    long nextLong() {
         byte b;
         while ((b = readByte()) < 33);
         boolean neg = b == '-';
         long num = neg ? 0 : b - '0';
-        while ((b = readByte()) > 32) num = num * 10 + (b - '0');
+        while ((b = readByte()) > 32)
+            num = num * 10 + (b - '0');
         return neg ? -num : num;
     }
 
-    double nd() {
+    double nextDouble() {
         byte b;
-        double num = 0, div = 1;
         while ((b = readByte()) < 33);
         boolean neg = false;
         if (b == '-') {
             neg = true;
             b = readByte();
         }
+        double num = 0, div = 1;
         while (b > 32 && b != '.') {
             num = num * 10 + (b - '0');
             b = readByte();
@@ -80,85 +80,95 @@ class MyUtil {
         return neg ? -num : num;
     }
 
-    private int tr = 0, BUF_SIZE = 8192;
-    private byte[] buf = new byte[BUF_SIZE];
-
-    private int countDigits(int v) {
-        return v >= 100000 ? v >= 10000000 ? v >= 100000000 ? v >= 1000000000 ? 10 : 9 : 8 : v >= 1000000 ? 7 : 6 : v >= 1000 ? v >= 10000 ? 5 : 4 : v >= 100 ? 3 : v >= 10 ? 2 : 1;
+    int countDigits(int v) {
+        return v >= 100000 ?
+                v >= 10000000 ?
+                        v >= 100000000 ?
+                                v >= 1000000000 ? 10 : 9 : 8 :
+                        v >= 1000000 ? 7 : 6 :
+                v >= 1000 ?
+                        v >= 10000 ? 5 : 4 :
+                        v >= 100 ? 3 :
+                                v >= 10 ? 2 : 1;
     }
 
-    private int countDigits(long v) {
-        return v >= 10000000000L ? 10 + countDigits((int) (v / 10000000000L)) : v >= 1000000000 ? 10 : countDigits((int) v);
+    int countDigits(long v) {
+        return v >= 10000000000L ? 10 + countDigits((int)(v / 10000000000L)) :
+                v >= 1000000000 ? 10 : countDigits((int)v);
     }
 
-    void print(byte b) {
-        buf[tr++] = b;
-        if (tr == BUF_SIZE) innerflush();
+    MyUtil print(byte b) {
+        outBuf[tr++] = b;
+        if (tr == 8192) innerFlush();
+        return this;
     }
 
-    void print(char c) {
-        print((byte) c);
+    MyUtil print(char c) {
+        return print((byte) c);
     }
 
-    void print(int x) {
-        if (x == Integer.MIN_VALUE) {
-            print((long) x);
+    MyUtil print(int x) {
+        if (x == 0x80000000) {
+            return print((long) x);
         }
-        if (tr + 12 >= BUF_SIZE) innerflush();
+        if (tr >= 8180) innerFlush();
         if (x < 0) {
             print((byte) '-');
             x = -x;
         }
         int d = countDigits(x);
         for (int i = tr + d - 1; i >= tr; i--) {
-            buf[i] = (byte) ('0' + x % 10);
+            outBuf[i] = (byte) ('0' + x % 10);
             x /= 10;
         }
         tr += d;
+        return this;
     }
 
-    void print(long x) {
+    MyUtil print(long x) {
         if (x == Long.MIN_VALUE) {
-            print("" + x);
+            return print("" + x);
         }
-        if (tr + 21 >= BUF_SIZE) innerflush();
+        if (tr >= 8171) innerFlush();
         if (x < 0) {
             print((byte) '-');
             x = -x;
         }
         int d = countDigits(x);
         for (int i = tr + d - 1; i >= tr; i--) {
-            buf[i] = (byte) ('0' + x % 10);
+            outBuf[i] = (byte) ('0' + x % 10);
             x /= 10;
         }
         tr += d;
+        return this;
     }
 
-    void print(double x) {
-        print(String.valueOf(x));
+    MyUtil print(double x) {
+        return print(String.valueOf(x));
     }
 
-    void print(double x, int precision) {
+    MyUtil print(double x, int precision) {
         if (x < 0) {
             print('-');
             x = -x;
         }
         x += Math.pow(10, -precision) / 2;
-        print((long) x);
-        print(".");
+        print((long) x).print('.');
         x -= (long) x;
         for (int i = 0; i < precision; i++) {
             x *= 10;
             print((byte) ('0' + (int) x));
             x -= (int) x;
         }
+        return this;
     }
 
-    void print(String s) {
+    MyUtil print(String s) {
         for (int i = 0; i < s.length(); i++) {
-            buf[tr++] = (byte) s.codePointAt(i);
-            if (tr == BUF_SIZE) innerflush();
+            outBuf[tr++] = (byte) s.codePointAt(i);
+            if (tr == 8192) innerFlush();
         }
+        return this;
     }
 
     void writeln() {
@@ -166,38 +176,31 @@ class MyUtil {
     }
 
     void println(byte b) {
-        print(b);
-        writeln();
+        print(b).writeln();
     }
 
     void println(char c) {
-        print(c);
-        writeln();
+        print(c).writeln();
     }
 
     void println(int x) {
-        print(x);
-        writeln();
+        print(x).writeln();
     }
 
     void println(long x) {
-        print(x);
-        writeln();
+        print(x).writeln();
     }
 
     void println(double x) {
-        print(x);
-        writeln();
+        print(x).writeln();
     }
 
     void println(double x, int precision) {
-        print(x, precision);
-        writeln();
+        print(x, precision).writeln();
     }
 
     void println(String s) {
-        print(s);
-        writeln();
+        print(s).writeln();
     }
 
     void println(Object o) {
@@ -247,13 +250,13 @@ class MyUtil {
         }
     }
 
-    private void innerflush() {
-        System.out.write(buf, 0, tr);
+    void innerFlush() {
+        System.out.write(outBuf, 0, tr);
         tr = 0;
     }
 
     void flush() {
-        innerflush();
+        innerFlush();
         System.out.flush();
     }
 
@@ -261,60 +264,66 @@ class MyUtil {
         return a > b ? b : a;
     }
 
-    int min(int... args) {
-        int ans = Integer.MAX_VALUE;
-        for (int v : args) if (ans > v) ans = v;
-        return ans;
+    int min(int... g) {
+        int z = 0x7fffffff;
+        for (int v : g)
+            if (z > v) z = v;
+        return z;
     }
 
     long min(long a, long b) {
         return a > b ? b : a;
     }
 
-    long min(long... args) {
-        long ans = Long.MAX_VALUE;
-        for (long v : args) if (ans > v) ans = v;
-        return ans;
+    long min(long... g) {
+        long z = Long.MAX_VALUE;
+        for (long v : g)
+            if (z > v) z = v;
+        return z;
     }
 
     double min(double a, double b) {
         return a > b ? b : a;
     }
 
-    double min(double... args) {
-        double ans = Double.POSITIVE_INFINITY;
-        for (double v : args) if (ans > v) ans = v;
-        return ans;
+    double min(double... g) {
+        double z = 1.0 / 0.0;
+        for (double v : g)
+            if (z > v) z = v;
+        return z;
     }
 
     int max(int a, int b) {
         return a < b ? b : a;
     }
 
-    int max(int... args) {
-        int ans = Integer.MIN_VALUE;
-        for (int v : args) if (ans < v) ans = v;
-        return ans;
+    int max(int... g) {
+        int z = 0x80000000;
+        for (int v : g)
+            if (z < v) z = v;
+        return z;
     }
 
     long max(long a, long b) {
         return a < b ? b : a;
     }
 
-    long max(long... args) {
-        long ans = Long.MIN_VALUE;
-        for (long v : args) if (ans < v) ans = v;
-        return ans;
+    long max(long... g) {
+        long z = Long.MIN_VALUE;
+        for (long v : g)
+            if (z < v) z = v;
+        return z;
     }
 
     double max(double a, double b) {
         return a < b ? b : a;
     }
 
-    double max(double... args) {
-        double ans = Double.NEGATIVE_INFINITY;
-        for (double v : args) if (ans < v) ans = v;
-        return ans;
+    double max(double... g) {
+        double z = -1.0 / 0.0;
+        for (double v : g)
+            if (z < v) z = v;
+        return z;
     }
 
     int abs(int a) {
