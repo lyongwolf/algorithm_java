@@ -81,33 +81,11 @@ class MapLong {
         create(u, key, val);
     }
 
-    public void setMax(long key, long val) {
+    public void merge(long key, long val, java.util.function.LongBinaryOperator op) {
         int u = hash(key), i;
         for (i = head[u]; i != -1; i = nxt[i]) {
             if (keys[i] == key) {
-                vals[i] = Math.max(vals[i], val);
-                return;
-            }
-        }
-        create(u, key, val);
-    }
-
-    public void setMin(long key, long val) {
-        int u = hash(key), i;
-        for (i = head[u]; i != -1; i = nxt[i]) {
-            if (keys[i] == key) {
-                vals[i] = Math.min(vals[i], val);
-                return;
-            }
-        }
-        create(u, key, val);
-    }
-    
-    public void add(long key, long val) {
-        int u = hash(key), i;
-        for (i = head[u]; i != -1; i = nxt[i]) {
-            if (keys[i] == key) {
-                vals[i] += val;
+                vals[i] = op.applyAsLong(vals[i], val);
                 return;
             }
         }
@@ -142,13 +120,13 @@ class MapLong {
             return "{}";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{");
+        sb.append("{\n");
         long[][] tup = view();
-        sb.append("(" + tup[0][0] + ", " + tup[0][1]);
+        sb.append("" + tup[0][0] + " = " + tup[0][1]);
         for (int i = 1; i < size; i++) {
-            sb.append("), (" + tup[i][0] + ", " + tup[i][1]);
+            sb.append(",\n" + tup[i][0] + " = " + tup[i][1]);
         }
-        sb.append(")}");
+        sb.append("\n}");
         return sb.toString();
     }
     

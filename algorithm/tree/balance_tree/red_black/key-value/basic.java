@@ -160,7 +160,7 @@ class RedBlackTree {
         insertFixup(n);
     }
 
-    public void add(int k, int v) {
+    public void merge(int k, int v, java.util.function.IntBinaryOperator op) {
         int p = 0, n = head;
         while (n != 0) {
             if (key[n] > k) {
@@ -170,67 +170,7 @@ class RedBlackTree {
                 p = n;
                 n = rc[n];
             } else {
-                val[n] += v;
-                return;
-            }
-        }
-        size++;
-        n = create(k, v);
-        if (p == 0) { // 新插入节点是根节点
-            head = n;
-            color[head] = BLACK;
-            return;
-        }
-        if (key[p] > k) {
-            lc[p] = n;
-        } else {
-            rc[p] = n;
-        }
-        fa[n] = p;
-        insertFixup(n);
-    }
-
-    public void setMax(int k, int v) {
-        int p = 0, n = head;
-        while (n != 0) {
-            if (key[n] > k) {
-                p = n;
-                n = lc[n];
-            } else if (key[n] < k) {
-                p = n;
-                n = rc[n];
-            } else {
-                val[n] = Math.max(val[n], v);
-                return;
-            }
-        }
-        size++;
-        n = create(k, v);
-        if (p == 0) { // 新插入节点是根节点
-            head = n;
-            color[head] = BLACK;
-            return;
-        }
-        if (key[p] > k) {
-            lc[p] = n;
-        } else {
-            rc[p] = n;
-        }
-        fa[n] = p;
-        insertFixup(n);
-    }
-
-    public void setMin(int k, int v) {
-        int p = 0, n = head;
-        while (n != 0) {
-            if (key[n] > k) {
-                p = n;
-                n = lc[n];
-            } else if (key[n] < k) {
-                p = n;
-                n = rc[n];
-            } else {
-                val[n] = Math.min(val[n], v);
+                val[n] = op.applyAsInt(val[n], v);
                 return;
             }
         }

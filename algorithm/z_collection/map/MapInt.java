@@ -80,33 +80,11 @@ class MapInt {
         create(u, key, val);
     }
 
-    public void setMax(int key, int val) {
+    public void merge(int key, int val, java.util.function.IntBinaryOperator op) {
         int u = hash(key), i;
         for (i = head[u]; i != -1; i = nxt[i]) {
             if (keys[i] == key) {
-                vals[i] = Math.max(vals[i], val);
-                return;
-            }
-        }
-        create(u, key, val);
-    }
-
-    public void setMin(int key, int val) {
-        int u = hash(key), i;
-        for (i = head[u]; i != -1; i = nxt[i]) {
-            if (keys[i] == key) {
-                vals[i] = Math.min(vals[i], val);
-                return;
-            }
-        }
-        create(u, key, val);
-    }
-    
-    public void add(int key, int val) {
-        int u = hash(key), i;
-        for (i = head[u]; i != -1; i = nxt[i]) {
-            if (keys[i] == key) {
-                vals[i] += val;
+                vals[i] = op.applyAsInt(vals[i], val);
                 return;
             }
         }
@@ -141,13 +119,13 @@ class MapInt {
             return "{}";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{");
+        sb.append("{\n");
         int[][] tup = view();
-        sb.append("(" + tup[0][0] + ", " + tup[0][1]);
+        sb.append("" + tup[0][0] + " = " + tup[0][1]);
         for (int i = 1; i < size; i++) {
-            sb.append("), (" + tup[i][0] + ", " + tup[i][1]);
+            sb.append(",\n" + tup[i][0] + " = " + tup[i][1]);
         }
-        sb.append(")}");
+        sb.append("\n}");
         return sb.toString();
     }
     
