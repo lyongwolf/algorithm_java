@@ -23,27 +23,17 @@ class Sort {
         }
     }
 
-    public static void merge(int[] a, java.util.function.IntBinaryOperator cmp) {
-        merge(a.clone(), a, 0, a.length, 0, cmp);
-    }
+    public static void merge(int[] a, java.util.function.IntBinaryOperator cmp) {merge(a.clone(), a, 0, a.length, 0, cmp);}
 
-    public static void merge(int[] a, int l, int r, java.util.function.IntBinaryOperator cmp) {
-        merge(java.util.Arrays.copyOfRange(a, l, r), a, l, r, -l, cmp);
-    }
+    public static void merge(int[] a, int l, int r, java.util.function.IntBinaryOperator cmp) {merge(java.util.Arrays.copyOfRange(a, l, r), a, l, r, -l, cmp);}
 
-    private static void merge(int[] src,
-                                  int[] dest,
-                                  int low, int high, int off,
-                                  java.util.function.IntBinaryOperator c) {
+    private static void merge(int[] src, int[] dest, int low, int high, int off, java.util.function.IntBinaryOperator c) {
         int length = high - low;
         if (length < 7) {
-            for (int i=low; i<high; i++)
-                for (int j=i; j>low && c.applyAsInt(dest[j-1], dest[j])>0; j--)
-                    swap(dest, j, j-1);
+            for (int i=low; i<high; i++) for (int j=i; j>low && c.applyAsInt(dest[j-1], dest[j])>0; j--) swap(dest, j, j-1);
             return;
         }
-        int destLow  = low;
-        int destHigh = high;
+        int destLow  = low, destHigh = high;
         low  += off;
         high += off;
         int mid = (low + high) >>> 1;
@@ -54,60 +44,38 @@ class Sort {
            return;
         }
         for(int i = destLow, p = low, q = mid; i < destHigh; i++) {
-            if (q >= high || p < mid && c.applyAsInt(src[p], src[q]) <= 0)
-                dest[i] = src[p++];
-            else
-                dest[i] = src[q++];
+            if (q >= high || p < mid && c.applyAsInt(src[p], src[q]) <= 0) dest[i] = src[p++];
+            else dest[i] = src[q++];
         }
     }
 
-    private static void swap(int[] x, int a, int b) {
-        int t = x[a];
-        x[a] = x[b];
-        x[b] = t;
-    }
+    private static void swap(int[] x, int a, int b) {int t = x[a]; x[a] = x[b]; x[b] = t;}
 
-    public static void merge(long[] a, java.util.function.LongBinaryOperator cmp) {
-        merge(a.clone(), a, 0, a.length, 0, cmp);
-    }
-
-    public static void merge(long[] a, int l, int r, java.util.function.LongBinaryOperator cmp) {
-        merge(java.util.Arrays.copyOfRange(a, l, r), a, l, r, -l, cmp);
-    }
-
-    private static void merge(long[] src,
-                                  long[] dest,
-                                  int low, int high, int off,
-                                  java.util.function.LongBinaryOperator c) {
+    public static void merge(long[] a, java.util.function.LongBinaryOperator cmp) {merge(a.clone(), a, 0, a.length, 0, cmp);}
+    
+    public static void merge(long[] a, int l, int r, java.util.function.LongBinaryOperator cmp) {merge(java.util.Arrays.copyOfRange(a, l, r), a, l, r, -l, cmp);}
+    
+    private static void merge(long[] src, long[] dest, int low, int high, int off, java.util.function.LongBinaryOperator c) {
         int length = high - low;
         if (length < 7) {
-            for (int i=low; i<high; i++)
-                for (int j=i; j>low && c.applyAsLong(dest[j-1], dest[j])>0; j--)
-                    swap(dest, j, j-1);
+            for (int i=low; i<high; i++) for (int j=i; j>low && c.applyAsLong(dest[j-1], dest[j])>0; j--) swap(dest, j, j-1);
             return;
         }
-        int destLow  = low;
-        int destHigh = high;
+        int destLow  = low, destHigh = high;
         low  += off;
         high += off;
         int mid = (low + high) >>> 1;
         merge(dest, src, low, mid, -off, c);
         merge(dest, src, mid, high, -off, c);
         if (c.applyAsLong(src[mid-1], src[mid]) <= 0) {
-           System.arraycopy(src, low, dest, destLow, length);
-           return;
+            System.arraycopy(src, low, dest, destLow, length);
+            return;
         }
         for(int i = destLow, p = low, q = mid; i < destHigh; i++) {
-            if (q >= high || p < mid && c.applyAsLong(src[p], src[q]) <= 0)
-                dest[i] = src[p++];
-            else
-                dest[i] = src[q++];
+            if (q >= high || p < mid && c.applyAsLong(src[p], src[q]) <= 0) dest[i] = src[p++];
+            else dest[i] = src[q++];
         }
     }
 
-    private static void swap(long[] x, int a, int b) {
-        long t = x[a];
-        x[a] = x[b];
-        x[b] = t;
-    }
+    private static void swap(long[] x, int a, int b) {long t = x[a]; x[a] = x[b]; x[b] = t;}
 }
