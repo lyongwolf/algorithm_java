@@ -25,7 +25,7 @@ class MyUtil {
         while ((b = readByte()) < 33);
         StringBuilder sb = new StringBuilder();
         while (b > 32) {
-            sb.append(b);
+            sb.append((char) b);
             b = readByte();
         }
         return sb.toString();
