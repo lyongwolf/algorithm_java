@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Q2 {
 
-    SegInBit tree = new SegInBit(80001, 8800000);
+    SegInBit tree;
 
     int[] head, nxt, to, w, dep, pa[], sz, dfn;
 
@@ -46,7 +46,7 @@ public class Q2 {
         for (int i = 1; i <= n; i++) {
             w[i] = Arrays.binarySearch(val, 0, m, w[i]);
         }
-        tree.init(n + 1, 0, m);
+        tree = new SegInBit(n + 1, 0, m);
         init(0, 1);
         for (int[] t : query) {
             int k = t[0], u = t[1], v = t[2];
@@ -127,24 +127,14 @@ public class Q2 {
 }
 
 class SegInBit {
-    private int N, ilow, ihigh, no;
-    private int[] root;
+    private static final int MAXN = 100000, MAXT = 10000000;
+    private static int[] root = new int[MAXN + 1], cnt = new int[MAXT], lc = new int[MAXT], rc = new int[MAXT];
+    private static int full[] = new int[128], rest[] = new int[128], fi, ri;// 整体查询加速部分
+    private static int no;
     
-    // 动态开点线段树部分
-    private int[] cnt, lc, rc;
+    private final int N, ilow, ihigh;
 
-    // 整体查询加速部分
-    private int full[] = new int[128], rest[] = new int[128], fi, ri;
-
-    public SegInBit(int MAXN, int tot) {
-        root = new int[MAXN + 1];
-
-        cnt = new int[tot];
-        lc = new int[tot];
-        rc = new int[tot];
-    }
-
-    public void init(int N, int ilow, int ihigh) {
+    public SegInBit(int N, int ilow, int ihigh) {
         this.N = N;
         this.ilow = ilow;
         this.ihigh = ihigh;
