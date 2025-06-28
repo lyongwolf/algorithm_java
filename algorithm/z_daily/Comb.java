@@ -26,6 +26,23 @@ class Comb {
         return F[n] * IF[n - m] % MOD * IF[m] % MOD;
     }
 
+    public long comb_inv(int n, int m) {
+        if (m < 0 || m > n) {
+            return -1;
+        }
+        if (m == 0 || m == n) {
+            return 1;
+        }
+        return IF[n] * F[n - m] % MOD * F[m] % MOD;
+    }
+
+    public long A(int n, int m) {
+        if (m < 0 || m > n) {
+            return 0;
+        }
+        return F[n] * IF[n - m] % MOD;
+    }
+
     public long comb2(long n, long m) {
         if (m < 0 || m > n) {
            return 0;
