@@ -1,4 +1,4 @@
-class Comb {
+class C {
     private static final int MOD = 1000000007, MAXN = 100000;
     private static final long[] F = new long[MAXN + 1], IF = new long[MAXN + 1];
     static {
@@ -32,13 +32,6 @@ class Comb {
         return IF[n] * F[n - m] % MOD * F[m] % MOD;
     }
 
-    public static long A(int n, int m) {
-        if (m < 0 || m > n) {
-            return 0;
-        }
-        return F[n] * IF[n - m] % MOD;
-    }
-
     public static long comb2(long n, long m) {
         if (m < 0 || m > n) {
            return 0;
@@ -52,6 +45,20 @@ class Comb {
             ans = ans * (i % MOD) % MOD;
         }
         return ans;
+    }
+
+    public static long A(int n, int m) {
+        if (m < 0 || m > n) {
+            return 0;
+        }
+        return F[n] * IF[n - m] % MOD;
+    }
+    
+    public static long A_inv(int n, int m) {
+        if (m < 0 || m > n) {
+            return -1;
+        }
+        return IF[n] * F[n - m] % MOD;
     }
 
     public static long inv(long a) {
