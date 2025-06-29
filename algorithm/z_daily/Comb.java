@@ -12,7 +12,7 @@ class C {
         }
     }
 
-    public static long comb(int n, int m) {
+    public static long c(int n, int m) {
         if (m < 0 || m > n) {
             return 0;
         }
@@ -22,7 +22,7 @@ class C {
         return F[n] * IF[n - m] % MOD * IF[m] % MOD;
     }
 
-    public static long comb_inv(int n, int m) {
+    public static long cInv(int n, int m) {
         if (m < 0 || m > n) {
             return -1;
         }
@@ -32,7 +32,7 @@ class C {
         return IF[n] * F[n - m] % MOD * F[m] % MOD;
     }
 
-    public static long comb2(long n, long m) {
+    public static long c2(long n, long m) {
         if (m < 0 || m > n) {
            return 0;
         }
@@ -47,14 +47,14 @@ class C {
         return ans;
     }
 
-    public static long A(int n, int m) {
+    public static long a(int n, int m) {
         if (m < 0 || m > n) {
             return 0;
         }
         return F[n] * IF[n - m] % MOD;
     }
     
-    public static long A_inv(int n, int m) {
+    public static long aInv(int n, int m) {
         if (m < 0 || m > n) {
             return -1;
         }
