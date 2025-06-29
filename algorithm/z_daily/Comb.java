@@ -1,11 +1,7 @@
 class Comb {
-    private final int MOD;
-    private final long[] F, IF;
-    
-    public Comb(int MOD, int MAXN) {
-        this.MOD = MOD;
-        F = new long[MAXN + 1];
-        IF = new long[MAXN + 1];
+    private static final int MOD = 1000000007, MAXN = 100000;
+    private static final long[] F = new long[MAXN + 1], IF = new long[MAXN + 1];
+    static {
         F[0] = F[1] = IF[1] = 1;
         for (int i = 2; i <= MAXN; i++) {
             F[i] = F[i - 1] * i % MOD;
@@ -16,7 +12,7 @@ class Comb {
         }
     }
 
-    public long comb(int n, int m) {
+    public static long comb(int n, int m) {
         if (m < 0 || m > n) {
             return 0;
         }
@@ -26,7 +22,7 @@ class Comb {
         return F[n] * IF[n - m] % MOD * IF[m] % MOD;
     }
 
-    public long comb_inv(int n, int m) {
+    public static long comb_inv(int n, int m) {
         if (m < 0 || m > n) {
             return -1;
         }
@@ -36,14 +32,14 @@ class Comb {
         return IF[n] * F[n - m] % MOD * F[m] % MOD;
     }
 
-    public long A(int n, int m) {
+    public static long A(int n, int m) {
         if (m < 0 || m > n) {
             return 0;
         }
         return F[n] * IF[n - m] % MOD;
     }
 
-    public long comb2(long n, long m) {
+    public static long comb2(long n, long m) {
         if (m < 0 || m > n) {
            return 0;
         }
@@ -58,11 +54,11 @@ class Comb {
         return ans;
     }
 
-    public long inv(long a) {
+    public static long inv(long a) {
         return pow(a, MOD - 2);
     }
 
-    public long pow(long a, long b) {
+    public static long pow(long a, long b) {
         long res = 1;
         while (b != 0) {
             if ((b & 1) != 0) {
