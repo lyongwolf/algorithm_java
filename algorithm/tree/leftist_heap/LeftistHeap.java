@@ -1,5 +1,3 @@
-package algorithm.tree.leftist_heap;
-
 class LeftistHeap {
     int[] val;
     int[] lc, rc, fa, dis, root;
