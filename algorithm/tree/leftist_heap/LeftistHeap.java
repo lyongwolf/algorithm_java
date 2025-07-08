@@ -74,5 +74,4 @@ class LeftistHeap {
     int rootNo(int i) {
         return root[i] == i ? i : (root[i] = rootNo(root[i]));
     }
-
 }
