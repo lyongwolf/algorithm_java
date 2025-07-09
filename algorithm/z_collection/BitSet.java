@@ -2,7 +2,7 @@ class BitSet {
     private int[] mag;
     private int n, END, MAXV;
     
-    public BitSet(int MAXV) {
+    public BitSet(int MAXV) {// [0, MAXV]
         this.MAXV = MAXV;
         n = MAXV / 32 + 1;
         END = -1 >>> (31 - MAXV % 32);
