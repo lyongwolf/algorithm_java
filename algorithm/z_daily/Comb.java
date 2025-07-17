@@ -14,7 +14,7 @@ class C {
 
     public static long c(int n, int m) {
         if (m < 0 || m > n) {
-            return 0;
+            throw new ArithmeticException();
         }
         if (m == 0 || m == n) {
             return 1;
@@ -24,7 +24,7 @@ class C {
 
     public static long cInv(int n, int m) {
         if (m < 0 || m > n) {
-            return -1;
+            throw new ArithmeticException();
         }
         if (m == 0 || m == n) {
             return 1;
@@ -34,7 +34,7 @@ class C {
 
     public static long c2(long n, long m) {
         if (m < 0 || m > n) {
-           return 0;
+            throw new ArithmeticException();
         }
         if (m == 0 || m == n) {
             return 1;
@@ -49,19 +49,22 @@ class C {
 
     public static long a(int n, int m) {
         if (m < 0 || m > n) {
-            return 0;
+            throw new ArithmeticException();
         }
         return F[n] * IF[n - m] % MOD;
     }
     
     public static long aInv(int n, int m) {
         if (m < 0 || m > n) {
-            return -1;
+            throw new ArithmeticException();
         }
         return IF[n] * F[n - m] % MOD;
     }
 
     public static long inv(long a) {
+        if (a == 0) {
+            throw new ArithmeticException();
+        }
         return pow(a, MOD - 2);
     }
 
