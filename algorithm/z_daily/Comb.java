@@ -2,7 +2,7 @@ class C {
     private static final int MOD = 1000000007, MAXN = 100000;
     private static final long[] F = new long[MAXN + 1], IF = new long[MAXN + 1];
     static {
-        F[0] = F[1] = IF[1] = 1;
+        F[0] = F[1] = IF[0] = IF[1] = 1;
         for (int i = 2; i <= MAXN; i++) {
             F[i] = F[i - 1] * i % MOD;
         }
@@ -16,18 +16,12 @@ class C {
         if (m < 0 || m > n) {
             throw new ArithmeticException();
         }
-        if (m == 0 || m == n) {
-            return 1;
-        }
         return F[n] * IF[n - m] % MOD * IF[m] % MOD;
     }
 
     public static long cInv(int n, int m) {
         if (m < 0 || m > n) {
             throw new ArithmeticException();
-        }
-        if (m == 0 || m == n) {
-            return 1;
         }
         return IF[n] * F[n - m] % MOD * F[m] % MOD;
     }
