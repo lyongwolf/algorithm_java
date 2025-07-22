@@ -5,6 +5,7 @@ class Sort {
     }
     
     public static void radix(int[] arr, int l, int r) {
+        if (r - l < 127) {java.util.Arrays.sort(arr, l, r + 1); return;}
         int len = r - l + 1, b = 4, n = 1 << b, m, mx = 0, x, i, j;
         while ((n <<= 1) <= len) b++;
         m = (n >>= 1) - 1;
@@ -13,7 +14,6 @@ class Sort {
         for (i = 1; i < n; i++) cnt[i] = cnt[i - 1] + cnt[i];
         for (i = r; i >= l; i--) tmp[--cnt[arr[i] & m]] = arr[i];
         for (i = l, j = 0; i <= r; arr[i++] = tmp[j++]) mx = Math.max(mx, 32 - Integer.numberOfLeadingZeros(arr[i]));
-        if (mx > b * b) {java.util.Arrays.sort(arr, l, r + 1); return;}
         for (x = b; x < mx; x += b) {
             java.util.Arrays.fill(cnt, 0);
             for (i = l; i <= r; i++) cnt[arr[i] >> x & m]++;
@@ -28,7 +28,7 @@ class Sort {
     }
     
     public static void radix(long[] arr, int l, int r) {
-        if (r - l + 1 <= 1000) {java.util.Arrays.sort(arr, l, r + 1); return;}
+        if (r - l < 1023) {java.util.Arrays.sort(arr, l, r + 1); return;}
         int len = r - l + 1, b = 4, n = 1 << b, m, mx = 0, x, i, j;
         while ((n <<= 1) <= len) b++;
         m = (n >>= 1) - 1;
