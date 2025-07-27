@@ -16,10 +16,9 @@ class Prime {
         isp = new boolean[N + 1];
         mf = new int[N + 1];
         num = new int[N / 2 + 1];
-        boolean[] vis = new boolean[N + 1];
         int j = 0;
         for (int i = 2, v; i <= N; i++) {
-            if (!vis[i]) {
+            if (mf[i] == 0) {
                 isp[i] = true;
                 num[j++] = i;
                 mf[i] = i;
@@ -29,7 +28,6 @@ class Prime {
                 if (v > N) {
                     break;
                 }
-                vis[v] = true;
                 mf[v] = p;
                 if (i % p == 0) {
                     break;
