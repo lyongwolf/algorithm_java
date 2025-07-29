@@ -19,9 +19,9 @@ class Prime {
         int j = 0;
         for (int i = 2, v; i <= N; i++) {
             if (mf[i] == 0) {
+                mf[i] = i;
                 isp[i] = true;
                 num[j++] = i;
-                mf[i] = i;
             }
             for (int p : num) {
                 v = p * i;
