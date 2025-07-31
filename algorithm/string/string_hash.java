@@ -34,8 +34,8 @@ class StringHash {
         PRE_HASH1 = new int[n + 1];
         PRE_HASH2 = new int[n + 1];
         POW_BASE1[0] = POW_BASE2[0] = 1;
-        for (int i = 0; i < n; i++) {
-            int v = s.charAt(i);
+        for (int i = 0, v; i < n; i++) {
+            v = s.charAt(i);
             POW_BASE1[i + 1] = (int) ((long) POW_BASE1[i] * BASE1 % MOD1);
             POW_BASE2[i + 1] = (int) ((long) POW_BASE2[i] * BASE2 % MOD2);
             PRE_HASH1[i + 1] = (int) (((long) PRE_HASH1[i] * BASE1 + v) % MOD1);
