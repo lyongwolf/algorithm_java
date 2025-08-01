@@ -43,15 +43,12 @@ class StringHash {
         }
     }
 
-    public int hash1(int l, int r) {// s[l:r]
-        return (int) ((PRE_HASH1[r + 1] - (long) PRE_HASH1[l] * POW_BASE1[r - l + 1] % MOD1 + MOD1) % MOD1);
-    }
-
-    public int hash2(int l, int r) {// s[l:r]
-        return (int) ((PRE_HASH2[r + 1] - (long) PRE_HASH2[l] * POW_BASE2[r - l + 1] % MOD2 + MOD2) % MOD2);
+    public long hash(int l, int r) {// s[l:r]
+        return ((PRE_HASH1[r + 1] - (long) PRE_HASH1[l] * POW_BASE1[r - l + 1] % MOD1 + MOD1) % MOD1) << 32 |
+               ((PRE_HASH2[r + 1] - (long) PRE_HASH2[l] * POW_BASE2[r - l + 1] % MOD2 + MOD2) % MOD2);
     }
 
     public boolean same(int l1, int r1, int l2, int r2) {
-        return hash1(l1, r1) == hash1(l2, r2) && hash2(l1, r1) == hash2(l2, r2);
+        return hash(l1, r1) == hash(l2, r2);
     }
 }
