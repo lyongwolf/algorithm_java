@@ -1,5 +1,3 @@
-package algorithm.graph.classic;
-
 import java.util.*;
 
 /**
