@@ -10,7 +10,7 @@ import java.util.*;
 public class SCC_in_out {
 
     int[] head, nxt, to;
-    int[] dfn, low, stk, scc, siz;
+    int[] dfn, low, stk, scc, sz;
     boolean[] vis;
     int ts, top, no;
 
@@ -27,7 +27,7 @@ public class SCC_in_out {
         low = new int[n + 1];
         stk = new int[n + 1];
         scc = new int[n + 1];
-        siz = new int[n + 1];
+        sz = new int[n + 1];
         vis = new boolean[n + 1];
         ts = top = no = 0;
         for (int u = 1; u <= n; u++) {
@@ -48,7 +48,7 @@ public class SCC_in_out {
         for (int i = 1; i <= no; i++) {
             if (out[i] == 0) {
                 cnt++;
-                sum = siz[i];
+                sum = sz[i];
             }
         }
         println(cnt == 1 ? sum : 0);
@@ -73,7 +73,7 @@ public class SCC_in_out {
                 o = stk[top--];
                 vis[o] = false;
                 scc[o] = no;
-                siz[no]++;
+                sz[no]++;
             } while (o != u);
         }
     }
