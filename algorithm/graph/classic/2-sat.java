@@ -1,10 +1,14 @@
 class TwoSat {
+    // range [1, n]
+    // if i ∈ [1, n] is true, then i + n must be false
+    // if i ∈ [1, n] is false, then i + n must be true
+
     int[] head, nxt, to;
     int[] dfn, low, stk, scc;
     boolean[] vis;
     int n, z, ts, top, no;
 
-    public TwoSat(int n) {// [1, n]
+    public TwoSat(int n) {
         this.n = n;
         z = 1;
         int m = n << 1 | 1;
