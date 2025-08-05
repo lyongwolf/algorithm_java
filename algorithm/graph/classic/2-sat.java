@@ -3,10 +3,10 @@ class TwoSat {
     // if i ∈ [1, n] is true, then i + n must be false
     // if i ∈ [1, n] is false, then i + n must be true
 
-    int[] head, nxt, to;
-    int[] dfn, low, stk, scc;
-    boolean[] vis;
-    int n, z, ts, top, no;
+    private int[] head, nxt, to;
+    private int[] dfn, low, stk, scc;
+    private boolean[] vis;
+    private int n, z, ts, top, no;
 
     public TwoSat(int n) {
         this.n = n;
