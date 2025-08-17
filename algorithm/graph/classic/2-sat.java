@@ -1,7 +1,7 @@
 class TwoSat {
     // range [1, n]
-    // if i ∈ [1, n] is true, then i + n must be false
-    // if i ∈ [1, n] is false, then i + n must be true
+    // if i is true, then i + n must be false
+    // if i is false, then i + n must be true
 
     private int[] stack;
     private int[] head, nxt, to;
